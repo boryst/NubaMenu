@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NubaMenu</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_menu_select">MenuSelectActivity</string>
+    <string name="title_activity_menu">Menu</string>
+</resources>

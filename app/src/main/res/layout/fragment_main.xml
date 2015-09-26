@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivityFragment"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/nubaG"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="25"
+
+        android:src="@drawable/nubag"
+        android:background="@null"
+        android:scaleType="centerCrop"/>
+
+    <ImageButton
+        android:id="@+id/nubaK"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="25"
+
+        android:src="@drawable/nubak"
+        android:background="@null"
+        android:scaleType="centerCrop"/>
+
+    <ImageButton
+        android:id="@+id/nubaM"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="25"
+        android:background="@null"
+        android:src="@drawable/nubam"
+        android:scaleType="centerCrop"/>
+    <ImageButton
+        android:id="@+id/nubaY"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="25"
+        android:background="@null"
+        android:src="@drawable/nubay"
+        android:scaleType="centerCrop"/>
+</LinearLayout>
