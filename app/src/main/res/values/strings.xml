@@ -4,4 +4,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_menu_select">MenuSelectActivity</string>
     <string name="title_activity_menu">Menu</string>
+
+    <string name="title_plates">Plates</string>
+    <string name="title_activity_tab_plates">TabPlates</string>
+    <string name="title_activity_tab_pitas">TabPitas</string>
+    <string name="title_activity_tab_mezzes">TabMezzes</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_filter">FilterActivity</string>
 </resources>

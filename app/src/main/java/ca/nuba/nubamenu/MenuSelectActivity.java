@@ -10,7 +10,12 @@ public class MenuSelectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_select);
+
+
+            setContentView(R.layout.activity_menu_select);
+
+
+
     }
 
 
@@ -35,4 +40,11 @@ public class MenuSelectActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//    }
 }
