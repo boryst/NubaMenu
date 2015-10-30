@@ -37,7 +37,7 @@ public class MenuActivityFragment extends Fragment{
     String[] mPlates = {"Najibs", "Mjadara", "Flafel", "Eggplant Stew",
             "Kafta", "Kibbeh", "Beef", "Chicken", "Hushwie"};
     MenuItem[] lunchMezze, lunchPlates, lunchPitas, lunchSalads, lunchSoups, lunchToShare, lunchBeverages,
-            brunchAll, brunchBevs, dinnerColdMezze, dinnerHotMezze, dinnerToShare, dinnerSoupsSalads, dinnerMains, features;
+            brunchAll, brunchBevs, dinnerColdMezze, dinnerHotMezze, dinnerToShare, dinnerSoupsSalads, dinnerMains, features, desserts;
     private static TabHost tabHost;
 
     //int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
@@ -75,13 +75,13 @@ public class MenuActivityFragment extends Fragment{
         int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
 
         lunchMezze = new MenuItem[]{
-                new MenuItem(resID, "Mjadra", "$8.50", true, true, true, "Organic green lentils and rice with onions and jalapeño, served with avocado and caramelized onions"),
-                new MenuItem(resID, "Hummus", "$7.50", true, true, true, "Organic chickpeas blended with garlic, lemon and tahini"),
-                new MenuItem(resID, "Baba Ghanooj", "$8.50", true, true, true, "Creamy roasted eggplant puree with citrus and tahini "),
-                new MenuItem(resID, "Najib's Special", "$8.50", true, true, true, "Crispy cauliflower tossed with lemon and sea salt, served with tahini "),
-                new MenuItem(resID, "Garden Falafel", "$7.95", true, true, true, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices"),
-                new MenuItem(resID, "Chicken Tawook", "$9.50", false, false, true, "Grilled Mount Lehman chicken thigh marinated in paprika, thyme, lemon and garlic confit with hummus and avocado"),
-                new MenuItem(resID, "Lamb Hashwie", "$9.50", false, false, true, "Sautéed lamb with onions, peppers, pinenuts and spices over hummus and avocado ")
+                new MenuItem(R.drawable.mezze_mjadra, "Mjadra", "$8.50", true, true, true, "Organic green lentils and rice with onions and jalapeño, served with avocado and caramelized onions"),
+                new MenuItem(R.drawable.mezze_hummus, "Hummus", "$7.50", true, true, true, "Organic chickpeas blended with garlic, lemon and tahini"),
+                new MenuItem(R.drawable.mezze_baba, "Baba Ghanooj", "$8.50", true, true, true, "Creamy roasted eggplant puree with citrus and tahini "),
+                new MenuItem(R.drawable.mezze_najibs, "Najib's Special", "$8.50", true, true, true, "Crispy cauliflower tossed with lemon and sea salt, served with tahini "),
+                new MenuItem(R.drawable.mezze_garden, "Garden Falafel", "$7.95", true, true, true, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices"),
+                new MenuItem(R.drawable.mezze_chicken, "Chicken Tawook", "$9.50", false, false, true, "Grilled Mount Lehman chicken thigh marinated in paprika, thyme, lemon and garlic confit with hummus and avocado"),
+                new MenuItem(R.drawable.mezze_hushwie, "Lamb Hashwie", "$9.50", false, false, true, "Sautéed lamb with onions, peppers, pinenuts and spices over hummus and avocado ")
         };
 
         lunchPlates = new MenuItem[]{
@@ -99,29 +99,29 @@ public class MenuActivityFragment extends Fragment{
         lunchPitas = new MenuItem[]{
                 new MenuItem(resID, "Mjadra", "$8.50", true, true, false, "Organic green lentils and rice with onions and jalapeño, served with avocado and caramelized onions "),
                 new MenuItem(resID, "Najib's Special", "$8.50", true, true, false, "Crispy cauliflower tossed with lemon and sea salt, hummus and taboulleh "),
-                new MenuItem(resID, "Falafel", "$7.00", true, true, false, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices"),
-                new MenuItem(resID, "Garden Falafel", "$8.50", true, true, false, "Victor’s secret falafel recipe with avocado and hummus"),
+                new MenuItem(R.drawable.pita_falafel, "Falafel", "$7.00", true, true, false, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices"),
+                new MenuItem(R.drawable.pita_garden, "Garden Falafel", "$8.50", true, true, false, "Victor’s secret falafel recipe with avocado and hummus"),
                 new MenuItem(resID, "Veggie Fraiche", "$7.75", true, true, false, "Baba ganooj, taboulleh, red peppers, organic carrots, green onions, cucumber and avocado"),
-                new MenuItem(resID, "Chicken Tawook", "$9.75", false, false, false, "Grilled mount lehman chicken breast marinated in paprika, thyme, lemon and garlic confit"),
+                new MenuItem(R.drawable.pita_chick, "Chicken Tawook", "$9.75", false, false, false, "Grilled mount lehman chicken breast marinated in paprika, thyme, lemon and garlic confit"),
                 new MenuItem(resID, "Lamb Hushwie", "$9.75", false, false, false, "Sautéed lamb with onions, peppers, pinenuts and spices over hummus"),
                 new MenuItem(resID, "Delux Toasted", "$11.75", true, false, false, "Your choice of falafel or najib with baba, Macedonian feta, tabbouleh and caramelized onions"),
                 new MenuItem(resID, "Delux Toasted Veggie", "$9.75", false, false, false, "Your choice of chicken or lamb; with baba, Macedonian feta, taboulleh and caramelized onions")
         };
 
         lunchSalads = new MenuItem[]{
-                new MenuItem(resID, "Taboulleh", "$8.25", true, true, false, "Hand chopped parsley, tomatoes, green onions and burghul in a lemon-mint dressing"),
-                new MenuItem(resID, "Fattoush Salad", "$10.50", true, true, false, "Organic greens, tomato, cucumber, green onion, chickpeas and carrots with a garlic lemon-herb dressing and pita chips "),
-                new MenuItem(resID, "Grilled Chicken & Feta Salad", "$13.95", false, false, true, "With organic greens, tomato, cucumber, chickpeas, carrots and green onions with a lemon-sumac dressing ")
+                new MenuItem(R.drawable.mezze_taboulleh, "Taboulleh", "$8.25", true, true, false, "Hand chopped parsley, tomatoes, green onions and burghul in a lemon-mint dressing"),
+                new MenuItem(R.drawable.salad_fatoush, "Fattoush Salad", "$10.50", true, true, false, "Organic greens, tomato, cucumber, green onion, chickpeas and carrots with a garlic lemon-herb dressing and pita chips "),
+                new MenuItem(R.drawable.salad_chick_feta, "Grilled Chicken & Feta Salad", "$13.95", false, false, true, "With organic greens, tomato, cucumber, chickpeas, carrots and green onions with a lemon-sumac dressing ")
         };
 
         lunchSoups = new MenuItem[]{
-                new MenuItem(resID, "Daily Vegan Soup", "$4.25", true, true, true, "Always fresh"),
-                new MenuItem(resID, "Red Lentil Soup", "$4.25", true, true, true, "Organic red lentils with veggies and aromatic spices")
+                new MenuItem(R.drawable.soup_daily, "Daily Vegan Soup", "$4.25", true, true, true, "Always fresh"),
+                new MenuItem(R.drawable.soup_lentil, "Red Lentil Soup", "$4.25", true, true, true, "Organic red lentils with veggies and aromatic spices")
         };
 
         lunchToShare = new MenuItem[]{
-                new MenuItem(resID, "Le Petit Feast", "$16.00", true, true, false, "Hummus, taboulleh, baba ganooj and homemade pickle"),
-                new MenuItem(resID, "La Feast", "$34.00", true, false, false, "A two course vegetarian mezze sampler including Le Petite Feast, fatoush salad, Najib’s special, falafel, mdjadra, macedonian feta, and marinated olives")
+                new MenuItem(R.drawable.toshare_petit, "Le Petit Feast", "$16.00", true, true, false, "Hummus, taboulleh, baba ganooj and homemade pickle"),
+                new MenuItem(R.drawable.toshare_feast, "La Feast", "$34.00", true, false, false, "A two course vegetarian mezze sampler including Le Petite Feast, fatoush salad, Najib’s special, falafel, mdjadra, macedonian feta, and marinated olives")
         };
 
         lunchBeverages = new MenuItem[]{
@@ -148,17 +148,17 @@ public class MenuActivityFragment extends Fragment{
         };
 
         dinnerColdMezze = new MenuItem[]{
-                new MenuItem(resID, "Hummus", "$7.50", true, true, true, "Organic chickpeas blended with garlic, lemon and tahini"),
-                new MenuItem(resID, "Baba Ghanooj", "$8.50", true, true, true, "Creamy roasted eggplant puree with lemon and tahini"),
+                new MenuItem(R.drawable.mezze_hummus, "Hummus", "$7.50", true, true, true, "Organic chickpeas blended with garlic, lemon and tahini"),
+                new MenuItem(R.drawable.mezze_baba, "Baba Ghanooj", "$8.50", true, true, true, "Creamy roasted eggplant puree with lemon and tahini"),
                 new MenuItem(resID, "Marinated Olives", "$6.50", true, true, true, "Selected mixed olives marinated with thyme, lemon juice, orange zest and olive oil"),
                 new MenuItem(resID, "Macedonian Feta", "$3.00", true, false, false, "")
         };
         dinnerHotMezze = new MenuItem[]{
-                new MenuItem(resID, "Najib’s Special", "$8.75", true, true, true, "Crispy cauliflower tossed with lemon and sea salt, served with tahini"),
-                new MenuItem(resID, "Garden Falafel", "$7.95", true, true, true, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices with hummus and avocado"),
-                new MenuItem(resID, "Mjadra", "$8.50", true, true, true, "Organic green lentils and rice with onions and jalapeño, served with avocado and caramelized onions"),
-                new MenuItem(resID, "Chicken Shish Tawook", "$10.00", false, false, true, "Mount Lehman chicken breast skewers served with hummus and avocado"),
-                new MenuItem(resID, "Lamb Hushwie", "$9.50", false, false, true, "Sautéed minced lamb with onions, pine nuts and spices. Served with hummus and avocado"),
+                new MenuItem(R.drawable.mezze_najibs, "Najib’s Special", "$8.75", true, true, true, "Crispy cauliflower tossed with lemon and sea salt, served with tahini"),
+                new MenuItem(R.drawable.mezze_garden, "Garden Falafel", "$7.95", true, true, true, "Victor’s secret recipe of organic chickpeas, fava beans, veggies and spices with hummus and avocado"),
+                new MenuItem(R.drawable.mezze_mjadra, "Mjadra", "$8.50", true, true, true, "Organic green lentils and rice with onions and jalapeño, served with avocado and caramelized onions"),
+                new MenuItem(R.drawable.mezze_chicken, "Chicken Shish Tawook", "$10.00", false, false, true, "Mount Lehman chicken breast skewers served with hummus and avocado"),
+                new MenuItem(R.drawable.mezze_hushwie, "Lamb Hushwie", "$9.50", false, false, true, "Sautéed minced lamb with onions, pine nuts and spices. Served with hummus and avocado"),
                 new MenuItem(resID, "Lamb Kibbeh Sainieh", "$9.50", false, false, false, "Grilled grain-fed halal lamb patty with vegetables, pine nuts, burghul and aromatic spices"),
                 new MenuItem(resID, "Vegan Stew", "$8.25", true, true, true, "Stewed seasonal veggies with tomatoes, onions, and chickpeas served over brown rice"),
                 new MenuItem(resID, "Halloumi Cheese", "$10.00", true, false, false, "Traditional Middle Eastern cheese. Seared and served with fresh tomato, pomegranate nut dressing, and fresh mint"),
@@ -166,15 +166,15 @@ public class MenuActivityFragment extends Fragment{
         };
 
         dinnerToShare = new MenuItem[]{
-                new MenuItem(resID, "Le Petit Feast", "$16.00", true, true, false, "Hummus, taboulleh, baba ghanooj and homemade pickles"),
-                new MenuItem(resID, "La Feast", "$35.00", true, false, false, "Two course vegetarian mezze sampler, including Le Petit Feast, Najib’s Special, falafel, mjadra, vegan stew, fattoush salad, Macedonian feta, and olives"),
+                new MenuItem(R.drawable.toshare_petit, "Le Petit Feast", "$16.00", true, true, false, "Hummus, taboulleh, baba ghanooj and homemade pickles"),
+                new MenuItem(R.drawable.toshare_feast, "La Feast", "$35.00", true, false, false, "Two course vegetarian mezze sampler, including Le Petit Feast, Najib’s Special, falafel, mjadra, vegan stew, fattoush salad, Macedonian feta, and olives"),
                 new MenuItem(resID, "Le Grand Feast", "$57.00", false, false, false, "Two course sampler, which includes Le Petit Feast, fattoush salad, Najib’s Special, roasted potatoes, lamb lollipops, prawns with chermoula sauce, and chicken skewers.")
         };
         dinnerSoupsSalads = new MenuItem[]{
-                new MenuItem(resID, "Red Lentil Soup", "$4.25", true, true, true, "Organic red lentils with veggies and aromatic spices"),
-                new MenuItem(resID, "Taboulleh Salad", "$8.25", true, true, false, "Hand chopped parsley, tomatoes, green onions, and burghul in a lemon-mint dressing"),
-                new MenuItem(resID, "Fattoush Salad", "$10.50", true, true, true, "Organic greens, tomato, cucumber, green onion with a garlic-lemon-sumac dressing and pita chips"),
-                new MenuItem(resID, "Fruit et Feta Salad", "$11.50", true, false, true, "Macedonian feta, dried nuts and figs with organic greens and a red wine pomegranate vinaigrette ")
+                new MenuItem(R.drawable.soup_lentil, "Red Lentil Soup", "$4.25", true, true, true, "Organic red lentils with veggies and aromatic spices"),
+                new MenuItem(R.drawable.mezze_taboulleh, "Taboulleh Salad", "$8.25", true, true, false, "Hand chopped parsley, tomatoes, green onions, and burghul in a lemon-mint dressing"),
+                new MenuItem(R.drawable.salad_fatoush, "Fattoush Salad", "$10.50", true, true, true, "Organic greens, tomato, cucumber, green onion with a garlic-lemon-sumac dressing and pita chips"),
+                new MenuItem(R.drawable.salad_feta, "Fruit et Feta Salad", "$11.50", true, false, true, "Macedonian feta, dried nuts and figs with organic greens and a red wine pomegranate vinaigrette ")
         };
         dinnerMains = new MenuItem[]{
                 new MenuItem(resID, "Stuffed Eggplant", "$19.00", true, false, true, "Roasted eggplant with a spicy tomato and red pepper stuffing, topped with feta dressing and toasted walnuts."),
@@ -191,7 +191,15 @@ public class MenuActivityFragment extends Fragment{
                 new MenuItem(resID, "Lamb Stew Plate", "$13.50", false, false, false,"Stew made with lamb and carrots","plate"),
                 new MenuItem(resID, "Lamb Stew", "$10.50", false, false, false,"Stew made with lamb and carrots on rice","hotMezze"),
                 new MenuItem(resID, "Man’oushe", "$8.50", false, false, false, "Grilled Lebanese-style flatbread with daily toppings","hotMezze"),
+                new MenuItem(resID, "Roasted Eggplat Plate", "$13.50", true, true, true, "Cabbage rolls with lamb and rice","plate")
 
+
+        };
+
+        desserts = new MenuItem[]{
+                new MenuItem(resID, "Quinoa Cake", "$8.00", false, false, false, "Cake"),
+                new MenuItem(resID, "Pistachio Financier", "$8.00", false, false, false, "Cake"),
+                new MenuItem(resID, "Labneh Ice-Cream", "$8.00", false, false, false, "Ice-Cream")
         };
 
     }

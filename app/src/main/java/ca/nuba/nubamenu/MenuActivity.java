@@ -1,6 +1,6 @@
 package ca.nuba.nubamenu;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -11,9 +11,13 @@ import android.os.Bundle;
 import android.app.AlertDialog.Builder;
 
 
-
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TabHost;
 
 public class MenuActivity extends AppCompatActivity {
@@ -64,25 +68,27 @@ public class MenuActivity extends AppCompatActivity {
         tab.select();
 
 
+
         alert = new AlertDialog.Builder(this);
-        alert.setTitle("Title");
-        alert.setMessage("Message");
-        // Set an EditText view to get user input
-        final EditText input = new EditText(this);
-        alert.setView(input);
+        alert.setView(R.layout.filter);
+
+
+
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
-                String value = input.getText().toString();
                 // Do something with value!
+                dialog.dismiss();
             }
         });
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Canceled.
+                dialog.dismiss();
             }
         });
+
 
     }
 

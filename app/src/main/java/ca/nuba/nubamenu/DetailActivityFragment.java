@@ -11,7 +11,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+
 import org.w3c.dom.Text;
+
+import java.math.BigDecimal;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -21,6 +25,9 @@ public class DetailActivityFragment extends Fragment {
     Boolean v, ve, gf;
     String price, name, desc;
     int picturePath, tabPosition;
+    float numStars;
+    float numStarsStatic, numStarsStatic2;
+    int numRatings;
 
     public DetailActivityFragment() {
     }
@@ -34,7 +41,7 @@ public class DetailActivityFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         if (intent != null) {
-            picturePath = intent.getIntExtra("picturePath",1);
+            picturePath = intent.getIntExtra("picturePath", 1);
             name = intent.getStringExtra("name");
             price = intent.getStringExtra("price");
             v = intent.getBooleanExtra("v", false);
@@ -45,17 +52,47 @@ public class DetailActivityFragment extends Fragment {
 
         }
 
-        ImageView imageView = (ImageView)rootView.findViewById(R.id.imgViewDetailImage);
-        TextView priceTextView = (TextView)rootView.findViewById(R.id.textViewDetailPrice);
-        ImageView vImgView = (ImageView)rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
-        ImageView veImageView = (ImageView)rootView.findViewById(R.id.imgViewDetailVeganIcon);
-        ImageView gfImageView = (ImageView)rootView.findViewById(R.id.imgViewDetailGlutenIcon);
-        TextView descTextView = (TextView)rootView.findViewById(R.id.textViewDetailDesc);
+        ImageView imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
+        final TextView priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
+        ImageView vImgView = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
+        ImageView veImageView = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
+        ImageView gfImageView = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
+        final TextView descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
 //        TextView nameTextView = (TextView)rootView.findViewById(R.id.textViewDetailName);
+
+
+        String user = "Borys";
+        numStars = 0;
+        numStarsStatic = 4f;
+        numRatings = 9;
+
+
+
+
+
+        final RatingBar ratingIndicatorBar = (RatingBar) rootView.findViewById(R.id.detailIndicatorBar);
+        final TextView ratingIndicatorBarTextView = (TextView) rootView.findViewById(R.id.detailIndicatorBarTextView);
+
+        RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.detailBar);
+        final TextView ratingBarTextView = (TextView) rootView.findViewById(R.id.detailBarTextView);
+
+        ratingBar.setOnRatingBarChangeListener(
+                new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        ratingBarTextView.setText(String.valueOf(rating));
+                        numStars = rating;
+                        numStarsStatic2 = ((numStarsStatic * numRatings) + numStars) / (numRatings + 1);
+                        ratingIndicatorBar.setRating(numStarsStatic2);
+                        ratingIndicatorBarTextView.setText(String.valueOf(round(numStarsStatic2, 1)));
+                                            }
+                }
+        );
+
+
 
         imageView.setImageResource(picturePath);
         priceTextView.setText(price);
-//        nameTextView.setText(name);
         descTextView.setText(desc);
 
 
@@ -68,7 +105,12 @@ public class DetailActivityFragment extends Fragment {
         if (gf) gfImageView.setImageResource(R.drawable.gf);
         else gfImageView.setImageResource(R.drawable.gfg);
 
-        //Toast.makeText(getActivity(), tabPosition, Toast.LENGTH_LONG).show();
         return rootView;
+    }
+
+    public static BigDecimal round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd;
     }
 }

@@ -1,14 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="ca.nuba.nubamenu.DetailActivityFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="ca.nuba.nubamenu.DetailActivityFragment">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <ImageView
@@ -16,79 +20,133 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
             android:background="@null"
+            android:scaleType="centerCrop" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            >
+
+            <ImageView
+                android:id="@+id/imgViewDetailVegetarianIcon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/imgViewDetailVeganIcon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/imgViewDetailGlutenIcon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewDetailPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textViewDetailDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Meal Rating"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
             />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+            <RatingBar
+                android:id="@+id/detailBar"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:gravity="center_vertical"
+                android:numStars="5"
+                android:stepSize="1"
+                />
 
-                >
-                <ImageView
-                    android:id="@+id/imgViewDetailVegetarianIcon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    />
-                <ImageView
-                    android:id="@+id/imgViewDetailVeganIcon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    />
+            <TextView
+                android:id="@+id/detailBarTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0.0"
 
-                <ImageView
-                    android:id="@+id/imgViewDetailGlutenIcon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/textViewDetailPrice"
-                    android:gravity="center"
-                    android:textSize="30sp"
+                android:textSize="30sp" />
+        </LinearLayout>
 
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    />
-            </LinearLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Meal Rating"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+            <RatingBar
+                android:id="@+id/detailIndicatorBar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                />
 
+            <TextView
+                android:id="@+id/detailIndicatorBarTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0.0"
 
+                android:textSize="30sp" />
+        </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/textViewDetailDesc"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        />
     </LinearLayout>
-
-
-    <!--<RatingBar-->
-        <!--android:id="@+id/ratingBarDetail"-->
-        <!--style="?android:attr/ratingBarStyleSmall"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="3"-->
-        <!--android:numStars="5"-->
-        <!--android:max="5"-->
-        <!--android:rating="3.0"-->
-        <!--android:stepSize="1.0" />-->
-
+    </ScrollView>
 </LinearLayout>

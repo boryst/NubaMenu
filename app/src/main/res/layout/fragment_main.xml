@@ -51,5 +51,6 @@
         android:layout_weight="25"
         android:background="@null"
         android:src="@drawable/nubay"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        />
 </LinearLayout>
