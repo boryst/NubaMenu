@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * Created by Borys on 15-10-13.
  */
 public class MenuArrayAdapter extends ArrayAdapter<MenuItem> {
-    public MenuArrayAdapter(Context context, ArrayList<MenuItem> meniItems) {
-        super(context, 0, meniItems);
+    public MenuArrayAdapter(Context context, ArrayList<MenuItem> menuItems) {
+        super(context, 0, menuItems);
     }
 
     @Override
@@ -59,6 +59,9 @@ public class MenuArrayAdapter extends ArrayAdapter<MenuItem> {
 
         textViewName.setText(menuItem.name);
         textViewPrice.setText(menuItem.price);
+
+        ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imgView_icon);
+        iconImageView.setImageResource(menuItem.iconPath);
         // Return the completed view to render on screen
         return convertView;
     }

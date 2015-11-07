@@ -5,6 +5,7 @@ package ca.nuba.nubamenu;
  */
 public class MenuItem {
     public int picturePath;
+    public int iconPath;
     public String name;
     public String price;
     public Boolean v;
@@ -14,8 +15,9 @@ public class MenuItem {
     public String featureType;
     public String type; //mezze, plate, pita etc
 
-    public MenuItem(int picturePath, String name, String price, Boolean v, Boolean ve, Boolean gf, String desc) {
+    public MenuItem(int picturePath, int iconPath, String name, String price, Boolean v, Boolean ve, Boolean gf, String desc) {
         this.picturePath = picturePath;
+        this.iconPath = iconPath;
         this.name = name;
         this.price = price;
         this.v = v;
@@ -24,16 +26,9 @@ public class MenuItem {
         this.desc = desc;
     }
 
-    public MenuItem(int picturePath, String name, String price, Boolean v, Boolean ve, Boolean gf, String desc,
+    public MenuItem(int picturePath, int iconPath, String name, String price, Boolean v, Boolean ve, Boolean gf, String desc,
                     String featureType) {
-        this.picturePath = picturePath;
-
-        this.name = name;
-        this.price = price;
-        this.v = v;
-        this.ve = ve;
-        this.gf = gf;
-        this.desc = desc;
+        this(picturePath, iconPath, name,price,v,ve,gf,desc);
         this.featureType = featureType;
     }
 

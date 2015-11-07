@@ -40,7 +40,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
                 return 0;
             }
         }
-        //return PAGE_COUNT;
     }
 
     @Override
@@ -50,9 +49,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
-        // somehow change layout for each position
-        // Generate title based on item position
         if (menuType.equals("Lunch")){
             return tabLunchTitles[position];
         } else if (menuType.equals("Dinner")){
@@ -63,82 +59,4 @@ public class TabsAdapter extends FragmentPagerAdapter {
     }
 
     //TODO: if small number of tabs - take whole screen (in getTabView)
-    //TODO: change colors for app, change logo to word only, make it appear on all screes woth text
-
-//    public View getTabView(int position) {
-//        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-//        switch (position) {
-//            case 0:{
-//
-//
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//
-//                ArrayList<MenuItem> arrayOfItems = new ArrayList<MenuItem>();
-//// Create the adapter to convert the array to views
-//                MenuArrayAdapter adapter = new MenuArrayAdapter(context, arrayOfItems);
-//// Attach the adapter to a ListView
-//                ListView listView = (ListView)v.findViewById(R.id.tab_listview);
-//                listView.setAdapter(adapter);
-//
-//                int resID = context.getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
-//                MenuItem[] newUsers = new MenuItem[]{
-//                        new MenuItem(resID, "Najibs", "$25"),
-//                        new MenuItem(resID, "Najibs", "$25")};
-//                adapter.addAll(newUsers);
-//                return v;
-//                //break;
-//            }
-//            case 1:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//                }
-//            case 2:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//            }
-//            case 3:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//            }
-//            case 4:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//            }
-//            case 5:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//            }
-//            case 6:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-////                break;
-//            }
-//            default:{
-//                View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//                return v;
-//            }
-//        }
-//
-////        View v = LayoutInflater.from(context).inflate(R.layout.fragment_menu, null);
-//        //extView tv = (TextView) v.findViewById(R.id.textView);
-//        //tv.setText(tabTitles[position]);
-//        //ImageView img = (ImageView) v.findViewById(R.id.imgView);
-//        //img.setImageResource(imageResId[position]);
-//        //return v;
-//    }
-
-//    public View getTabView(int position) {
-//        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-//        View v = LayoutInflater.from(context).inflate(R.layout.tab_view, null);
-//        TextView tv = (TextView) v.findViewById(R.id.tab_text);
-//        tv.setText(tabTitles[position]);
-//        ImageView img = (ImageView) v.findViewById(R.id.tab_img);
-//        img.setImageResource(R.mipmap.ic_launcher);
-//        return v;
-//    }
 }
