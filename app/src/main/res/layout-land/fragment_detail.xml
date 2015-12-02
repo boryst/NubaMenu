@@ -38,6 +38,15 @@
                     android:layout_weight="4"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/textViewDetailName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:paddingTop="5dp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:id="@+id/textViewDetailDesc"
                         android:layout_width="fill_parent"
                         android:layout_height="145dp"
@@ -46,44 +55,44 @@
                         android:paddingTop="@dimen/activity_vertical_margin"
                         android:text="Description"
                         android:textSize="20sp" />
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="55dp">
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="55dp">-->
 
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Your Meal Rating"
-                            android:gravity="center"
-                            android:textSize="15sp"
-                            />
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            >
-                            <RatingBar
-                                android:id="@+id/detailBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="50dp"
-                                android:numStars="5"
-                                android:stepSize="1"
-                                />
+                        <!--<TextView-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Your Meal Rating"-->
+                            <!--android:gravity="center"-->
+                            <!--android:textSize="15sp"-->
+                            <!--/>-->
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--android:orientation="horizontal"-->
+                            <!--android:paddingLeft="10dp"-->
+                            <!--android:paddingRight="10dp"-->
+                            <!-->-->
+                            <!--<RatingBar-->
+                                <!--android:id="@+id/detailBar"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="50dp"-->
+                                <!--android:numStars="5"-->
+                                <!--android:stepSize="1"-->
+                                <!--/>-->
 
-                            <TextView
-                                android:id="@+id/detailBarTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:text="0.0"
+                            <!--<TextView-->
+                                <!--android:id="@+id/detailBarTextView"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="10dp"-->
+                                <!--android:text="0.0"-->
 
-                                android:textSize="30sp" />
-                        </LinearLayout>
-                    </LinearLayout>
+                                <!--android:textSize="30sp" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
 
                 </LinearLayout>
 
@@ -145,44 +154,44 @@
                         android:textSize="25sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4">
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Average Meal Rating"
-                        android:gravity="center"
-                        android:textSize="15sp"
-                        />
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        >
-                        <RatingBar
-                            android:id="@+id/detailIndicatorBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:numStars="5"
-                            android:stepSize="0.1"
-                            android:isIndicator="true"
-                            />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="4">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Average Meal Rating"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textSize="15sp"-->
+                        <!--/>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingLeft="10dp"-->
+                        <!--android:paddingRight="10dp"-->
+                        <!-->-->
+                        <!--<RatingBar-->
+                            <!--android:id="@+id/detailIndicatorBar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="50dp"-->
+                            <!--android:numStars="5"-->
+                            <!--android:stepSize="0.1"-->
+                            <!--android:isIndicator="true"-->
+                            <!--/>-->
 
-                        <TextView
-                            android:id="@+id/detailIndicatorBarTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0.0"
+                        <!--<TextView-->
+                            <!--android:id="@+id/detailIndicatorBarTextView"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="0.0"-->
 
-                            android:textSize="30sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                            <!--android:textSize="30sp" />-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
             </LinearLayout>
 
 

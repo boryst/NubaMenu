@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
 
     AlertDialog.Builder alert;
 
-    private static TabHost tabHost;
+    //private static TabHost tabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

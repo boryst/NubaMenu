@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsAdapter extends FragmentPagerAdapter {
 
-    private String tabLunchTitles[] = new String[] { "Mezzes", "Lunch Plates", "Pitas", "Salads","Soups", "To Share", "Beverages"};
-    private String tabDinnerTitles[] = new String[] {"Cold Mezzes", "Hot Mezzes","To Share", "Soups, Salads & More","Mains"};
+    private String tabLunchTitles[] = new String[] { "Mezze", "Lunch Plate", "Pita", "Salad","Soup", "To Share", "Beverages"};
+    private String tabDinnerTitles[] = new String[] {"Cold Mezze", "Hot Mezze","To Share", "Soups, Salads & More","Mains"};
     private String tabBrunchTitles[] = new String[] {"Brunch","SIGNATURE BRUNCH BEVERAGES"};
     final int L_PAGE_COUNT = tabLunchTitles.length;
     final int D_PAGE_COUNT = tabDinnerTitles.length;

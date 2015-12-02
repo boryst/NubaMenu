@@ -1,12 +1,20 @@
 package ca.nuba.nubamenu;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -43,11 +51,18 @@ public class MenuSelectActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.fragment_menu_select, container, false);
         //Toast.makeText(getActivity(), "onCreateViewStarted", Toast.LENGTH_LONG).show();
+        int lunchPicPortrait = getActivity().getResources().getIdentifier("nubalunch", "drawable", "ca.nuba.nubamenu");
+        int brunchPicPortrait = getActivity().getResources().getIdentifier("nubabrunch", "drawable", "ca.nuba.nubamenu");
+        int dinnerPicPortrait = getActivity().getResources().getIdentifier("nubadinner", "drawable", "ca.nuba.nubamenu");
+
+        int lunchPicLand = getActivity().getResources().getIdentifier("nubalunch_land", "drawable", "ca.nuba.nubamenu");
+        int brunchPicLand = getActivity().getResources().getIdentifier("nubabrunch_land", "drawable", "ca.nuba.nubamenu");
+        int dinnerPicLand = getActivity().getResources().getIdentifier("nubadinner_land", "drawable", "ca.nuba.nubamenu");
+
 
 
         if (savedInstanceState !=null){
             kflag = savedInstanceState.getString(STATE_MENU);
-            //Toast.makeText(getActivity(), "STATE_MENU", Toast.LENGTH_LONG).show();
         }
 
 
@@ -59,15 +74,6 @@ public class MenuSelectActivityFragment extends Fragment {
             getActivity().setTitle(extras.getString("EXTRA_LOCATION"));
 
         }
-
-
-
-//        if (intent.getStringExtra("location") != null) {
-//            upLocation = intent.getStringExtra("location");
-//            //Toast.makeText(getActivity(), "location is in createView", Toast.LENGTH_LONG).show();
-//            //Toast.makeText(getActivity(), upLocation, Toast.LENGTH_LONG).show();
-//
-//        }
 
         View rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
 
@@ -102,6 +108,20 @@ public class MenuSelectActivityFragment extends Fragment {
 //                super.onSaveInstanceState(savedInstanceState);
 
                 imgViewBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
+                //imageButtonPressEffect(imgViewBrunch, brunchPicPortrait);
+
+
+                int orientation = getResources().getConfiguration().orientation;
+
+
+                if (orientation == 2){
+                    imageButtonPressEffect(imgViewBrunch, brunchPicLand);
+                } else {
+                    imageButtonPressEffect(imgViewBrunch, brunchPicPortrait);
+                }
+
+
+
                 imgViewBrunch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,7 +178,55 @@ public class MenuSelectActivityFragment extends Fragment {
 //            }
 //        });
 
+        int orientation = getResources().getConfiguration().orientation;
+
+
+        if (orientation == 2){
+            imageButtonPressEffect(imgViewLunch, lunchPicLand);
+            imageButtonPressEffect(imgViewDinner, dinnerPicLand);
+        } else {
+            imageButtonPressEffect(imgViewLunch, lunchPicPortrait);
+            imageButtonPressEffect(imgViewDinner, dinnerPicPortrait);
+        }
+
+
+
+
+
         return rootView;
+    }
+
+
+    public void imageButtonPressEffect(ImageButton button, int picture){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+
+            //Drawable firstLayer = getResources().getDrawable(R.drawable.nubag);
+            Drawable firstLayer = getResources().getDrawable(picture);
+
+
+            GradientDrawable secondLayer = new GradientDrawable(
+                    GradientDrawable.Orientation.TL_BR, new int[]{
+                    getResources().getColor(R.color.gradientAccent),
+                    getResources().getColor(R.color.gradientAccent),
+                    getResources().getColor(R.color.gradientPrimary)});
+
+            Drawable[] layers = new Drawable[]{firstLayer, secondLayer};
+
+
+            LayerDrawable ld = new LayerDrawable(layers);
+            StateListDrawable states = new StateListDrawable();
+            states.addState(new int[] {android.R.attr.state_pressed}, ld);
+            states.addState(new int[] {android.R.attr.state_focused}, ld);
+            states.addState(new int[]{}, firstLayer);
+
+            button.setImageDrawable(states);
+
+
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ColorStateList csl = ColorStateList.valueOf(getResources().getColor(R.color.primary));
+            RippleDrawable d = new RippleDrawable(csl, getResources().getDrawable(picture), null);
+            button.setImageDrawable(d);
+        }
     }
 
     @Override

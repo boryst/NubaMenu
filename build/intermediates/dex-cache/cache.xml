@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/Borys/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-343f1305ab52b18b6b6cb70eb0635eaf90cf062e.jar" />
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-3e8b7dc168ddcda2805b6c48ecd49c9690a0792b.jar" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-6132e467b55aa1b9e4865a25dc4e75ce135ddfc3.jar" />
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-bfb85693ca5669e26a0be6cf951e95f496186065.jar" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-54027e0401e49f021ca4c28a890f1a31224d3c0e.jar" />
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-f576ae2653ae39bbeee7a943ddf9a8bd2dad88ed.jar" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-3aba9778c7917aa0af3b8d248c332797aa6397b8.jar" />
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-7d43ad484b078f759ede89d678cd19d09951a27d.jar" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/Borys/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-fc64158d57a0c9b330788b887357e8258d6e2424.jar" />
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-0e5388a8a8b9cae96f74682b4f92f83ffca34e27.jar" />
     </item>
     <item
         jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
@@ -42,6 +42,27 @@
         revision="23.0.1"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
         <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-d3b2d2af813ac199b83d07353c0c97b21c243efd.jar" />
+    </item>
+    <item
+        jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-9ebb62a73c4a4d81fedfab112bd82eb5e5d85a73.jar" />
+    </item>
+    <item
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1c1afa0ab2a8197a5da1b36c4167a9e479cb74d9">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-aede52e490e5e07529b8dd433d485de37ae81d43.jar" />
+    </item>
+    <item
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-4b4b4c9006a1710341bb5287d30403665b18edd1.jar" />
     </item>
 
 </items>

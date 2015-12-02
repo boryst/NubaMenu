@@ -11,7 +11,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@null"
-        android:src="@drawable/nubalunch"
         android:scaleType="centerCrop"
 
         />
@@ -22,7 +21,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@null"
-        android:src="@drawable/nubadinner"
         android:scaleType="centerCrop"
         />
 
