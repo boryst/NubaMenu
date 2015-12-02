@@ -32,8 +32,9 @@ Tablet(Nexus 7 2013) Portrait
 <img src="http://i.imgur.com/oungg0m.jpg" height="250">
 <img src="http://i.imgur.com/xSzYLlE.jpg" height="250">
 <img src="http://i.imgur.com/SvhZudx.png" height="250">
-<img src="http://i.imgur.com/Q8eySs4.png" height="250">
 <img src="http://i.imgur.com/9wsCdTc.png" height="250">
+<img src="http://i.imgur.com/Q8eySs4.png" height="250">
+
 
 Tablet(Nexus 7 2013) Landscape
 
