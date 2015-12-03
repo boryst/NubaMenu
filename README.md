@@ -3,12 +3,14 @@ Current state of application:
 
 1. No online
 
-2. Some of the future fixes/improvements:
+2. Some pictures missing 
+
+3. Some of the future fixes/improvements:
 
 add features, desserts, listview to recyclerview, nuba logo in action bar, add search, settings?, list land add short description and portrait tablet, new icons for v, ve, gf, meat?, tablet list+detail(two pane mode), add addresses and phones for each location(where? Info setting?), title for every tab?, add times for lunch and dinner and hours of work(on pics?), clickable picks in detail?, setting for currency, all strings into string.XML, check all descriptions, icons for "ve option","gf option", more explicit icons?,
 Filter save in preferences or using Data Binding, fix Detail.xml for tablet
 
-3. Screenshots:
+4. Screenshots:
 
 Phone(OnePlus One) Portrait
 
