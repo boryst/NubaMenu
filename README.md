@@ -8,7 +8,9 @@ Current state of application:
 Add online(connection to api and fetching data from website,Facebook comments, rating stars), add features, desserts, listview to recyclerview, nuba logo in action bar, add search, settings?, list land add short description and portrait tablet, new icons for v, ve, gf, meat?, tablet list+detail(two pane mode), add addresses and phones for each location(where? Info setting?), title for every tab?, add times for lunch and dinner and hours of work(on pics?), clickable picks in detail?, setting for currency, all strings into string.XML, check all descriptions, icons for "ve option","gf option", more explicit icons?,
 Filter save in preferences or using Data Binding, fix Detail.xml for tablet
 
-4. Screenshots:
+4. <a href="https://www.dropbox.com/s/o7zonipyi30u77o/NubaMenu_12.01.15.apk?dl=0">Download apk (12.01.15)</a>
+
+5. Screenshots:
 
 Phone(OnePlus One) Portrait
 
