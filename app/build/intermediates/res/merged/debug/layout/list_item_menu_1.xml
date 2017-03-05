@@ -7,4 +7,4 @@
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall" /><!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout/list_item_menu_1.xml -->
+    android:minHeight="?android:attr/listPreferredItemHeightSmall" />

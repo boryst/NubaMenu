@@ -29,4 +29,3 @@
     <!--xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"-->
     <!--android:name="ca.nuba.nubamenu.MenuActivityFragmentFragment" tools:layout="@layout/fragment_menu"-->
     <!--android:layout_width="match_parent" android:layout_height="match_parent" />-->
-<!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout/activity_menu.xml -->

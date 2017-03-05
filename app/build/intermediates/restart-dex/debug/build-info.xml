@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
+    density="xxhdpi"
+    format="8"
+    plugin-version="2.2.3"
+    timestamp="42186070714369"
+    token="5275292714981831532"
+    verifier="FIELD_REMOVED" >
+
+    <task
+        name="javac"
+        duration="1320" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="60" />
+    <task
+        name="verifier"
+        duration="32" />
+
+    <artifact
+        location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+        type="DEX" />
+
+    <build
+        timestamp="41937058867109"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/outputs/apk/app-debug.apk"
+            type="MAIN" />
+    </build>
+    <build
+        timestamp="42186070714369"
+        verifier="FIELD_REMOVED" >
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+            type="DEX" />
+    </build>
+
+</instant-run>

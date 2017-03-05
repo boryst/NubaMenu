@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/messenger_bubble_small_white.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/messenger_bubble_small_white.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubak.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubak.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/messenger_bubble_large_white.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/messenger_bubble_large_white.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/com_facebook_button_icon.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/com_facebook_button_icon.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubam.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubam.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/com_facebook_button_like_icon_selected.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/com_facebook_button_like_icon_selected.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubay.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubay.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/messenger_button_send_round_shadow.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/messenger_button_send_round_shadow.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubag.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubag.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/messenger_bubble_large_blue.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/messenger_bubble_large_blue.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubab.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubab.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/messenger_bubble_small_blue.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/messenger_bubble_small_blue.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/com_facebook_button_send_icon.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable-xxhdpi/com_facebook_button_send_icon.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubal.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubal.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable-xxhdpi/nubad.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable-xxhdpi/nubad.png"
+    }
+]

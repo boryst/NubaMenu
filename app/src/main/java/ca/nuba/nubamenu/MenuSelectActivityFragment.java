@@ -1,15 +1,9 @@
 package ca.nuba.nubamenu;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +11,18 @@ import android.widget.ImageButton;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment with choice of type of menu (Brunch, Lunch, Dinner)
  */
 public class MenuSelectActivityFragment extends Fragment {
+    final String LOG_TAG = MenuSelectActivityFragment.class.getSimpleName();
 
-
-    //private String flag;
-    private String kflag, upLocation; //location with brunch
-    static final String STATE_MENU = "menuState";
-    ImageButton imgViewLunch, imgViewDinner, imgViewBrunch;
+    private String location; //location with brunch
+    static final String LOCATION_EXTRA = "LOCATION_EXTRA";
+    public static final String TYPE_EXTRA = "TYPE_EXTRA";
+    public static final String TYPE_LUNCH = "Lunch";
+    public static final String TYPE_BRUNCH = "Brunch";
+    public static final String TYPE_DINNER = "Dinner";
+    ImageButton imgBtnLunch, imgBtnDinner, imgBtnBrunch;
     Bundle extras = new Bundle();
 
     public MenuSelectActivityFragment() {
@@ -33,171 +30,127 @@ public class MenuSelectActivityFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-
-        //Toast.makeText(getActivity(), "onSave called", Toast.LENGTH_LONG).show();
-
-
-        savedInstanceState.putString(STATE_MENU, "Kitsilano");
+        Log.v(LOG_TAG, "onSaveInstanceState");
+        //savedInstanceState.putString(STATE_MENU, "Kitsilano");
+        savedInstanceState.putString(LOCATION_EXTRA, location);
         super.onSaveInstanceState(savedInstanceState);
 
     }
 
-
-
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.fragment_menu_select, container, false);
-        //Toast.makeText(getActivity(), "onCreateViewStarted", Toast.LENGTH_LONG).show();
-        int lunchPicPortrait = getActivity().getResources().getIdentifier("nubalunch", "drawable", "ca.nuba.nubamenu");
-        int brunchPicPortrait = getActivity().getResources().getIdentifier("nubabrunch", "drawable", "ca.nuba.nubamenu");
-        int dinnerPicPortrait = getActivity().getResources().getIdentifier("nubadinner", "drawable", "ca.nuba.nubamenu");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        int lunchPicLand = getActivity().getResources().getIdentifier("nubalunch_land", "drawable", "ca.nuba.nubamenu");
-        int brunchPicLand = getActivity().getResources().getIdentifier("nubabrunch_land", "drawable", "ca.nuba.nubamenu");
-        int dinnerPicLand = getActivity().getResources().getIdentifier("nubadinner_land", "drawable", "ca.nuba.nubamenu");
+        View rootView;
 
+        int nubaLunchID = getActivity().getResources().getIdentifier("nubal", "drawable", "ca.nuba.nubamenu");
+        int nubaBrunchID = getActivity().getResources().getIdentifier("nubab", "drawable", "ca.nuba.nubamenu");
+        int nubaDinnerID = getActivity().getResources().getIdentifier("nubad", "drawable", "ca.nuba.nubamenu");
 
+//        if (savedInstanceState !=null){
+//            kflag = savedInstanceState.getString(STATE_MENU);
+//        }
 
-        if (savedInstanceState !=null){
-            kflag = savedInstanceState.getString(STATE_MENU);
-        }
-
-
+        //Get location either from MainActivity or from MenuActivity and set page title
         Intent intent = getActivity().getIntent();
 
         if (intent != null) {
-            Bundle extras = intent.getExtras();
+            //true only if we came from MainActivity
+            Log.v(LOG_TAG, "onCreateView.intent != null");
 
-            getActivity().setTitle(extras.getString("EXTRA_LOCATION"));
-
+            //Bundle extras = intent.getExtras();
+            //location = extras.getString(MainActivityFragment.LOCATION_EXTRA);
+            location = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
+            getActivity().setTitle(location);
+        } else {
+            //if we came from MenuSelect or MainActvity?
+            Log.v(LOG_TAG, "onCreateView.else");
+            location = savedInstanceState.getString(LOCATION_EXTRA);
         }
 
-        View rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
-
-        //View rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
-        if (intent.getStringExtra("EXTRA_LOCATION") != null) {
-            upLocation = intent.getStringExtra("EXTRA_LOCATION");
-            //Toast.makeText(getActivity(), upLocation, Toast.LENGTH_LONG).show();
+        extras.putString(LOCATION_EXTRA, location);
 
 
+/**        if (intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA) != null) {
+            upLocation = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
         }
-        kflag = intent.getStringExtra("EXTRA_LOCATION");
+
+        kflag = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
+
         if (kflag != null) {
-            extras.putString("EXTRA_LOCATION", kflag);
+            extras.putString(MainActivityFragment.LOCATION_EXTRA, kflag);
         } else if (upLocation != null) {
-            extras.putString("EXTRA_LOCATION", upLocation);
+            extras.putString(MainActivityFragment.LOCATION_EXTRA, upLocation);
 
-        }
-        //Toast.makeText(getActivity(), "FLAG", Toast.LENGTH_LONG).show();
+        }*/
 
-
-        //Bundle extras = new Bundle();
-
-
-
-
-        if (intent !=null){
-            if ((kflag != null) && (kflag.equals("Kitsilano")) || ((upLocation != null) && upLocation.equals("k"))){
-//                Toast.makeText(getActivity(), intent.getStringExtra("flag"), Toast.LENGTH_LONG).show();
+        // if flag = brunch - load brunch layout
+/**            if ((kflag != null) && (kflag.equals("Kitsilano")) || ((upLocation != null) && upLocation.equals("k"))){
                 rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
+                imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
+                Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
 
-//                savedInstanceState.putString(STATE_MENU, "k");
-//                super.onSaveInstanceState(savedInstanceState);
-
-                imgViewBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
-                //imageButtonPressEffect(imgViewBrunch, brunchPicPortrait);
-
-
-                int orientation = getResources().getConfiguration().orientation;
-
-
-                if (orientation == 2){
-                    imageButtonPressEffect(imgViewBrunch, brunchPicLand);
-                } else {
-                    imageButtonPressEffect(imgViewBrunch, brunchPicPortrait);
-                }
-
-
-
-                imgViewBrunch.setOnClickListener(new View.OnClickListener() {
+                imgBtnBrunch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        extras.putString("EXTRA_TYPE", "Brunch");
-
-                        //flag = "brunch";
+                        extras.putString(TYPE_EXTRA, "Brunch");
                         Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
                         startActivity(intent);
                     }
                 });
             } else {
                 rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
-                //Toast.makeText(getActivity(), intent.getStringExtra("flag"), Toast.LENGTH_LONG).show();
-            }
+            }*/
+
+        if (location !=null && location.equals(MainActivityFragment.LOCATION_KITSILANO)){
+            rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
+            imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
+            Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
+
+            imgBtnBrunch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    extras.putString(TYPE_EXTRA, TYPE_BRUNCH);
+                    Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
+                    //Intent intent1 = new Intent(getActivity(), MenuActivity.class).putExtra(TYPE_EXTRA, TYPE_BRUNCH);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
         }
 
 
 
-        imgViewLunch = (ImageButton) rootView.findViewById(R.id.nubaMenuLunch);
-        imgViewLunch.setOnClickListener(new View.OnClickListener() {
+
+        imgBtnLunch = (ImageButton) rootView.findViewById(R.id.nubaMenuLunch);
+        Utility.imageButtonPressEffect(imgBtnLunch, nubaLunchID, getActivity());
+        imgBtnLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                extras.putString("EXTRA_TYPE", "Lunch");
+                extras.putString(TYPE_EXTRA, TYPE_LUNCH);
                 //flag = "lunch";
                 Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
                 startActivity(intent);
             }
         });
 
-        imgViewDinner = (ImageButton) rootView.findViewById(R.id.nubaMenuDinner);
-        imgViewDinner.setOnClickListener(new View.OnClickListener() {
+        imgBtnDinner = (ImageButton) rootView.findViewById(R.id.nubaMenuDinner);
+        Utility.imageButtonPressEffect(imgBtnDinner, nubaDinnerID, getActivity());
+        imgBtnDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                extras.putString("EXTRA_TYPE", "Dinner");
-
-                //Toast.makeText(getActivity(), extras.getString("EXTRA_TYPE"), Toast.LENGTH_LONG).show();
-                //Toast.makeText(getActivity(), extras.getString("EXTRA_LOCATION"), Toast.LENGTH_LONG).show();
-
-
+                extras.putString(TYPE_EXTRA, TYPE_DINNER);
                 //flag = "dinner";
                 Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
                 startActivity(intent);
             }
         });
 
-//        imgViewBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
-//        imgViewBrunch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                flag = "brunch";
-//                Intent intent = new Intent(getActivity(), MenuActivity.class).putExtra("flag", flag);
-//                startActivity(intent);
-//            }
-//        });
-
-        int orientation = getResources().getConfiguration().orientation;
-
-
-        if (orientation == 2){
-            imageButtonPressEffect(imgViewLunch, lunchPicLand);
-            imageButtonPressEffect(imgViewDinner, dinnerPicLand);
-        } else {
-            imageButtonPressEffect(imgViewLunch, lunchPicPortrait);
-            imageButtonPressEffect(imgViewDinner, dinnerPicPortrait);
-        }
-
-
-
-
-
         return rootView;
     }
 
 
-    public void imageButtonPressEffect(ImageButton button, int picture){
+/**    public void imageButtonPressEffect(ImageButton button, int picture){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
             //Drawable firstLayer = getResources().getDrawable(R.drawable.nubag);
@@ -227,20 +180,16 @@ public class MenuSelectActivityFragment extends Fragment {
             RippleDrawable d = new RippleDrawable(csl, getResources().getDrawable(picture), null);
             button.setImageDrawable(d);
         }
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
-
-
 
         super.onCreate(savedInstanceState);
         //Toast.makeText(getActivity(), "created", Toast.LENGTH_LONG).show();
 
         if (savedInstanceState !=null){
-
+            Log.v(LOG_TAG, "savedInstanceState.getString(LOCATION_EXTRA) - "+savedInstanceState.getString(LOCATION_EXTRA));
             //Toast.makeText(getActivity(), "something there", Toast.LENGTH_LONG).show();
             //Toast.makeText(getActivity(), savedInstanceState.getString(STATE_MENU), Toast.LENGTH_LONG).show();
 
@@ -250,28 +199,17 @@ public class MenuSelectActivityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //Toast.makeText(getActivity(), "resumed", Toast.LENGTH_LONG).show();
-
-        Intent intent = getActivity().getIntent();
+/*        Intent intent = getActivity().getIntent();
 
 
-        if (intent.getStringExtra("EXTRA_LOCATION") != null) {
-            upLocation = intent.getStringExtra("EXTRA_LOCATION");
-            //Toast.makeText(getActivity(), "location is here", Toast.LENGTH_LONG).show();
+        if (intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA) != null) {
+            upLocation = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
 
 //            if (upLocation.equals("k")) {
-////                Toast.makeText(getActivity(), intent.getStringExtra("flag"), Toast.LENGTH_LONG).show();
 //                View rootView = new View;
 //                rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
-//            }
+//            }*/
 
-        }
-        //Toast.makeText(getActivity(), kflag, Toast.LENGTH_LONG).show();
-        //Toast.makeText(getActivity(), extras.getString("EXTRA_LOCATION"), Toast.LENGTH_LONG).show();
-        //extras.getString("EXTRA_LOCATION");
-
-
-
-
+//        }
     }
 }

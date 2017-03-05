@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.nuba.nubamenu.test">
+
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+                     android:targetPackage="ca.nuba.nubamenu"
+                     android:handleProfiling="false"
+                     android:functionalTest="false"
+                     android:label="Tests for ca.nuba.nubamenu"/>
+</manifest>

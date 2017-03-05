@@ -17,7 +17,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@null"
-            android:src="@drawable/nubabrunch_land"
             android:scaleType="centerCrop"
             />
         <ImageButton
@@ -26,7 +25,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@null"
-            android:src="@drawable/nubalunch_land"
             android:scaleType="centerCrop"
 
             />
@@ -41,10 +39,8 @@
         android:layout_height="match_parent"
         android:layout_weight="4"
         android:background="@null"
-        android:src="@drawable/nubadinner_land"
         android:scaleType="centerCrop"
         />
 
 
 </LinearLayout>
-<!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_menu_select_brunch.xml -->

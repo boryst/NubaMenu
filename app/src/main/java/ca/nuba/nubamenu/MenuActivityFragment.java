@@ -4,32 +4,29 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+
+import ca.nuba.nubamenu.data.NubaContract;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MenuActivityFragment extends Fragment {
-
+    public static final String LOG_TAG = MenuActivityFragment.class.getSimpleName();
 
     public static final String ARG_PAGE = "ARG_PAGE";
     public static final String ARG_LOCATION = "ARG_LOCATION";
@@ -501,7 +498,7 @@ public class MenuActivityFragment extends Fragment {
                     }
                     case 7: {
                         //mArrayAdapter.addAll(lunchBeverages);
-                        checkFilters(brunchBevs, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
+                        checkFilters(lunchBeverages, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
                         return listView;
                     }
                 }
@@ -575,6 +572,7 @@ public class MenuActivityFragment extends Fragment {
         if (veFilter != null) veCheckBox.setChecked(true); else veCheckBox.setChecked(false);
         if (gfFilter != null) gfCheckBox.setChecked(true); else gfCheckBox.setChecked(false);
         if (mFilter != null) mCheckBox.setChecked(true); else mCheckBox.setChecked(false);
+
 
 
 
@@ -658,7 +656,6 @@ public class MenuActivityFragment extends Fragment {
                 dialog.dismiss();
 
 
-
 //                SharedPreferences preferences = PreferenceManager
 //                        .getDefaultSharedPreferences(getActivity());
 //                SharedPreferences.Editor editor = preferences.edit();
@@ -668,10 +665,6 @@ public class MenuActivityFragment extends Fragment {
 //                editor.putBoolean("mFilter", mFilter);
 //                editor.commit();
                 //editor.apply();
-
-
-
-
 
 
                 listInflater(vFilter, veFilter, gfFilter, mFilter);
@@ -685,6 +678,30 @@ public class MenuActivityFragment extends Fragment {
         });
 
         alert.show();
+    }
+
+
+    @Override
+    public void onStart() {
+        //final String LOG_TAG = FetchNubaMenuTask.class.getSimpleName();
+        super.onStart();
+
+        Cursor cursor = getActivity().getContentResolver().query(
+                NubaContract.NubaMenuEntry.CONTENT_URI,
+                Utility.NUBA_MENU_PROJECTION,
+                null,
+                null,
+                null
+        );
+
+        if (cursor != null){
+            cursor.moveToFirst();
+            Log.v(LOG_TAG, "Cursor - "+cursor.getString(Utility.COL_NUBA_MENU_NAME));
+            cursor.close();
+        }
+
+//        FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
+//        menuInfoTask.execute();
     }
 
 

@@ -22,7 +22,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="25"
-        android:src="@drawable/nubagl"
         android:background="@null"
         android:scaleType="centerCrop"/>
 
@@ -32,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="25"
 
-        android:src="@drawable/nubakl"
         android:background="@null"
         android:scaleType="centerCrop"/>
 
@@ -42,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="25"
         android:background="@null"
-        android:src="@drawable/nubaml"
         android:scaleType="centerCrop"/>
     <ImageButton
         android:id="@+id/nubaY"
@@ -50,7 +47,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="25"
         android:background="@null"
-        android:src="@drawable/nubayl"
         android:scaleType="centerCrop"/>
 </LinearLayout>
-<!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_main.xml -->

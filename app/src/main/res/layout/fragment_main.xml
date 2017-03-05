@@ -7,56 +7,6 @@
     android:orientation="vertical"
     >
 
-
-
-    <!--<ListView-->
-        <!--android:id="@+id/list_view_locations"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-
-       <!--/>-->
-
-    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
-
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/nubaG"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="25"-->
-        <!--android:src="@drawable/nubag"-->
-        <!--android:background="@drawable/selector"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--/>-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/nubaK"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="25"-->
-
-        <!--android:src="@drawable/nubak"-->
-        <!--android:background="@null"-->
-        <!--android:scaleType="centerCrop"/>-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/nubaM"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="25"-->
-        <!--android:background="@null"-->
-        <!--android:src="@drawable/nubam"-->
-        <!--android:scaleType="centerCrop"/>-->
-    <!--<ImageButton-->
-        <!--android:id="@+id/nubaY"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="25"-->
-        <!--android:background="@null"-->
-        <!--android:src="@drawable/nubay"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--/>-->
     <ImageButton
         android:id="@+id/nubaG"
         android:layout_width="fill_parent"
@@ -64,6 +14,7 @@
         android:layout_weight="25"
         android:background="@null"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/imageButton_contentDesc_nuba_gasstown"
         />
 
     <ImageButton
@@ -71,9 +22,10 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="25"
-
         android:background="@null"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/imageButton_contentDesc_nuba_kitsilano"
+        />
 
     <ImageButton
         android:id="@+id/nubaM"
@@ -81,7 +33,9 @@
         android:layout_height="0dp"
         android:layout_weight="25"
         android:background="@null"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/imageButton_contentDesc_nuba_mount_pleasant"
+        />
     <ImageButton
         android:id="@+id/nubaY"
         android:layout_width="fill_parent"
@@ -89,5 +43,6 @@
         android:layout_weight="25"
         android:background="@null"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/imageButton_contentDesc_nuba_yaletown"
         />
 </LinearLayout>

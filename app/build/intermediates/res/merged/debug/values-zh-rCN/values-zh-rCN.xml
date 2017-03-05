@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-zh-rCN/values-zh-rCN.xml -->
-    <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"转到主屏幕"</string>
     <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s：%2$s"</string>
     <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s - %2$s：%3$s"</string>
@@ -21,8 +19,6 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"分享方式"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"通过%s分享"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"收起"</string>
-    <!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values-zh-rCN/values-zh-rCN.xml -->
-    <eat-comment/>
     <string name="com_facebook_image_download_unknown_error">下载图片时出现意外错误。</string>
     <string name="com_facebook_internet_permission_error_message">Web 登录需要互联网许可</string>
     <string name="com_facebook_internet_permission_error_title">AndroidManifest 错误</string>
@@ -40,7 +36,6 @@
     <string name="com_facebook_share_button_text">分享</string>
     <string name="com_facebook_tooltip_default">新增功能！一切任您掌控 — 选择您想通过应用分享的信息。</string>
     <string name="messenger_send_button_text">发送</string>
-    <!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-zh-rCN/values-zh-rCN.xml -->
-    <eat-comment/>
+    <string msgid="146198913615257606" name="search_menu_title">"搜索"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

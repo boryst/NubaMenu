@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="ca.nuba.nubamenu.MenuSelectActivityFragment"
     android:orientation="horizontal">
 
@@ -11,9 +11,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@null"
-        android:src="@drawable/nubalunch_land"
         android:scaleType="centerCrop"
-
         />
 
     <ImageButton
@@ -22,8 +20,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@null"
-        android:src="@drawable/nubadinner_land"
         android:scaleType="centerCrop"
         />
-
 </LinearLayout>

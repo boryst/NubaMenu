@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/list_item_menu.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/list_item_menu.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/fragment_menu.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_menu.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/fragment_main.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_main.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/fragment_detail.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_detail.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/filter.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/filter.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/fragment_menu_select.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_menu_select.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/layout-land/fragment_menu_select_brunch.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout-land/fragment_menu_select_brunch.xml"
+    }
+]

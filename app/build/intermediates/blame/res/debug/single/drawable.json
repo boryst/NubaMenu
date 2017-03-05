@@ -1,0 +1,758 @@
+[
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/main_eggplant.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/main_eggplant.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_najibs_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_najibs_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_veg_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_veg_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_cold_mezze_olives.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_cold_mezze_olives.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_veg_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_veg_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_chick_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_chick_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/com_facebook_button_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/com_facebook_button_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_mjadra_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_mjadra_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_hushwie_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_hushwie_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/feature_manoush.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/feature_manoush.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_veg_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_veg_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_najibs_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_najibs_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_chicken.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_chicken.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/v.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/v.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/arrow_right.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/arrow_right.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_chick_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_chick_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_garden_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_garden_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_mezze_mjadra.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_mezze_mjadra.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_mjadra_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_mjadra_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_falafel.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_falafel.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_najibs_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_najibs_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_menu_overflow_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_ab_back_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_falafel_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_falafel_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/navigation_empty_icon.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/res/drawable/navigation_empty_icon.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_veg_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_veg_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_hushwie_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_hushwie_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/design_fab_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/res/drawable/design_fab_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_beef.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_beef.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_go_search_api_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_grand.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_grand.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_grand_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_grand_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_tick_mark_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_garden_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_garden_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/gfg.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/gfg.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_falafel_22.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_falafel_22.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_chick_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_chick_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_feast2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_feast2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/soup_lentil.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/soup_lentil.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_kibbe.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_kibbe.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/cold_mezze_feta.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/cold_mezze_feta.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/feature_plate_eggplant.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/feature_plate_eggplant.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/com_facebook_button_login_silver_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/com_facebook_button_login_silver_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/dessert_quinoa.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/dessert_quinoa.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_najibs_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_najibs_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_hot_mezze_lambstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_hot_mezze_lambstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_kafta.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_kafta.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_tawook_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_tawook_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_hushwie.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_hushwie.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_search_api_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_chick_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_chick_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/messenger_button_white_bg_selector.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/messenger_button_white_bg_selector.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/gf.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/gf.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_falafel_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_falafel_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_chicken.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_chicken.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_garden_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_garden_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_feature_manoush.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_feature_manoush.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_vstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_vstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/mezze_najibs.jpg",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/mezze_najibs.jpg"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_cold_mezze_feta.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_cold_mezze_feta.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_soup_daily.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_soup_daily.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_hushwie.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_hushwie.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_feast2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_feast2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_feature_plate_eggplant.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_feature_plate_eggplant.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_hot_mezze_kibbeh.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_hot_mezze_kibbeh.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_garden_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_garden_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_garden_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_garden_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_mjadra_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_mjadra_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/design_bottom_navigation_item_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/res/drawable/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/messenger_button_white_bg_round.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/messenger_button_white_bg_round.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/hot_mezze_lambstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/hot_mezze_lambstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_falafel_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_falafel_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_petit.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_petit.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_falafel_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_falafel_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/mezze_najibs_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/mezze_najibs_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_najibs_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_najibs_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_garden_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_garden_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_chick_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_chick_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_feature_phylo.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_feature_phylo.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/veg.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/veg.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_mjadra_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_mjadra_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_falafel_22.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_falafel_22.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_hot_mezze_halloumi.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_hot_mezze_halloumi.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_petit2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_petit2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_mezze_najibs.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_mezze_najibs.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_falafel.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_falafel.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/selector.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/selector.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_hushwie_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_hushwie_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_dessert_pistachio.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_dessert_pistachio.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_veg_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_veg_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/design_password_eye.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/res/drawable/design_password_eye.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ve.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ve.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_soup_lentil.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_soup_lentil.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/hot_mezze_halloumi.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/hot_mezze_halloumi.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_main_eggplant.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_main_eggplant.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_mezze_hummus.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_mezze_hummus.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/com_facebook_button_send_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/com_facebook_button_send_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_mjadra_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_mjadra_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_falafel_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_falafel_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/vg.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/vg.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/dessert_rolls.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/dessert_rolls.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_falafel_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_falafel_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_delux_najibs_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_delux_najibs_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/cold_mezze_olives.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/cold_mezze_olives.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/soup_daily.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/soup_daily.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_btn_check_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_petit.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_petit.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_hot_mezze_eggplantstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_hot_mezze_eggplantstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_kafta.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_kafta.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_mjadra.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_mjadra.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/mezze_baba.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/mezze_baba.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/hot_mezze_kibbeh.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/hot_mezze_kibbeh.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/dessert_pistachio.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/dessert_pistachio.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/feature_malfouf.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/feature_malfouf.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_chick_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_chick_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_grand.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_grand.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_toshare_feast.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_toshare_feast.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_vstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_vstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_grand_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_grand_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_chick_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_chick_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_chick_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_chick_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/messenger_button_blue_bg_round.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/messenger_button_blue_bg_round.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_najibs_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_najibs_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_kibbe.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_kibbe.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_chick_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_chick_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/plate_najibs.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/plate_najibs.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_petit2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_petit2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/nuba_logo.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/nuba_logo.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/hot_mezze_eggplantstew.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/hot_mezze_eggplantstew.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_mezze_baba.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_mezze_baba.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_najibs.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_najibs.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_chick_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_chick_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_feature_sprouts.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_feature_sprouts.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_chick_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_chick_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/feature_phylo.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/feature_phylo.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_beef.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_beef.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_ic_voice_search_api_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/mezze_hummus.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/mezze_hummus.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/toshare_feast.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/toshare_feast.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/feature_sprouts.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/feature_sprouts.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_najibs_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_najibs_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_launcher.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/com_facebook_button_like_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/com_facebook_button_like_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_tawook_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_tawook_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_plate_mjadra.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_plate_mjadra.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_dessert_quinoa.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_dessert_quinoa.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/design_snackbar_background.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/25.2.0/res/drawable/design_snackbar_background.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/mezze_mjadra.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/mezze_mjadra.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_najibs_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_najibs_2.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_feature_malfouf.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_feature_malfouf.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_chick_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_chick_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_dessert_rolls.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_dessert_rolls.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_najibs_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_najibs_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/messenger_button_blue_bg_selector.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/drawable/messenger_button_blue_bg_selector.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_delux_hushwie_1.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_delux_hushwie_1.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/ic_pita_mjadra_3.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/ic_pita_mjadra_3.png"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.2.0/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/gradient_v20_nubag.xml",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/gradient_v20_nubag.xml"
+    },
+    {
+        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/drawable/pita_veg_2.png",
+        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/drawable/pita_veg_2.png"
+    }
+]

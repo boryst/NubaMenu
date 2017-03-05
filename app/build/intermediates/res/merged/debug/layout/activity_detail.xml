@@ -5,4 +5,3 @@
     tools:layout="@layout/fragment_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-<!-- From: file:/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/layout/activity_detail.xml -->
