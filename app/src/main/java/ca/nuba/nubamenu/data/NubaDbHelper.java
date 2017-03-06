@@ -7,9 +7,9 @@ import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 
 
 
-class NubaDbHelper extends SQLiteOpenHelper {
+public class NubaDbHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "nuba.db";
+    public static final String DATABASE_NAME = "nuba.db";
     private static final int DATABASE_VERSION = 1;
 
 

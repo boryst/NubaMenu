@@ -43,7 +43,10 @@ public class NewTabsAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new MenuActivityFragment();
 
         Bundle args = new Bundle();
-        args.putInt(MenuActivityFragment.ARG_OBJECT, position +1);
+        mCursor.moveToPosition(position);
+
+        args.putString(MenuActivityFragment.ARG_PAGE, mCursor.getString(0));
+        Log.v(LOG_TAG, "Page name - "+mCursor.getString(0));
         fragment.setArguments(args);
         return fragment;
     }

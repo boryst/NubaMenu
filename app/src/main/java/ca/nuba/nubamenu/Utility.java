@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.ImageButton;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import ca.nuba.nubamenu.data.NubaDbHelper;
 
 /**
  * Created by Borys on 2017-03-04.
@@ -103,5 +104,9 @@ public class Utility {
             case "brunchBevs": return "Beverages";
             default: return "Something Wrong";
         }
+    }
+
+    public static void dropDB(Context context){
+        context.deleteDatabase(NubaDbHelper.DATABASE_NAME);
     }
 }

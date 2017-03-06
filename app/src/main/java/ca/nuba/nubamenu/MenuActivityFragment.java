@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 
 import ca.nuba.nubamenu.data.NubaContract;
 
-import static android.R.attr.type;
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -26,12 +26,14 @@ public class MenuActivityFragment extends Fragment {
     public static final String ARG_LOCATION = "ARG_LOCATION";
     public static final String ARG_MENU_TYPE = "ARG_MENU_TYPE";
 
-    public static final String ARG_OBJECT = "object";
+    public static final String ARG_DISH_TYPE = "DISH_TYPE";
+
+    public static String type, location;
 
     AlertDialog.Builder alert;
 
 
-    private int mPage;
+    private String mPageName;
     Boolean vCheckBoxBefore, veCheckBoxBefore; //variables for dynamic Checkboxes in filter
     Boolean vFilter, veFilter, gfFilter, mFilter,
     vFilter_onCreate;
@@ -44,6 +46,8 @@ public class MenuActivityFragment extends Fragment {
     private String mMenuType;
     private MenuArrayAdapter mArrayAdapter;
     TextView textView;
+
+
 
 
     String tabBrunchDesc[] = new String[] {"",""};
@@ -76,16 +80,19 @@ public class MenuActivityFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
-        mLocation = getArguments().getString(ARG_LOCATION);
-        mMenuType = getArguments().getString(ARG_MENU_TYPE);
+        mPageName = getArguments().getString(ARG_PAGE);
+        Log.v(LOG_TAG, "mPage - "+mPageName);
+
+/*        mLocation = getArguments().getString(ARG_LOCATION);
+        mMenuType = getArguments().getString(ARG_MENU_TYPE);*/
+
 
         setHasOptionsMenu(true);
         int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
 
         SharedPreferences prefs = getActivity().getSharedPreferences(MainActivityFragment.NUBA_PREFS, MODE_PRIVATE);
-        String location = prefs.getString(MainActivityFragment.LOCATION_EXTRA, null);
-        String type = prefs.getString(MenuSelectActivityFragment.TYPE_EXTRA, null);
+        location = prefs.getString(MainActivityFragment.LOCATION_EXTRA, null);
+        type = prefs.getString(MenuSelectActivityFragment.TYPE_EXTRA, null);
         //Log.v(LOG_TAG, "location from prefs - "+location+", type - "+type);
 
     }
@@ -117,15 +124,39 @@ public class MenuActivityFragment extends Fragment {
                 NubaContract.NubaMenuEntry.CONTENT_URI,
                 Utility.NUBA_MENU_PROJECTION,
                 Utility.sNubaMenuWithLike,
-                new String[]{type+"%"},
+                new String[]{mPageName},
                 null);
+
+/*        Cursor mCursor = getActivity().getContentResolver().query(
+                NubaContract.NubaMenuEntry.CONTENT_URI,
+                Utility.NUBA_MENU_PROJECTION,
+                null,
+                null,
+                null);*/
+
+        if (mCursor != null) {
+            mCursor.moveToPosition(2);
+            Log.v(LOG_TAG, "type - "+type);
+            Log.v(LOG_TAG, "Cursor - "+String.valueOf(mCursor));
+            //Log.v(LOG_TAG, "Cursor - " + mCursor.getString(Utility.COL_NUBA_MENU_NAME));
+        }
+        //String[] array = {"line 1", "line 2", "line 3", "line 4"};
+
+        //ArrayList list = new ArrayList<>(Arrays.asList(array));
+
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.menu_recyclerview);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(mCursor);
-        recyclerView.setAdapter(recyclerAdapter);
+        //RecyclerAdapter recyclerAdapter = new RecyclerAdapter(mCursor);
+        //recyclerView.setAdapter(recyclerAdapter);
+
+        MyListCursorAdapter myListCursorAdapter = new MyListCursorAdapter(getActivity(),mCursor);
+        recyclerView.setAdapter(myListCursorAdapter);
+
+
+
         //Bundle args = getArguments();
         //textView = ((TextView) rootView.findViewById(R.id.testTextView));
         //textView.setText(Integer.toString(args.getInt(ARG_OBJECT)));
@@ -205,7 +236,9 @@ public class MenuActivityFragment extends Fragment {
         }
 
         listInflater(vFilter_onCreate, veFilter, gfFilter, mFilter);*/
-
+        if (mCursor != null) {
+            //mCursor.close();
+        }
         return rootView;
     }
 
