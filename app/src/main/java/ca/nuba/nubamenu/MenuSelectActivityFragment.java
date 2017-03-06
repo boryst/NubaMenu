@@ -1,6 +1,8 @@
 package ca.nuba.nubamenu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import ca.nuba.nubamenu.data.NubaContract;
+
+import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.MainActivityFragment.NUBA_PREFS;
 
 
 /**
@@ -53,19 +60,31 @@ public class MenuSelectActivityFragment extends Fragment {
         //Get location either from MainActivity or from MenuActivity and set page title
         Intent intent = getActivity().getIntent();
 
-        if (intent != null) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        location = prefs.getString(MainActivityFragment.LOCATION_EXTRA, null);
+
+
+
+/*        if (intent != null && intent.hasExtra(MainActivityFragment.LOCATION_EXTRA)) {
             //true only if we came from MainActivity
             Log.v(LOG_TAG, "onCreateView.intent != null");
+            Log.v(LOG_TAG, "Intent - "+String.valueOf(intent));
 
             //Bundle extras = intent.getExtras();
             //location = extras.getString(MainActivityFragment.LOCATION_EXTRA);
             location = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
-            getActivity().setTitle(location);
         } else {
             //if we came from MenuSelect or MainActvity?
             Log.v(LOG_TAG, "onCreateView.else");
-            location = savedInstanceState.getString(LOCATION_EXTRA);
-        }
+
+            if (savedInstanceState != null){
+                location = savedInstanceState.getString(LOCATION_EXTRA);
+                Log.v(LOG_TAG, "savedInstanceState is not null");
+            }
+            Log.v(LOG_TAG, "location - "+location);
+
+        }*/
+        getActivity().setTitle(location);
 
         extras.putString(LOCATION_EXTRA, location);
 
@@ -110,7 +129,11 @@ public class MenuSelectActivityFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     extras.putString(TYPE_EXTRA, TYPE_BRUNCH);
-                    Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
+                    Intent intent = new Intent(getActivity(), MenuActivity.class);
+//                    intent.putExtras(extras);
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                    editor.putString(TYPE_EXTRA, TYPE_BRUNCH);
+                    editor.apply();
                     //Intent intent1 = new Intent(getActivity(), MenuActivity.class).putExtra(TYPE_EXTRA, TYPE_BRUNCH);
                     startActivity(intent);
                 }
@@ -129,7 +152,11 @@ public class MenuSelectActivityFragment extends Fragment {
             public void onClick(View v) {
                 extras.putString(TYPE_EXTRA, TYPE_LUNCH);
                 //flag = "lunch";
-                Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+//                intent.putExtras(extras);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(TYPE_EXTRA, TYPE_LUNCH);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -141,7 +168,11 @@ public class MenuSelectActivityFragment extends Fragment {
             public void onClick(View v) {
                 extras.putString(TYPE_EXTRA, TYPE_DINNER);
                 //flag = "dinner";
-                Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+//                intent.putExtras(extras);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(TYPE_EXTRA, TYPE_DINNER);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -186,19 +217,21 @@ public class MenuSelectActivityFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //Toast.makeText(getActivity(), "created", Toast.LENGTH_LONG).show();
 
-        if (savedInstanceState !=null){
-            Log.v(LOG_TAG, "savedInstanceState.getString(LOCATION_EXTRA) - "+savedInstanceState.getString(LOCATION_EXTRA));
-            //Toast.makeText(getActivity(), "something there", Toast.LENGTH_LONG).show();
-            //Toast.makeText(getActivity(), savedInstanceState.getString(STATE_MENU), Toast.LENGTH_LONG).show();
-
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+
+        Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI,Utility.NUBA_MENU_PROJECTION, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()){
+            Log.v(LOG_TAG, "Checking cursor - "+cursor.getString(Utility.COL_NUBA_MENU_NAME));
+            cursor.close();
+        }
+
 /*        Intent intent = getActivity().getIntent();
 
 

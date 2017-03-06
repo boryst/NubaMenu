@@ -19,6 +19,13 @@ import ca.nuba.nubamenu.data.NubaContract;
 
 public class Utility {
 
+    public  static final String sNubaMenuWithLike =
+            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ?";
+
+
+
+
+
     public static final String[] NUBA_MENU_PROJECTION = {
             NubaContract.NubaMenuEntry.TABLE_NAME + "." + NubaContract.NubaMenuEntry._ID,
             NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE,
@@ -75,6 +82,26 @@ public class Utility {
             ColorStateList csl = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.primary));
             RippleDrawable d = new RippleDrawable(csl, ContextCompat.getDrawable(context, picture), null);
             button.setImageDrawable(d);
+        }
+    }
+
+    public static String formatMenuType(String menuType){
+        switch (menuType){
+            case "lunchMezze": return "Mezze";
+            case "lunchPlates": return "Plates";
+            case "lunchPitas": return "Pitas";
+            case "lunchSalads": return "Salads";
+            case "lunchSoups": return "Soups";
+            case "lunchToShare": return "To Share";
+            case "lunchBeverages": return "Beverages";
+            case "dinnerColdMezze": return "Cold Mezze";
+            case "dinnerHotMezze": return "Hot Mezze";
+            case "dinnerToShare": return "To Share";
+            case "dinnerSoupsSalads": return "Soups & Salads";
+            case "dinnerMains": return "Mains";
+            case "brunchAll": return "Mains";
+            case "brunchBevs": return "Beverages";
+            default: return "Something Wrong";
         }
     }
 }

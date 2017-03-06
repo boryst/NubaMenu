@@ -117,6 +117,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, menuInfo.getString(NUBA_ICON_PATH));
 
                     mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
+                    Log.v(LOG_TAG, "Inserting");
                 }
             }
         } catch (JSONException e) {

@@ -28,6 +28,8 @@ public class NubaProvider extends ContentProvider {
     private static final String sNubaMenuWithID =
             NubaMenuEntry.TABLE_NAME+ "." + NubaMenuEntry._ID + " = ? ";
 
+
+
 //    private static final String sNubaMenuWith --- =
 //            MoviesEntry.TABLE_NAME+ "." + MoviesEntry.COLUMN_FAV_MOVIE + " = ? ";
 

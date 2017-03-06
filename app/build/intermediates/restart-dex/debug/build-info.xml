@@ -5,40 +5,59 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="42186070714369"
+    timestamp="59490968809027"
     token="5275292714981831532"
-    verifier="FIELD_REMOVED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="1320" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="60" />
+        duration="0" />
     <task
         name="verifier"
-        duration="32" />
-
-    <artifact
-        location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
-        type="DEX" />
+        duration="0" />
 
     <build
-        timestamp="41937058867109"
+        timestamp="49705511093021"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/Borys/StudioProjects/NubaMenu/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="42186070714369"
-        verifier="FIELD_REMOVED" >
+        timestamp="54899972127647"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="58593382809171"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="58935794767815"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
             type="DEX" />
     </build>
+    <build
+        timestamp="59490968809027"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

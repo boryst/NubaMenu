@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/mipmap-mdpi/iic_launcher.png",
-        "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/mipmap-mdpi/iic_launcher.png"
-    },
-    {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
         "source": "/Users/Borys/StudioProjects/NubaMenu/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     }

@@ -44,7 +44,8 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return MenuActivityFragment.newInstance(position + 1, location, menuType);
+        //return MenuActivityFragment.newInstance(position + 1, location, menuType);
+        return null;
     }
 
     @Override

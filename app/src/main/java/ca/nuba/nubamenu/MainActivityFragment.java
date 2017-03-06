@@ -1,6 +1,7 @@
 package ca.nuba.nubamenu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.imageButtonPressEffect;
 
 
@@ -16,8 +18,8 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
-        //menuInfoTask.execute();
+/*        FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
+        menuInfoTask.execute();*/
     }
     //String mFlag;
     ImageButton imgBtnG, imgBtnY, imgBtnM, imgBtnK;
@@ -26,6 +28,8 @@ public class MainActivityFragment extends Fragment {
     public static final String LOCATION_KITSILANO = "Kitsilano";
     public static final String LOCATION_MOUNT = "Mount Pleasant";
     public static final String LOCATION_YALETOWN = "Yaletown";
+
+    public static final String NUBA_PREFS = "NUBA_PREFS";
 
     public MainActivityFragment() {
     }
@@ -59,7 +63,11 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class).putExtra(LOCATION_EXTRA, LOCATION_GASTOWN);
+                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+                //intent.putExtra(LOCATION_EXTRA, LOCATION_GASTOWN);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(LOCATION_EXTRA, LOCATION_GASTOWN);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -72,7 +80,12 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class).putExtra(LOCATION_EXTRA, LOCATION_KITSILANO);
+                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+                //intent.putExtra(LOCATION_EXTRA, LOCATION_KITSILANO);
+
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(LOCATION_EXTRA, LOCATION_KITSILANO);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -85,7 +98,11 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class).putExtra(LOCATION_EXTRA, LOCATION_MOUNT);
+                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+//                intent.putExtra(LOCATION_EXTRA, LOCATION_MOUNT);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(LOCATION_EXTRA, LOCATION_MOUNT);
+                editor.apply();
                 startActivity(intent);
             }
         });
@@ -98,7 +115,11 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class).putExtra(LOCATION_EXTRA, LOCATION_YALETOWN);
+                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+                //intent.putExtra(LOCATION_EXTRA, LOCATION_YALETOWN);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(LOCATION_EXTRA, LOCATION_YALETOWN);
+                editor.apply();
                 startActivity(intent);
             }
         });
