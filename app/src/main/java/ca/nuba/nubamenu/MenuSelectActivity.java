@@ -1,9 +1,13 @@
 package ca.nuba.nubamenu;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.TAB_NUMBER_EXTRA;
 
 public class MenuSelectActivity extends AppCompatActivity {
 
@@ -30,4 +34,13 @@ public class MenuSelectActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        SharedPreferences.Editor editor = this.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+        editor.putInt(TAB_NUMBER_EXTRA, 0);
+        editor.apply();
+        super.onResume();
+
+
+    }
 }

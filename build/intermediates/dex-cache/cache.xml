@@ -2,67 +2,184 @@
 <items version="2" >
 
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-3e8b7dc168ddcda2805b6c48ecd49c9690a0792b.jar" />
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/85aa9d07320f48161e05e3e35bafb266e86298ac/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5cb0b14fec4dc6428f55d249ba5545a445ac157f/classes.dex" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-bfb85693ca5669e26a0be6cf951e95f496186065.jar" />
-    </item>
-    <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-f576ae2653ae39bbeee7a943ddf9a8bd2dad88ed.jar" />
-    </item>
-    <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-7d43ad484b078f759ede89d678cd19d09951a27d.jar" />
-    </item>
-    <item
-        jar="/Users/Borys/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-0e5388a8a8b9cae96f74682b4f92f83ffca34e27.jar" />
-    </item>
-    <item
+        is-multidex="true"
         jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-d3b2d2af813ac199b83d07353c0c97b21c243efd.jar" />
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_d3b2d2af813ac199b83d07353c0c97b21c243efd/classes.dex" />
     </item>
     <item
-        jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-9ebb62a73c4a4d81fedfab112bd82eb5e5d85a73.jar" />
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/7f689eb23d803e0faa7ed92a17b806f51e58b71e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9e27d526206a393456551c2d1bcb244b063ce81a/classes.dex" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        is-multidex="true"
+        jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.6.0_57163c1ca9e8126dd7117c84f07ce5cbbcc0eef4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.11.0/840897fcd7223a8143f1d9b6f69714e7be34fd50/okio-1.11.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.11.0_20e576d0eea1ce428fbc552d042d77e5fa94d667/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_58ae0da97c5ebe662a57a71bb3b6888b42305dfc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/cc28815baa823dd3791cb18f71065c6d1fe531e1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="1c1afa0ab2a8197a5da1b36c4167a9e479cb74d9">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-aede52e490e5e07529b8dd433d485de37ae81d43.jar" />
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_488608941689db998a3f6dc2fe2e45c7cd694711/classes.dex" />
     </item>
     <item
-        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/pre-dexed/debug/classes-4b4b4c9006a1710341bb5287d30403665b18edd1.jar" />
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/ddf5269669e362bb004d7944e76a7501f59f6747/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_25ca17675545b0f0910461835f5a17204b6b575c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/06bc8bf01b41f6463295357e14b1210d3a7cbb67/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_66d5ab6b0a47e32d8bc23d5c2c9ee108c51d61ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.2.0_4028a5538e63347b834fe5657bd5847c0fb36029/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/8477c6ff4b4c355b22012774d752ed7dfeacfca6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_20f403c1aa994c4a73736e30ca39e8f68b6adab7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-android-1.2.0_9ebb62a73c4a4d81fedfab112bd82eb5e5d85a73/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/015239a00ee8e63d30f5e0d0bb20c16b2e6d3a31/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9fe4a6551aa92fad7db99b9349a3345f4b19f5fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/b8664d4f1015ebe0e0b917687c31dec74b666e9c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e706087130d7fc5bec4e00710d284f3e151bdf8e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1c91651fcd969f6a8c1d223f9c834aa600ba8554">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_9fbbe7bc34f681f0ce1576f77c44dd35170a626c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/a96daba6cd3d5f7f68a36ccfc01b77ae7dbaf566/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_05f314e57d88f3e562c49b8baec7133f0bf92681/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/2e0275156cf8b67d0619f6e8fd30aa3a4081c8fa/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0c331908fd26958963805cf416cac6b3642c17d1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/dfb51be91e94a582677f4cd9b3d8ab106ae07cde/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_073e458370f061fa9049ea78f332d6e7971d83ca/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/1eda15338025b83fd43ac0e330dff142cc0933f4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1860c5cfca5f7766f2c54df4e61e926f00e96857/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+        <dex dex="/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2f583625a4587babfa9e9db4f933c3f4c0cc10c3/classes.dex" />
     </item>
 
 </items>

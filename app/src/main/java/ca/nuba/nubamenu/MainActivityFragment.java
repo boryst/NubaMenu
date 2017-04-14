@@ -2,6 +2,7 @@ package ca.nuba.nubamenu;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import ca.nuba.nubamenu.data.NubaContract;
+
 import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
+import static ca.nuba.nubamenu.Utility.LOCATION_GASTOWN;
+import static ca.nuba.nubamenu.Utility.LOCATION_KITSILANO;
+import static ca.nuba.nubamenu.Utility.LOCATION_MOUNT;
+import static ca.nuba.nubamenu.Utility.LOCATION_YALETOWN;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.imageButtonPressEffect;
 
 
@@ -18,18 +27,18 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-/*        FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
-        menuInfoTask.execute();*/
+        Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI, null,null,null,null);
+        if (cursor == null || !cursor.moveToFirst()) {
+            FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
+            menuInfoTask.execute();
+        } else {
+            cursor.close();
+        }
     }
     //String mFlag;
     ImageButton imgBtnG, imgBtnY, imgBtnM, imgBtnK;
-    public static final String LOCATION_EXTRA = "LOCATION_EXTRA";
-    public static final String LOCATION_GASTOWN = "Gastown";
-    public static final String LOCATION_KITSILANO = "Kitsilano";
-    public static final String LOCATION_MOUNT = "Mount Pleasant";
-    public static final String LOCATION_YALETOWN = "Yaletown";
 
-    public static final String NUBA_PREFS = "NUBA_PREFS";
+
 
     public MainActivityFragment() {
     }

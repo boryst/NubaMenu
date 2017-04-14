@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import ca.nuba.nubamenu.data.NubaContract;
 
 import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE_NUMBER;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 
 
 public class NewTabsAdapter extends FragmentStatePagerAdapter {
@@ -27,9 +30,9 @@ public class NewTabsAdapter extends FragmentStatePagerAdapter {
     public NewTabsAdapter(FragmentManager fm, Context context){
         super(fm);
         mContext = context;
-        SharedPreferences prefs = mContext.getSharedPreferences(MainActivityFragment.NUBA_PREFS, MODE_PRIVATE);
-        type = prefs.getString(MenuSelectActivityFragment.TYPE_EXTRA, null);
-        Log.v(LOG_TAG, "type - " + type);
+        SharedPreferences prefs = mContext.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        type = prefs.getString(TYPE_EXTRA, null);
+        //Log.v(LOG_TAG, "type - " + type);
         mCursor = context.getContentResolver().query(
                 NubaContract.NubaMenuEntry.CONTENT_URI,
                 new String[]{"DISTINCT " + NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE},
@@ -45,8 +48,8 @@ public class NewTabsAdapter extends FragmentStatePagerAdapter {
         Bundle args = new Bundle();
         mCursor.moveToPosition(position);
 
-        args.putString(MenuActivityFragment.ARG_PAGE, mCursor.getString(0));
-        Log.v(LOG_TAG, "Page name - "+mCursor.getString(0));
+        args.putString(ARG_PAGE, mCursor.getString(0));
+        args.putInt(ARG_PAGE_NUMBER, position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,5 +65,10 @@ public class NewTabsAdapter extends FragmentStatePagerAdapter {
         //return "OBJECT "+ (position +1);
         mCursor.moveToPosition(position);
         return Utility.formatMenuType(mCursor.getString(0));
+    }
+
+    public String getPageTitleUncut(int position) {
+        mCursor.moveToPosition(position);
+        return mCursor.getString(0);
     }
 }

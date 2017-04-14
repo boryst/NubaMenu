@@ -1,7 +1,7 @@
-#Sun Mar 05 15:09:49 PST 2017
-base.0=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_9fbbe7bc34f681f0ce1576f77c44dd35170a626c
+#Sat Mar 18 03:38:15 PDT 2017
+base.0=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_9fbbe7bc34f681f0ce1576f77c44dd35170a626c
 renamed.1=classes.dex
 renamed.0=classes2.dex
-file.1=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_58ae0da97c5ebe662a57a71bb3b6888b42305dfc/classes.dex
-base.1=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_58ae0da97c5ebe662a57a71bb3b6888b42305dfc
-file.0=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_9fbbe7bc34f681f0ce1576f77c44dd35170a626c/classes.dex
+file.1=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_58ae0da97c5ebe662a57a71bb3b6888b42305dfc/classes.dex
+base.1=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_58ae0da97c5ebe662a57a71bb3b6888b42305dfc
+file.0=/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_9fbbe7bc34f681f0ce1576f77c44dd35170a626c/classes.dex

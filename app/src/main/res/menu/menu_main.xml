@@ -5,6 +5,9 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/drop_db"
+        android:title="Drop DB"
+        />
     <item android:id="@+id/action_info"
         android:title="Info"
         android:orderInCategory="101"

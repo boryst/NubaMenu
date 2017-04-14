@@ -2,19 +2,22 @@ package ca.nuba.nubamenu;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import ca.nuba.nubamenu.data.NubaContract;
 
 import static android.content.Context.MODE_PRIVATE;
-import static ca.nuba.nubamenu.MainActivityFragment.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
+import static ca.nuba.nubamenu.Utility.LOCATION_KITSILANO;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.TYPE_BRUNCH;
+import static ca.nuba.nubamenu.Utility.TYPE_DINNER;
+import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
+import static ca.nuba.nubamenu.Utility.TYPE_LUNCH;
 
 
 /**
@@ -24,11 +27,7 @@ public class MenuSelectActivityFragment extends Fragment {
     final String LOG_TAG = MenuSelectActivityFragment.class.getSimpleName();
 
     private String location; //location with brunch
-    static final String LOCATION_EXTRA = "LOCATION_EXTRA";
-    public static final String TYPE_EXTRA = "TYPE_EXTRA";
-    public static final String TYPE_LUNCH = "Lunch";
-    public static final String TYPE_BRUNCH = "Brunch";
-    public static final String TYPE_DINNER = "Dinner";
+
     ImageButton imgBtnLunch, imgBtnDinner, imgBtnBrunch;
     Bundle extras = new Bundle();
 
@@ -37,7 +36,7 @@ public class MenuSelectActivityFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onSaveInstanceState");
+        //Log.v(LOG_TAG, "onSaveInstanceState");
         //savedInstanceState.putString(STATE_MENU, "Kitsilano");
         savedInstanceState.putString(LOCATION_EXTRA, location);
         super.onSaveInstanceState(savedInstanceState);
@@ -61,7 +60,7 @@ public class MenuSelectActivityFragment extends Fragment {
         Intent intent = getActivity().getIntent();
 
         SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
-        location = prefs.getString(MainActivityFragment.LOCATION_EXTRA, null);
+        location = prefs.getString(LOCATION_EXTRA, null);
 
 
 
@@ -120,7 +119,7 @@ public class MenuSelectActivityFragment extends Fragment {
                 rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
             }*/
 
-        if (location !=null && location.equals(MainActivityFragment.LOCATION_KITSILANO)){
+        if (location !=null && location.equals(LOCATION_KITSILANO)){
             rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
             imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
             Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
@@ -225,12 +224,12 @@ public class MenuSelectActivityFragment extends Fragment {
         super.onResume();
 
 
-        Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI,Utility.NUBA_MENU_PROJECTION, null, null, null);
+/*        Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI,Utility.NUBA_MENU_PROJECTION, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()){
             Log.v(LOG_TAG, "Checking cursor - "+cursor.getString(Utility.COL_NUBA_MENU_NAME));
             cursor.close();
-        }
+        }*/
 
 /*        Intent intent = getActivity().getIntent();
 

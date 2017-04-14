@@ -1,112 +1,139 @@
 package ca.nuba.nubamenu;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.CheckBox;
 
 import ca.nuba.nubamenu.data.NubaContract;
 
 import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE_NUMBER;
+import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
+import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithGfFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVGfFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVVeFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVVeGfFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVeFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithVeGfFilter;
 
 
-public class MenuActivityFragment extends Fragment {
-    public static final String LOG_TAG = MenuActivityFragment.class.getSimpleName();
+public class MenuActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+    public static String LOG_TAG = MenuActivityFragment.class.getSimpleName();
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-    public static final String ARG_LOCATION = "ARG_LOCATION";
-    public static final String ARG_MENU_TYPE = "ARG_MENU_TYPE";
-
-    public static final String ARG_DISH_TYPE = "DISH_TYPE";
+//    public static final String ARG_LOCATION = "ARG_LOCATION";
+//    public static final String ARG_MENU_TYPE = "ARG_MENU_TYPE";
+//
+//    public static final String ARG_DISH_TYPE = "DISH_TYPE";
 
     public static String type, location;
+
+    CursorLoader cursorLoader;
+    private static final int MENU_LOADER = 0;
+    MyListCursorAdapter myListCursorAdapter;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     AlertDialog.Builder alert;
 
 
     private String mPageName;
+    int mPageNumber;
     Boolean vCheckBoxBefore, veCheckBoxBefore; //variables for dynamic Checkboxes in filter
-    Boolean vFilter, veFilter, gfFilter, mFilter,
-    vFilter_onCreate;
+    Boolean vFilter, veFilter, gfFilter, mFilter;
 
-
+    String selection;
+    String[] selectionArgs;
 
     private View rootView;
-    private ListView listView;
-    private String mLocation;
-    private String mMenuType;
-    private MenuArrayAdapter mArrayAdapter;
-    TextView textView;
-
-
-
-
-    String tabBrunchDesc[] = new String[] {"",""};
-
-
-    MenuItem[] lunchMezze, lunchPlates, lunchPitas, lunchSalads, lunchSoups, lunchToShare, lunchBeverages,
-            brunchAll, brunchBevs, dinnerColdMezze, dinnerHotMezze, dinnerToShare, dinnerSoupsSalads, dinnerMains, features, desserts;
-
-/*    public static MenuActivityFragment newInstance(int page, String location, String menuType) {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        args.putString(ARG_LOCATION, location);
-        args.putString(ARG_MENU_TYPE, menuType);
-
-
-        MenuActivityFragment fragment = new MenuActivityFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onResume() {
-        super.onResume();
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        //Boolean test =  prefs.getBoolean("vFilter", true);
+        Log.v(LOG_TAG+ "|"+mPageName, "onResume");
 
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+        } else veFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+        } else gfFilter = null;
+        checkFilters(vFilter, veFilter, gfFilter);
+        Log.v(LOG_TAG+ "|"+mPageName, "onResume || v - "+vFilter+ ", ve - "+veFilter+ ", gf - "+gfFilter);
+
+
+        getLoaderManager().restartLoader(MENU_LOADER, null, this);
+        super.onResume();
+//        + "|"+mPageName
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         mPageName = getArguments().getString(ARG_PAGE);
-        Log.v(LOG_TAG, "mPage - "+mPageName);
-
-/*        mLocation = getArguments().getString(ARG_LOCATION);
-        mMenuType = getArguments().getString(ARG_MENU_TYPE);*/
-
+        mPageNumber = getArguments().getInt(ARG_PAGE_NUMBER);
+        //Log.v(LOG_TAG, "onCreate - "+mPageName);
 
         setHasOptionsMenu(true);
-        int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
+        //int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(MainActivityFragment.NUBA_PREFS, MODE_PRIVATE);
-        location = prefs.getString(MainActivityFragment.LOCATION_EXTRA, null);
-        type = prefs.getString(MenuSelectActivityFragment.TYPE_EXTRA, null);
-        //Log.v(LOG_TAG, "location from prefs - "+location+", type - "+type);
+        prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        location = prefs.getString(LOCATION_EXTRA, null);
+        type = prefs.getString(TYPE_EXTRA, null);
+
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+        } else veFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+        } else gfFilter = null;
+
+
+        checkFilters(vFilter, veFilter, gfFilter);
+
+
+/*        Log.v(LOG_TAG, "onCreate|| v - "+prefs.getString(FILTER_VEGETARIAN, "nope")+
+                ", ve - "+prefs.getString(FILTER_VEGAN, "nope")+
+                ", gf - "+prefs.getString(FILTER_GLUTEN_FREE, "nope"));*/
+        //Log.v(LOG_TAG, "onResume|| v - "+vFilter+ ", ve - "+veFilter+ ", gf - "+gfFilter);
+
 
     }
+
+
 
 
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
-/*            case android.R.id.home: {
-                NavUtils.navigateUpTo(getActivity(), NavUtils.getParentActivityIntent(getActivity()).putExtra("EXTRA_LOCATION", mLocation));
-                return true;
-            }*/
+
             case R.id.action_filter: {
-                /**filter();*/
+                filter();
                 return true;
 
             }
@@ -115,311 +142,106 @@ public class MenuActivityFragment extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            Log.v(LOG_TAG, mPageName+" is visible now");
+        } else {
+            Log.v(LOG_TAG, mPageName+" is invisible");
+        }
+    }
+
+
+    @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Log.v(LOG_TAG, "onCreateView");
+        Log.v(LOG_TAG+ "|"+mPageName, "onCreateView");
 
         rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-
-        Cursor mCursor = getActivity().getContentResolver().query(
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                Utility.NUBA_MENU_PROJECTION,
-                Utility.sNubaMenuWithLike,
-                new String[]{mPageName},
-                null);
 
 /*        Cursor mCursor = getActivity().getContentResolver().query(
                 NubaContract.NubaMenuEntry.CONTENT_URI,
                 Utility.NUBA_MENU_PROJECTION,
-                null,
-                null,
+                Utility.sNubaMenuWithLike,
+                new String[]{mPageName},
                 null);*/
-
-        if (mCursor != null) {
-            mCursor.moveToPosition(2);
-            Log.v(LOG_TAG, "type - "+type);
-            Log.v(LOG_TAG, "Cursor - "+String.valueOf(mCursor));
-            //Log.v(LOG_TAG, "Cursor - " + mCursor.getString(Utility.COL_NUBA_MENU_NAME));
-        }
-        //String[] array = {"line 1", "line 2", "line 3", "line 4"};
-
-        //ArrayList list = new ArrayList<>(Arrays.asList(array));
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.menu_recyclerview);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        //RecyclerAdapter recyclerAdapter = new RecyclerAdapter(mCursor);
-        //recyclerView.setAdapter(recyclerAdapter);
 
-        MyListCursorAdapter myListCursorAdapter = new MyListCursorAdapter(getActivity(),mCursor);
+//        myListCursorAdapter = new MyListCursorAdapter(getActivity(),mCursor, mPageNumber);
+        myListCursorAdapter = new MyListCursorAdapter(getActivity(), null, mPageNumber);
         recyclerView.setAdapter(myListCursorAdapter);
 
 
-
-        //Bundle args = getArguments();
-        //textView = ((TextView) rootView.findViewById(R.id.testTextView));
-        //textView.setText(Integer.toString(args.getInt(ARG_OBJECT)));
-/**
-
-
-
-//        Intent intent = getActivity().getIntent();
-//        if (intent != null) {
-//            Bundle extras = intent.getExtras();
-//            pageForTitle = extras.getInt("EXTRA_PAGE",1);
+//        if (mCursor != null) {
+//            mCursor.close();
 //        }
-
-
-
-
-        ArrayList<MenuItem> arrayOfMenuItems = new ArrayList<MenuItem>();
-        mArrayAdapter = new MenuArrayAdapter(getActivity(), arrayOfMenuItems);
-        listView = (ListView) rootView.findViewById(R.id.menu_listview);
-        listView.setAdapter(mArrayAdapter);
-//        listInflater(vFilter, veFilter, gfFilter, mFilter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MenuItem menuItemDetails = mArrayAdapter.getItem(position);
-
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra("picturePath", menuItemDetails.picturePath);
-                intent.putExtra("name", menuItemDetails.name);
-                *//**  combine tabTitles arrays into two dimentional array and get rid of this switch?  *//*
-                switch (mMenuType){
-                    case "Lunch":{
-                        intent.putExtra("page", tabLunchTitles[mPage - 1]);
-                        break;
-                    }
-                    case "Dinner":{
-                        intent.putExtra("page", tabDinnerTitles[mPage - 1]);
-                        break;
-                    }
-                    case "Brunch":{
-                        intent.putExtra("page", tabBrunchTitles[mPage - 1]);
-                        break;
-                    }
-                }
-
-                intent.putExtra("price", menuItemDetails.price);
-                intent.putExtra("v", menuItemDetails.v);
-                intent.putExtra("ve", menuItemDetails.ve);
-                intent.putExtra("gf", menuItemDetails.gf);
-                intent.putExtra("desc", menuItemDetails.desc);
-                //for up intent
-                intent.putExtra("EXTRA_LOCATION", mLocation);
-                intent.putExtra("EXTRA_TYPE", mMenuType);
-                intent.putExtra("EXTRA_PAGE", mPage);
-
-                startActivity(intent);
-            }
-        });
-
-        //textViewPageTitle = (TextView) rootView.findViewById(R.id.menu_title_textview);
-        //textViewPageDesc = (TextView) rootView.findViewById(R.id.menu_title_desc_textview);
-
-        //TODO: make "Lunch" array and add there all lunch menus, and then change "switch" to loop
-
-
-        //listInflater(null, null, null, null);
-
-
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-// then you use
-        if (prefs != null) {
-            Boolean test = prefs.getBoolean("vFilter", true);
-           // Toast.makeText(getActivity(), String.valueOf(test), Toast.LENGTH_SHORT).show();
-
-        }
-
-        listInflater(vFilter_onCreate, veFilter, gfFilter, mFilter);*/
-        if (mCursor != null) {
-            //mCursor.close();
-        }
         return rootView;
     }
 
-    public void checkFilters(MenuItem[] array, MenuArrayAdapter adapter,
-                             Boolean v, Boolean ve, Boolean gf, Boolean m, int page,
-                             String[] arrayOfTitles, String[] arrayOfDesc){
-        adapter.clear();
-        //textViewPageTitle.setText(arrayOfTitles[page - 1]);
-        //textViewPageDesc.setText(arrayOfDesc[page - 1]);
+    public void checkFilters(Boolean v, Boolean ve, Boolean gf){
 
-        if (v != null || ve != null || gf != null || m != null) {
+        selection = null;
+        selectionArgs = null;
 
-        //TODO: Add "V but not Ve"
 
-        if (v != null && gf != null) {
-            for (MenuItem item:array) {
-                if (item.v && item.gf){
-                    adapter.add(item);
+        if (v == null){
+            if (ve == null) {
+                if (gf == null){
+//                    selection = null;
+                    selection = Utility.sNubaMenuWithLike;
+//                    selectionArgs = null;
+                    selectionArgs = new String[]{mPageName};
+                    Log.v(LOG_TAG, "Selection - default");
+                } else {
+                    selection = sNubaMenuWithGfFilter; // selection with gf
+                    selectionArgs = new String[]{mPageName, String.valueOf(gf)};
+                    Log.v(LOG_TAG, "Selection - gf");
                 }
+            } else if (gf == null){
+                selection = sNubaMenuWithVeFilter;//selection with ve
+                selectionArgs = new String[]{mPageName, String.valueOf(ve)};
+                Log.v(LOG_TAG, "Selection - ve");
+            } else {
+                selection = sNubaMenuWithVeGfFilter;//selection with ve and gf
+                selectionArgs = new String[]{mPageName, String.valueOf(ve), String.valueOf(gf)};
+                Log.v(LOG_TAG, "Selection - ve +  gf");
+            }
+        }
+
+
+        else if (ve == null){
+            if (gf == null){
+                selection = sNubaMenuWithVFilter; //selection with v
+                selectionArgs = new String[]{mPageName, String.valueOf(v)};
+                Log.v(LOG_TAG, "Selection - v");
+            } else {
+                selection = sNubaMenuWithVGfFilter; //selection with v ang gf
+                selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(gf)};
+                Log.v(LOG_TAG, "Selection - v + gf");
             }
 
-        } else if (ve != null && gf != null) {
-            for (MenuItem item:array) {
-                if (item.ve && item.gf){
-                    adapter.add(item);
-                }
-            }
-
-        } else if (m != null && gf != null) {
-            for (MenuItem item:array) {
-                if (!item.v && item.gf){
-                    adapter.add(item);
-                }
-            }
-        } else if (ve != null) {
-            for (MenuItem item: array) {
-                if (item.ve){
-                    adapter.add(item);
-                }
-            }
-        } else if (v != null) {
-                for (MenuItem item: array) {
-                    if (item.v){
-                        adapter.add(item);
-                    }
-                }
+        }
 
 
-            } else if (gf != null) {
-                for (MenuItem item: array) {
-                    if (item.gf){
-                        adapter.add(item);
-                    }
-                }
-
-            } else if (m != null) {
-
-                for (MenuItem item : array) {
-                    if (!item.v) {
-                        adapter.add(item);
-                    }
-                }
-            }
-
-
-
-        } else  adapter.addAll(array);
-            //    mArrayAdapter.clear();
-        //} else mArrayAdapter.addAll(array);
+        else if (gf == null){
+            selection = sNubaMenuWithVVeFilter; //selection with v and ve
+            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve)};
+            Log.v(LOG_TAG, "Selection - v + ve");
+        } else {
+            selection = sNubaMenuWithVVeGfFilter; // selection v + ve + gf
+            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf)};
+            Log.v(LOG_TAG, "Selection - v + ve + gf");
+        }
     }
 
 
-
-
-/**    public View listInflater(Boolean vFilter, Boolean veFilter, Boolean gfFilter, Boolean mFilter) {
-        switch (mMenuType) {
-            case "Lunch": {
-//                for (MenuItem[] array: lunchArray) {
-//                    checkFilters(array, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter);
-//                    return listView;
-//
-//
-//                }
-
-
-
-
-                switch (mPage) {
-                    case 1: {
-
-
-                        checkFilters(lunchMezze, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-                        return listView;
-                    }
-                    case 2: {
-                        //mArrayAdapter.addAll(lunchPlates);
-                        checkFilters(lunchPlates, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-                        return listView;
-                    }
-                    case 3: {
-                        //mArrayAdapter.addAll(lunchPitas);
-                        checkFilters(lunchPitas, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-
-                        return listView;
-                    }
-                    case 4: {
-                        //mArrayAdapter.addAll(lunchSalads);
-                        checkFilters(lunchSalads, mArrayAdapter, vFilter, veFilter, gfFilter, mFilter, mPage, tabLunchTitles, tabLunchDesc);
-
-                        return listView;
-                    }
-                    case 5: {
-                        //mArrayAdapter.addAll(lunchSoups);
-                        checkFilters(lunchSoups, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-
-                        return listView;
-                    }
-                    case 6: {
-                        //mArrayAdapter.addAll(lunchToShare);
-                        checkFilters(lunchToShare, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-
-                        return listView;
-                    }
-                    case 7: {
-                        //mArrayAdapter.addAll(lunchBeverages);
-                        checkFilters(lunchBeverages, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabLunchTitles, tabLunchDesc);
-                        return listView;
-                    }
-                }
-            }
-            case "Dinner": {
-                switch (mPage) {
-                    case 1: {
-                        //mArrayAdapter.addAll(dinnerColdMezze);
-                        checkFilters(dinnerColdMezze, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabDinnerTitles, tabDinnerDesc);
-                        return listView;
-                    }
-                    case 2: {
-                        //mArrayAdapter.addAll(dinnerHotMezze);
-                        checkFilters(dinnerHotMezze, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabDinnerTitles, tabDinnerDesc);
-                        return listView;
-                    }
-                    case 3: {
-//                        mArrayAdapter.addAll(dinnerToShare);
-                        checkFilters(dinnerToShare, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabDinnerTitles, tabDinnerDesc);
-                        return listView;
-                    }
-                    case 4: {
-//                        mArrayAdapter.addAll(dinnerSoupsSalads);
-                        checkFilters(dinnerSoupsSalads, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabDinnerTitles, tabDinnerDesc);
-                        return listView;
-                    }
-                    case 5: {
-//                        mArrayAdapter.addAll(dinnerMains);
-                        checkFilters(dinnerMains, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabDinnerTitles, tabDinnerDesc);
-                        return listView;
-                    }
-
-                }
-            }
-            case "Brunch": {
-                switch (mPage) {
-                    case 1: {
-//                        mArrayAdapter.addAll(brunchAll);
-                        checkFilters(brunchAll, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabBrunchTitles, tabBrunchDesc);
-                        return listView;
-                    }
-                    case 2: {
-//                        mArrayAdapter.addAll(brunchBevs);
-                        checkFilters(brunchBevs, mArrayAdapter, vFilter, veFilter, gfFilter,mFilter, mPage, tabBrunchTitles, tabBrunchDesc);
-                        return listView;
-                    }
-
-                }
-            }
-        }
-        return listView;
-    }*/
-
-
-/**    public void filter() {
+    public void filter() {
         alert = new AlertDialog.Builder(getActivity());
 
         final View container = getActivity().getLayoutInflater().inflate(R.layout.filter, null);
@@ -430,7 +252,7 @@ public class MenuActivityFragment extends Fragment {
 
         final CheckBox vCheckBox = (CheckBox) container.findViewById(R.id.filterVCheckBox);
         final CheckBox veCheckBox = (CheckBox) container.findViewById(R.id.filterVeCheckBox);
-        CheckBox gfCheckBox = (CheckBox) container.findViewById(R.id.filterGfCheckBox);
+        final CheckBox gfCheckBox = (CheckBox) container.findViewById(R.id.filterGfCheckBox);
         final CheckBox mCheckBox = (CheckBox) container.findViewById(R.id.filterMCheckBox);
 
 
@@ -500,8 +322,11 @@ public class MenuActivityFragment extends Fragment {
                     vCheckBox.setChecked(false);
                     veCheckBox.setChecked(false);
                     mFilter = true;
-                    vFilter = null;
-                    veFilter = null;
+                    vFilter = false;
+                    veFilter = false;
+                    Log.v(LOG_TAG, "here");
+/*                    vFilter = null;
+                    veFilter = null;*/
                 } else {
                     mFilter = null;
                     if (vCheckBoxBefore) vFilter = true; else vFilter = null;
@@ -512,11 +337,46 @@ public class MenuActivityFragment extends Fragment {
             }
         });
 
+
+
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
 
-                listInflater(vFilter, veFilter, gfFilter, mFilter);
+                //listInflater(vFilter, veFilter, gfFilter, mFilter);
+                //Log.v(LOG_TAG, "v - "+vFilter+", ve - "+veFilter);
+
+                checkFilters(vFilter,veFilter,gfFilter);
+
+//                editor.putBoolean(FILTER_VEGETARIAN, vFilter);
+//                editor.putBoolean(FILTER_VEGAN, veFilter);
+//                editor.putBoolean(FILTER_GLUTEN_FREE, gfFilter);
+                editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
+                editor.putString(FILTER_VEGETARIAN, String.valueOf(vFilter));
+                editor.putString(FILTER_VEGAN, String.valueOf(veFilter));
+                editor.putString(FILTER_GLUTEN_FREE, String.valueOf(gfFilter));
+                editor.apply();
+
+                Log.v(LOG_TAG+ "|"+mPageName, "After DialogOK || v - "+String.valueOf(vFilter)+", ve - "+String.valueOf(veFilter)+", gf - "+String.valueOf(gfFilter));
+
+/**                Cursor cursor = getActivity().getContentResolver().query(
+                        NubaContract.NubaMenuEntry.CONTENT_URI,
+                        Utility.NUBA_MENU_PROJECTION,
+                        Utility.sNubaMenuWithFilter,
+                        new String[]{mPageName, String.valueOf(vFilter),String.valueOf(veFilter), String.valueOf(gfFilter)},
+                        null
+                );*/
+
+                    Cursor cursor = getActivity().getContentResolver().query(
+                            NubaContract.NubaMenuEntry.CONTENT_URI,
+                            Utility.NUBA_MENU_PROJECTION,
+                            selection,
+                            selectionArgs,
+                            null
+                    );
+                    myListCursorAdapter.swapCursor(cursor);
+
+
             }
         });
 
@@ -527,29 +387,74 @@ public class MenuActivityFragment extends Fragment {
         });
 
         alert.show();
-    }*/
+    }
 
 
     @Override
     public void onStart() {
         super.onStart();
-/**        Cursor cursor = getActivity().getContentResolver().query(
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Log.v(LOG_TAG+ "|"+mPageName, "onCreateLoader");
+/*        Boolean vv, veve, gfgf;
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            vv = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+        } else vv = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            veve = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+        } else veve = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            gfgf = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+        } else gfgf = null;
+
+        Log.v(LOG_TAG, "v - "+vv+",ve - "+veve+", gf - "+gfgf);
+
+        checkFilters(vv,veve,gfgf);*/
+
+
+/*        cursorLoader = new CursorLoader(
+                getActivity(),
                 NubaContract.NubaMenuEntry.CONTENT_URI,
                 Utility.NUBA_MENU_PROJECTION,
-                null,
-                null,
-                null
-        );
+                Utility.sNubaMenuWithLike,
+                new String[]{mPageName},
+                null);*/
 
-        if (cursor != null){
-            cursor.moveToFirst();
-            Log.v(LOG_TAG, "Cursor - "+cursor.getString(Utility.COL_NUBA_MENU_NAME));
-            cursor.close();
-        }*/
+        //Log.v(LOG_TAG, "selection - "+selection);
+        cursorLoader = new CursorLoader(
+                getActivity(),
+                NubaContract.NubaMenuEntry.CONTENT_URI,
+                Utility.NUBA_MENU_PROJECTION,
+                selection,
+                selectionArgs,
+                null);
+        return cursorLoader;
+    }
 
-//        FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
-//        menuInfoTask.execute();
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //Log.v(LOG_TAG, "onLoaderFinished");
+
+        myListCursorAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        Log.v(LOG_TAG+ "|"+mPageName, "onLoaderReset");
+        myListCursorAdapter.swapCursor(null);
+
     }
 
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        //Log.v(LOG_TAG, "onactivityCreated");
+
+        getLoaderManager().initLoader(MENU_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+
+
+    }
 }

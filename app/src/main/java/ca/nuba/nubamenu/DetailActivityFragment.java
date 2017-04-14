@@ -1,36 +1,54 @@
 package ca.nuba.nubamenu;
 
-import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.Locale;
+
+import ca.nuba.nubamenu.data.NubaContract;
+
+import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class DetailActivityFragment extends Fragment {
+public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+    public static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
 
     Boolean v, ve, gf;
-    String price, name, desc, page;
-    int picturePath, tabPosition;
+    String name, desc, page, picturePath;
+    Double price;
+    int  tabPosition;
     float numStars;
     float numStarsStatic, numStarsStatic2;
     int numRatings;
+
+    ImageView imageView, imageViewV, imageViewVe, imageViewGf;
+    TextView nameTextView, priceTextView, descTextView;
+    private static final int DETAIL_LOADER = 0;
+    CursorLoader cursorLoader;
+
 
     public DetailActivityFragment() {
     }
@@ -41,8 +59,54 @@ public class DetailActivityFragment extends Fragment {
 
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
+        nameTextView = (TextView) rootView.findViewById(R.id.textViewDetailName);
+        priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
+        imageViewV = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
+        imageViewVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
+        imageViewGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
+        descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
 
-        Intent intent = getActivity().getIntent();
+
+
+/**        SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        int itemId = prefs.getInt(ITEM_ID_EXTRA, 0);
+        Log.v(LOG_TAG, "itemId - "+itemId);
+        //int tabNumber = prefs.getInt(TAB_NUMBER_EXTRA, 0);
+        //Log.v(LOG_TAG, "position - "+position+", tabNumber - "+tabNumber);
+
+        Cursor cursor = getActivity().getContentResolver().query(
+                NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(itemId),
+                Utility.NUBA_MENU_PROJECTION,
+                null,
+                null,
+                null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+            name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
+            picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
+
+
+            File img = new File(getActivity().getFilesDir() + "/" + picturePath);
+            if (!img.exists()){
+                Log.v(LOG_TAG, "Image "+picturePath+" does not exist");
+                Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
+                Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(imageView);
+            } else {
+                Picasso.with(getActivity()).load(img).into(imageView);
+            }
+
+            nameTextView.setText(name);
+        }
+
+        Log.v(LOG_TAG, "name - "+name+", picPath - "+picturePath);*/
+
+
+
+        //TODO: Add CursorLoaders
+
+/*        Intent intent = getActivity().getIntent();
         if (intent != null) {
             picturePath = intent.getIntExtra("picturePath", 1);
             name = intent.getStringExtra("name");
@@ -55,9 +119,9 @@ public class DetailActivityFragment extends Fragment {
             page = intent.getStringExtra("page");
 
 
-        }
+        }*/
 
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
+/**        ImageView imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
 
         imageView.setImageBitmap(decodeSampledBitmapFromResource(getContext().getResources(), picturePath, 100, 100));
 
@@ -73,7 +137,7 @@ public class DetailActivityFragment extends Fragment {
         String user = "Borys";
         numStars = 0;
         numStarsStatic = 4f;
-        numRatings = 9;
+        numRatings = 9;*/
 
 
 
@@ -98,11 +162,8 @@ public class DetailActivityFragment extends Fragment {
 //                }
 //        );
 
-        nameTextView.setText(name +" "+page);
-/**
-        imageView.setImageResource(picturePath);
+/**        nameTextView.setText(name +" "+page);
 
- */
         priceTextView.setText(price);
         descTextView.setText(desc);
 
@@ -114,7 +175,7 @@ public class DetailActivityFragment extends Fragment {
         else veImageView.setImageResource(R.drawable.veg);
 
         if (gf) gfImageView.setImageResource(R.drawable.gf);
-        else gfImageView.setImageResource(R.drawable.gfg);
+        else gfImageView.setImageResource(R.drawable.gfg);*/
 
         return rootView;
     }
@@ -164,5 +225,92 @@ public class DetailActivityFragment extends Fragment {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        cursorLoader = new CursorLoader(
+                getActivity(),
+                NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_ID_EXTRA, 0)),
+                Utility.NUBA_MENU_PROJECTION,
+                null,
+                null,
+                null);
+
+        return cursorLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+
+        if (cursor != null){
+            cursor.moveToFirst();
+            picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
+            name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
+            price = cursor.getDouble(Utility.COL_NUBA_MENU_PRICE);
+            //Log.v(LOG_TAG, "price - "+String.valueOf(price));
+            v = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN));
+            //Log.v(LOG_TAG, "v - "+String.valueOf(v));
+            ve = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN));
+            //Log.v(LOG_TAG, "ve - "+String.valueOf(ve));
+            gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
+            //Log.v(LOG_TAG, "gf - "+String.valueOf(gf));
+            desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
+
+/* Assign data to views*/
+            File img = new File(getActivity().getFilesDir() + "/" + picturePath);
+            if (!img.exists()){
+                Log.v(LOG_TAG, "Image "+picturePath+" does not exist");
+                Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
+                Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(imageView);
+            } else {
+                Picasso.with(getActivity()).load(img).into(imageView);
+            }
+
+            nameTextView.setText(name);
+            //priceTextView.setText(String.valueOf(price));
+            priceTextView.setText("$" +String.format(Locale.CANADA, "%.2f", price));
+
+
+            if (v){
+                Picasso.with(getActivity()).load(R.drawable.v).into(imageViewV);
+            } else{
+                imageViewV.setVisibility(View.GONE);
+//                Picasso.with(getActivity()).load(R.drawable.vg).into(imageViewV);
+            }
+
+            if (ve){
+                Picasso.with(getActivity()).load(R.drawable.ve).into(imageViewVe);
+            } else{
+                imageViewVe.setVisibility(View.GONE);
+//                Picasso.with(getActivity()).load(R.drawable.veg).into(imageViewVe);
+            }
+
+            if (gf){
+                Picasso.with(getActivity()).load(R.drawable.gf).into(imageViewGf);
+            } else{
+                imageViewGf.setVisibility(View.GONE);
+//                Picasso.with(getActivity()).load(R.drawable.gfg).into(imageViewGf);
+            }
+
+            descTextView.setText(desc);
+
+        }
+
+//        Log.v(LOG_TAG, "name - "+name+", picPath - "+picturePath);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
     }
 }

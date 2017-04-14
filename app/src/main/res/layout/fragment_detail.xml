@@ -21,7 +21,13 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+
+            />
+<!--
+           android:scaleType="centerCrop"
+-->
+
 
         <TextView
             android:id="@+id/textViewDetailName"

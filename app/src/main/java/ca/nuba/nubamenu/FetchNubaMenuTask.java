@@ -109,12 +109,12 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_MENU_TYPE, menuDataJason.names().getString(i));
                     contentValues.put(NubaMenuEntry.COLUMN_NAME, menuInfo.getString(NUBA_NAME));
                     contentValues.put(NubaMenuEntry.COLUMN_PRICE, menuInfo.getDouble(NUBA_PRICE));
-                    contentValues.put(NubaMenuEntry.COLUMN_VEGETARIAN, menuInfo.getBoolean(NUBA_V));
-                    contentValues.put(NubaMenuEntry.COLUMN_VEGAN, menuInfo.getBoolean(NUBA_VE));
-                    contentValues.put(NubaMenuEntry.COLUMN_GLUTEN_FREE, menuInfo.getBoolean(NUBA_GF));
+                    contentValues.put(NubaMenuEntry.COLUMN_VEGETARIAN, menuInfo.getString(NUBA_V));
+                    contentValues.put(NubaMenuEntry.COLUMN_VEGAN, menuInfo.getString(NUBA_VE));
+                    contentValues.put(NubaMenuEntry.COLUMN_GLUTEN_FREE, menuInfo.getString(NUBA_GF));
                     contentValues.put(NubaMenuEntry.COLUMN_DESCRIPTION, menuInfo.getString(NUBA_DESC));
-                    contentValues.put(NubaMenuEntry.COLUMN_PIC_PATH, menuInfo.getString(NUBA_PIC_PATH));
-                    contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, menuInfo.getString(NUBA_ICON_PATH));
+                    contentValues.put(NubaMenuEntry.COLUMN_PIC_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_PIC_PATH)));
+                    contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_ICON_PATH)));
 
                     mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
                     Log.v(LOG_TAG, "Inserting");
