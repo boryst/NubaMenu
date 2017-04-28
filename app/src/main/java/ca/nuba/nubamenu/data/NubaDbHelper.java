@@ -30,7 +30,8 @@ public class NubaDbHelper extends SQLiteOpenHelper {
                 NubaMenuEntry.COLUMN_GLUTEN_FREE+" BOOLEAN NOT NULL, "+
                 NubaMenuEntry.COLUMN_DESCRIPTION+" TEXT NOT NULL, "+
                 NubaMenuEntry.COLUMN_PIC_PATH+" TEXT NOT NULL, "+
-                NubaMenuEntry.COLUMN_ICON_PATH+" TEXT NOT NULL"+
+                NubaMenuEntry.COLUMN_ICON_PATH+" TEXT NOT NULL, "+
+                NubaMenuEntry.COLUMN_WEB_ID+" INT NOT NULL"+
                 ");";
 
         db.execSQL(SQL_CREATE_NUBA_MENU_TABLE);

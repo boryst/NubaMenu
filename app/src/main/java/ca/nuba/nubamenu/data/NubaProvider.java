@@ -9,12 +9,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 
 public class NubaProvider extends ContentProvider {
 
-
+    public static final String LOG_TAG = NubaProvider.class.getSimpleName();
 
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -153,13 +154,14 @@ public class NubaProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-            SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = mOpenHelper.getReadableDatabase();
             final int match = sUriMatcher.match(uri);
             int  rowsUpdated;
 
             switch (match){
                 case NUBA_MENU:{
                     rowsUpdated = db.update(NubaMenuEntry.TABLE_NAME, values, selection, selectionArgs);
+                    Log.v(LOG_TAG, "case NUBA_MENU");
                     break;
                 }
                 case NUBA_MENU_WITH_ID:{
@@ -168,6 +170,7 @@ public class NubaProvider extends ContentProvider {
                             values,
                             sNubaMenuWithID,
                             new String[]{NubaMenuEntry.getIDFromURI(uri)});
+                    Log.v(LOG_TAG, "case NUBA_MENU_WITH_ID");
                     break;
                 }
                 default: {

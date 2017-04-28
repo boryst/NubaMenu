@@ -1,8 +1,9 @@
-package ca.nuba.nubamenu;
+package ca.nuba.nubamenu.service;
 
+import android.app.IntentService;
 import android.content.ContentValues;
-import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,19 +17,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import ca.nuba.nubamenu.Utility;
 import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 
+/**
+ * Created by Borys on 2017-04-20.
+ */
 
-public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
-    private final String LOG_TAG = FetchNubaMenuTask.class.getSimpleName();
-    private final Context mContext;
+public class FetchNubaMenuService extends IntentService {
+public static final String LOG_TAG = FetchNubaMenuService.class.getSimpleName();
 
-    FetchNubaMenuTask(Context context){
-        mContext = context;
+    public FetchNubaMenuService(){
+        super("Nuba");
     }
-
     @Override
-    protected Void doInBackground(String... params){
+    protected void onHandleIntent(@Nullable Intent intent) {
+
 
         HttpURLConnection urlCOnnection = null;
         BufferedReader reader = null;
@@ -36,7 +40,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
         String nubaMenuJsonStr = null;
 
         try {
-            final String MOVIE_BASE_URL = "http://boryst.com/get_nuba_json.php?pass="+SensitiveInfo.nubaJsonWebPass;
+            final String MOVIE_BASE_URL = "http://boryst.com/get_nuba_json.php?pass=1234";
 
             URL url = new URL(MOVIE_BASE_URL);
             urlCOnnection = (HttpURLConnection) url.openConnection();
@@ -46,7 +50,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
             InputStream inputStream = urlCOnnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null){
-                return null;
+                return;
             }
 
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -58,7 +62,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
             }
 
             if (buffer.length() == 0){
-                return null;
+                return;
             }
 
             nubaMenuJsonStr = buffer.toString();
@@ -81,15 +85,11 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                 }
             }
         }
-        return null;
+        return;
     }
 
     private void getNubaMenuDataFromJason (String nubaMenuJsonStr) throws JSONException {
-
-
         try {
-            Log.v(LOG_TAG, "nubaMenuJsonStr - "+nubaMenuJsonStr);
-
             final String NUBA_NAME = "name";
             final String NUBA_PRICE = "price";
             final String NUBA_V = "v";
@@ -99,6 +99,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
             final String NUBA_PIC_PATH = "pic_path";
             final String NUBA_ICON_PATH = "icon_path";
             final String NUBA_WED_ID = "web_id";
+
 
 
             JSONObject menuDataJason = new JSONObject(nubaMenuJsonStr);
@@ -120,9 +121,14 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_DESCRIPTION, menuInfo.getString(NUBA_DESC));
                     contentValues.put(NubaMenuEntry.COLUMN_PIC_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_PIC_PATH)));
                     contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_ICON_PATH)));
+                    contentValues.put(NubaMenuEntry.COLUMN_GLUTEN_FREE, menuInfo.getString(NUBA_GF));
                     contentValues.put(NubaMenuEntry.COLUMN_WEB_ID, menuInfo.getInt(NUBA_WED_ID));
 
-                    mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
+
+
+
+                    //this.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
+                    //this.getContentResolver().update(NubaMenuEntry.CONTENT_URI, contentValues);
                     Log.v(LOG_TAG, "Inserting");
                 }
             }

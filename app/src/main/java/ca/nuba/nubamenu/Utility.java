@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 import ca.nuba.nubamenu.data.NubaDbHelper;
 
 
@@ -61,6 +62,7 @@ public class Utility {
     public static final String FILTER_VEGETARIAN = "FILTER_VEGETARIAN";
     public static final String FILTER_VEGAN = "FILTER_VEGAN";
     public static final String FILTER_GLUTEN_FREE = "FILTER_GLUTEN_FREE";
+    public static final String FILTER_MEAT = "FILTER_MEAT";
 
     public static final String sNubaMenuWithLike =
             NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ?";
@@ -111,6 +113,9 @@ public class Utility {
                     NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN + " LIKE ? AND "+
                     NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE + " LIKE ?";
 
+    public static final  String sNubaMenuUpdateWithWebID =
+            NubaMenuEntry.TABLE_NAME+ "." + NubaMenuEntry.COLUMN_WEB_ID + " = ? ";
+
 
     public static final String[] NUBA_MENU_PROJECTION = {
             NubaContract.NubaMenuEntry.TABLE_NAME + "." + NubaContract.NubaMenuEntry._ID,
@@ -122,7 +127,8 @@ public class Utility {
             NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE,
             NubaContract.NubaMenuEntry.COLUMN_DESCRIPTION,
             NubaContract.NubaMenuEntry.COLUMN_PIC_PATH,
-            NubaContract.NubaMenuEntry.COLUMN_ICON_PATH
+            NubaContract.NubaMenuEntry.COLUMN_ICON_PATH,
+            NubaContract.NubaMenuEntry.COLUMN_WEB_ID
     };
 
     public static final int COL_NUBA_MENU_ID = 0;
@@ -135,6 +141,7 @@ public class Utility {
     public static final int COL_NUBA_MENU_DESCRIPTION = 7;
     public static final int COL_NUBA_MENU_PIC_PATH = 8;
     public static final int COL_NUBA_MENU_ICON_PATH = 9;
+    public static final int COL_NUBA_WEB_ID = 10;
 
 
 

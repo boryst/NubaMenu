@@ -24,6 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE_NUMBER;
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
+import static ca.nuba.nubamenu.Utility.FILTER_MEAT;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
@@ -69,9 +70,8 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onResume() {
-        Log.v(LOG_TAG+ "|"+mPageName, "onResume");
 
-        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+/*        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
             vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
         } else veFilter = null;
         if (prefs.getString(FILTER_VEGAN, null) != null) {
@@ -80,13 +80,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
             gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
         } else gfFilter = null;
-        checkFilters(vFilter, veFilter, gfFilter);
-        Log.v(LOG_TAG+ "|"+mPageName, "onResume || v - "+vFilter+ ", ve - "+veFilter+ ", gf - "+gfFilter);
+        checkFilters(vFilter, veFilter, gfFilter);*/
 
 
-        getLoaderManager().restartLoader(MENU_LOADER, null, this);
+        //getLoaderManager().restartLoader(MENU_LOADER, null, this);
         super.onResume();
-//        + "|"+mPageName
     }
 
     @Override
@@ -104,24 +102,22 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         type = prefs.getString(TYPE_EXTRA, null);
 
         if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
-            vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            if (!prefs.getString(FILTER_VEGETARIAN, null).equals("null")) {
+                vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            }
         } else veFilter = null;
         if (prefs.getString(FILTER_VEGAN, null) != null) {
-            veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            }
         } else veFilter = null;
         if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
-            gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            }
         } else gfFilter = null;
 
-
         checkFilters(vFilter, veFilter, gfFilter);
-
-
-/*        Log.v(LOG_TAG, "onCreate|| v - "+prefs.getString(FILTER_VEGETARIAN, "nope")+
-                ", ve - "+prefs.getString(FILTER_VEGAN, "nope")+
-                ", gf - "+prefs.getString(FILTER_GLUTEN_FREE, "nope"));*/
-        //Log.v(LOG_TAG, "onResume|| v - "+vFilter+ ", ve - "+veFilter+ ", gf - "+gfFilter);
-
 
     }
 
@@ -131,7 +127,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_filter: {
                 filter();
                 return true;
@@ -145,9 +140,59 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser){
-            Log.v(LOG_TAG, mPageName+" is visible now");
+            //Log.v(LOG_TAG, mPageName+" is visible now");
+
+            if (mPageName != null){
+                Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
+                Log.v(LOG_TAG, "String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
+                Log.v(LOG_TAG, "String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
+
+
+                if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+                    if (!prefs.getString(FILTER_VEGETARIAN, null).equals("null")) {
+                        vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+                        //Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - " + vFilter);
+                    }
+                } else veFilter = null;
+                if (prefs.getString(FILTER_VEGAN, null) != null) {
+                    if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                        veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+                        //Log.v(LOG_TAG, "String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - " + veFilter);
+                    }
+                } else veFilter = null;
+                if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+                    if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                        gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+                        //Log.v(LOG_TAG, "String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - " + gfFilter);
+                    }
+                } else gfFilter = null;
+
+                if (prefs.getString(FILTER_MEAT, null) != null) {
+                    if (!prefs.getString(FILTER_MEAT, null).equals("null")) {
+                        mFilter = Boolean.parseBoolean(prefs.getString(FILTER_MEAT, null));
+                    }
+                } else mFilter = null;
+
+
+                Log.v(LOG_TAG, "After: String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
+                Log.v(LOG_TAG, "After: String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
+                Log.v(LOG_TAG, "After: String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
+
+                checkFilters(vFilter, veFilter, gfFilter);
+
+
+                Cursor cursor = getContext().getContentResolver().query(
+                        NubaContract.NubaMenuEntry.CONTENT_URI,
+                        Utility.NUBA_MENU_PROJECTION,
+                        selection,
+                        selectionArgs,
+                        null
+                );
+                myListCursorAdapter.swapCursor(cursor);
+            }
+
         } else {
-            Log.v(LOG_TAG, mPageName+" is invisible");
+//            Log.v(LOG_TAG, mPageName+" is invisible");
         }
     }
 
@@ -156,7 +201,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Log.v(LOG_TAG, "onCreateView");
-        Log.v(LOG_TAG+ "|"+mPageName, "onCreateView");
+//        Log.v(LOG_TAG+ "|"+mPageName, "onCreateView");
 
         rootView = inflater.inflate(R.layout.fragment_menu, container, false);
 
@@ -214,6 +259,21 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             }
         }
 
+        else if (!v) {
+            if (gf == null){
+                selection = sNubaMenuWithVVeFilter; //selection with v and ve
+                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve)};
+                Log.v(LOG_TAG, "Selection - !v + !ve aka Meat");
+            } else {
+                selection = sNubaMenuWithVVeGfFilter; // selection v + ve + gf
+                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf)};
+                Log.v(LOG_TAG + mPageName, "Selection - !v + !ve + gf aka Meat + gf");
+            }
+
+        }
+
+
+
 
         else if (ve == null){
             if (gf == null){
@@ -236,32 +296,65 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         } else {
             selection = sNubaMenuWithVVeGfFilter; // selection v + ve + gf
             selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf)};
-            Log.v(LOG_TAG, "Selection - v + ve + gf");
+            Log.v(LOG_TAG + mPageName, "Selection - v + ve + gf");
         }
     }
 
 
     public void filter() {
         alert = new AlertDialog.Builder(getActivity());
-
         final View container = getActivity().getLayoutInflater().inflate(R.layout.filter, null);
-
         alert.setView(container);
-
-
 
         final CheckBox vCheckBox = (CheckBox) container.findViewById(R.id.filterVCheckBox);
         final CheckBox veCheckBox = (CheckBox) container.findViewById(R.id.filterVeCheckBox);
         final CheckBox gfCheckBox = (CheckBox) container.findViewById(R.id.filterGfCheckBox);
         final CheckBox mCheckBox = (CheckBox) container.findViewById(R.id.filterMCheckBox);
 
+//        if (vFilter != null) vCheckBox.setChecked(true); else vCheckBox.setChecked(false);
+//        if (veFilter != null) veCheckBox.setChecked(true); else veCheckBox.setChecked(false);
+//        if (gfFilter != null) gfCheckBox.setChecked(true); else gfCheckBox.setChecked(false);
+//        if (mFilter != null) mCheckBox.setChecked(true); else mCheckBox.setChecked(false);
 
-        if (vFilter != null) vCheckBox.setChecked(true); else vCheckBox.setChecked(false);
-        if (veFilter != null) veCheckBox.setChecked(true); else veCheckBox.setChecked(false);
-        if (gfFilter != null) gfCheckBox.setChecked(true); else gfCheckBox.setChecked(false);
-        if (mFilter != null) mCheckBox.setChecked(true); else mCheckBox.setChecked(false);
+        if (vFilter != null) {
+            if (vFilter) {
+                vCheckBox.setChecked(true);
+            } else {
+                vCheckBox.setChecked(false);
+            }
+        } else {
+            vCheckBox.setChecked(false);
+        }
 
+        if (veFilter != null) {
+            if (veFilter) {
+                veCheckBox.setChecked(true);
+            } else {
+                veCheckBox.setChecked(false);
+            }
+        } else {
+            veCheckBox.setChecked(false);
+        }
 
+        if (gfFilter != null) {
+            if (gfFilter) {
+                gfCheckBox.setChecked(true);
+            } else {
+                gfCheckBox.setChecked(false);
+            }
+        } else {
+            gfCheckBox.setChecked(false);
+        }
+
+        if (mFilter != null) {
+            if (mFilter) {
+                mCheckBox.setChecked(true);
+            } else {
+                mCheckBox.setChecked(false);
+            }
+        } else {
+            mCheckBox.setChecked(false);
+        }
 
 
         vCheckBoxBefore = false;
@@ -270,15 +363,19 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
+//
+                    if (veFilter != null && !veFilter) veFilter = null;
+//
+
                     vFilter = true;
                     vCheckBoxBefore = true;
                     mFilter = null;
                     mCheckBox.setChecked(false);
+
                 } else {
                     vFilter = null;
                     vCheckBoxBefore = false;
                 }
-
             }
         });
 
@@ -301,7 +398,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 }
             }
         });
-
 
         gfCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,29 +439,18 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
 
-                //listInflater(vFilter, veFilter, gfFilter, mFilter);
-                //Log.v(LOG_TAG, "v - "+vFilter+", ve - "+veFilter);
-
-                checkFilters(vFilter,veFilter,gfFilter);
-
-//                editor.putBoolean(FILTER_VEGETARIAN, vFilter);
-//                editor.putBoolean(FILTER_VEGAN, veFilter);
-//                editor.putBoolean(FILTER_GLUTEN_FREE, gfFilter);
+                checkFilters(vFilter, veFilter, gfFilter);
                 editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(FILTER_VEGETARIAN, String.valueOf(vFilter));
                 editor.putString(FILTER_VEGAN, String.valueOf(veFilter));
                 editor.putString(FILTER_GLUTEN_FREE, String.valueOf(gfFilter));
+                editor.putString(FILTER_MEAT, String.valueOf(mFilter));
+                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGETARIAN - "+ String.valueOf(vFilter));
+                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGAN - "+ String.valueOf(veFilter));
+                Log.v(LOG_TAG + "-InAlert", "FILTER_GLUTEN_FREE - "+ String.valueOf(gfFilter));
+
                 editor.apply();
 
-                Log.v(LOG_TAG+ "|"+mPageName, "After DialogOK || v - "+String.valueOf(vFilter)+", ve - "+String.valueOf(veFilter)+", gf - "+String.valueOf(gfFilter));
-
-/**                Cursor cursor = getActivity().getContentResolver().query(
-                        NubaContract.NubaMenuEntry.CONTENT_URI,
-                        Utility.NUBA_MENU_PROJECTION,
-                        Utility.sNubaMenuWithFilter,
-                        new String[]{mPageName, String.valueOf(vFilter),String.valueOf(veFilter), String.valueOf(gfFilter)},
-                        null
-                );*/
 
                     Cursor cursor = getActivity().getContentResolver().query(
                             NubaContract.NubaMenuEntry.CONTENT_URI,
@@ -375,8 +460,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                             null
                     );
                     myListCursorAdapter.swapCursor(cursor);
-
-
             }
         });
 
@@ -397,32 +480,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG+ "|"+mPageName, "onCreateLoader");
-/*        Boolean vv, veve, gfgf;
-        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
-            vv = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
-        } else vv = null;
-        if (prefs.getString(FILTER_VEGAN, null) != null) {
-            veve = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
-        } else veve = null;
-        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
-            gfgf = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
-        } else gfgf = null;
-
-        Log.v(LOG_TAG, "v - "+vv+",ve - "+veve+", gf - "+gfgf);
-
-        checkFilters(vv,veve,gfgf);*/
-
-
-/*        cursorLoader = new CursorLoader(
-                getActivity(),
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                Utility.NUBA_MENU_PROJECTION,
-                Utility.sNubaMenuWithLike,
-                new String[]{mPageName},
-                null);*/
-
-        //Log.v(LOG_TAG, "selection - "+selection);
         cursorLoader = new CursorLoader(
                 getActivity(),
                 NubaContract.NubaMenuEntry.CONTENT_URI,
@@ -435,14 +492,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        //Log.v(LOG_TAG, "onLoaderFinished");
-
         myListCursorAdapter.swapCursor(cursor);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        Log.v(LOG_TAG+ "|"+mPageName, "onLoaderReset");
         myListCursorAdapter.swapCursor(null);
 
     }
@@ -450,8 +504,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //Log.v(LOG_TAG, "onactivityCreated");
-
         getLoaderManager().initLoader(MENU_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
 

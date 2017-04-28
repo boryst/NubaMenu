@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MainActivityFragment extends Fragment {
         Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI, null,null,null,null);
         if (cursor == null || !cursor.moveToFirst()) {
             FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
+            Log.v("MAF", "Starting menuInfoTask");
             menuInfoTask.execute();
         } else {
             cursor.close();

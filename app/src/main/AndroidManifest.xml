@@ -11,6 +11,13 @@
         android:logo="@drawable/nuba_logo"
         android:theme="@style/AppTheme" >
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notificaton_color"
+            android:resource="@color/accent"/>
+
         <provider
             android:authorities="ca.nuba.nubamenu"
             android:name=".data.NubaProvider"/>
@@ -48,6 +55,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuActivity" />
         </activity>
+
+        <service android:name=".service.NubaFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".NubaFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".service.FetchNubaMenuService">
+
+        </service>
     </application>
 
 </manifest>

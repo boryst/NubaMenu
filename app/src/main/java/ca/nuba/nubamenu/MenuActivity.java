@@ -49,7 +49,7 @@ public class MenuActivity extends AppCompatActivity {
         mViewPager.setAdapter(mTabsAdapter);
 
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+/**        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -64,7 +64,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
         //Fragment fr = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + mViewPager.getCurrentItem());
         //Log.v(LOG_TAG, "current page - "+mViewPager.getCurrentItem());
 

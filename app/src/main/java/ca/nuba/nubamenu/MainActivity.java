@@ -24,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Picasso.with(this).setIndicatorsEnabled(true);
 
+        //Log.v(LOG_TAG, "Token: "+ FirebaseInstanceId.getInstance().getToken());
+
+//        Cursor cursor = this.getContentResolver().query(
+//                NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(1),
+//                Utility.NUBA_MENU_PROJECTION,
+//                null,
+//                null,
+//                null);
+//        cursor.moveToFirst();
+//        Log.v(LOG_TAG, "--Cursor"+String.valueOf(cursor.getString(Utility.COL_NUBA_MENU_NAME)));
+
+
         File dirFiles = getFilesDir();
         int i = 1;
         for (String strFile : dirFiles.list()) {

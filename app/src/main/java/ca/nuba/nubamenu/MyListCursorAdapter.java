@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.POSITION_EXTRA;
@@ -96,6 +97,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         }
 
         if (myListItem.getVegetarian()){
+            viewHolder.list_item_vegetarian_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.v).into(viewHolder.list_item_vegetarian_icon);
         } else {
             viewHolder.list_item_vegetarian_icon.setVisibility(GONE);
@@ -105,6 +107,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 //        }
 
         if (myListItem.getVegan()){
+            viewHolder.list_item_vegan_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.ve).into(viewHolder.list_item_vegan_icon);
         } else {
             viewHolder.list_item_vegan_icon.setVisibility(GONE);
@@ -114,6 +117,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 //        }
 
         if (myListItem.getGlutenFree()){
+            viewHolder.list_item_gluten_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.gf).into(viewHolder.list_item_gluten_icon);
         } else {
             viewHolder.list_item_gluten_icon.setVisibility(GONE);
