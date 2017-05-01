@@ -24,26 +24,12 @@ Phone(OnePlus One) Portrait
 
 Phone(OnePlus One) Landscape
 
-<img src="http://i.imgur.com/zeZNjd1.jpg" width="250">
-<img src="http://i.imgur.com/duDj8OD.jpg" width="250">
-<img src="http://i.imgur.com/zf1HPsK.png" width="250">
-<img src="http://i.imgur.com/hvTfx5T.png" width="250">
-<img src="http://i.imgur.com/3EEM7ht.png" width="250">
-
+<img src="http://i.imgur.com/zeZNjd1.jpg" width="250">  <img src="http://i.imgur.com/duDj8OD.jpg" width="250">  <img src="http://i.imgur.com/zf1HPsK.png" width="250">  <img src="http://i.imgur.com/hvTfx5T.png" width="250">  <img src="http://i.imgur.com/3EEM7ht.png" width="250">
 Tablet(Nexus 7 2013) Portrait
 
-<img src="http://i.imgur.com/oungg0m.jpg" height="250">
-<img src="http://i.imgur.com/xSzYLlE.jpg" height="250">
-<img src="http://i.imgur.com/SvhZudx.png" height="250">
-<img src="http://i.imgur.com/9wsCdTc.png" height="250">
-<img src="http://i.imgur.com/Q8eySs4.png" height="250">
-
+<img src="http://i.imgur.com/oungg0m.jpg" height="250"> <img src="http://i.imgur.com/xSzYLlE.jpg" height="250"> <img src="http://i.imgur.com/SvhZudx.png" height="250"> <img src="http://i.imgur.com/9wsCdTc.png" height="250"> <img src="http://i.imgur.com/Q8eySs4.png" height="250"> 
 
 Tablet(Nexus 7 2013) Landscape
 
-<img src="http://i.imgur.com/uC80aqM.jpg" width="250">
-<img src="http://i.imgur.com/sJCnBsg.jpg" width="250">
-<img src="http://i.imgur.com/VPsb3gl.png" width="250">
-<img src="http://i.imgur.com/ZPJdBPM.png" width="250">
-<img src="http://i.imgur.com/KnOZmqB.png" width="250">
+<img src="http://i.imgur.com/uC80aqM.jpg" width="250">  <img src="http://i.imgur.com/sJCnBsg.jpg" width="250">  <img src="http://i.imgur.com/VPsb3gl.png" width="250">  <img src="http://i.imgur.com/ZPJdBPM.png" width="250">  <img src="http://i.imgur.com/KnOZmqB.png" width="250">
 
