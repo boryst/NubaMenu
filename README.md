@@ -9,9 +9,9 @@ Current state of application(05.01.2017):
 5. Some of the future fixes/improvements/additions:
 
 Two pane mode for tablets</br>
-Settings
-Search
-Comments
+Settings</br>
+Search</br>
+Comments</br>
 Item ratings
 
 6. <a href="https://www.dropbox.com/s/zq2nftiyq4h1roq/NubaMenu.apk?dl=0">Download apk (05.01.2017)</a>
