@@ -1,5 +1,5 @@
 # NubaMenu
-Current state of application:
+Current state of application(05.01.2017):
 
 1. App connected to NubaMenu API. During first launch donwloads DB and images. Receives updates via Firebase cloud messaging.
 2. Content provider and SQLite DB.
@@ -14,7 +14,7 @@ Search
 Comments
 Item ratings
 
-6. <a href="https://www.dropbox.com/s/o7zonipyi30u77o/NubaMenu_12.01.15.apk?dl=0">Download apk (12.01.15)</a>
+6. <a href="https://www.dropbox.com/s/zq2nftiyq4h1roq/NubaMenu.apk?dl=0">Download apk (05.01.2017)</a>
 
 7. Screenshots:
 
