@@ -6,7 +6,7 @@ Current state of application:
 3. Some pictures missing.  
 4. Filter for vegetarian, vegan or gluten free items.
 
-Some of the future fixes/improvements/additions:
+5. Some of the future fixes/improvements/additions:
 
 Two pane mode for tablets
 Settings
@@ -14,18 +14,13 @@ Search
 Comments
 Item ratings
 
-4. <a href="https://www.dropbox.com/s/o7zonipyi30u77o/NubaMenu_12.01.15.apk?dl=0">Download apk (12.01.15)</a>
+6. <a href="https://www.dropbox.com/s/o7zonipyi30u77o/NubaMenu_12.01.15.apk?dl=0">Download apk (12.01.15)</a>
 
-5. Screenshots:
+7. Screenshots:
 
 Phone(OnePlus One) Portrait
 
-<img src="http://i.imgur.com/vSUdhUK.jpg" height="250">
-<img src="http://i.imgur.com/uoldzeE.jpg" height="250">
-<img src="http://i.imgur.com/PbTr9gx.png" height="250">
-<img src="http://i.imgur.com/MoSDG6k.png" height="250">
-<img src="http://i.imgur.com/QoRsLnk.png" height="250">
-<img src="http://i.imgur.com/FdttZuL.jpg" height="250">
+<img src="http://i.imgur.com/vSUdhUK.jpg" height="250"><img src="http://i.imgur.com/uoldzeE.jpg" height="250"><img src="http://i.imgur.com/PbTr9gx.png" height="250"><img src="http://i.imgur.com/MoSDG6k.png" height="250"><img src="http://i.imgur.com/QoRsLnk.png" height="250"><img src="http://i.imgur.com/FdttZuL.jpg" height="250">
 
 Phone(OnePlus One) Landscape
 
