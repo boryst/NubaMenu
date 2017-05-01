@@ -8,7 +8,7 @@ Current state of application(05.01.2017):
 
 5. Some of the future fixes/improvements/additions:
 
-Two pane mode for tablets
+Two pane mode for tablets</br>
 Settings
 Search
 Comments
