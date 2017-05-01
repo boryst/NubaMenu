@@ -1,12 +1,18 @@
 # NubaMenu
 Current state of application:
 
-1. No online  
-2. Some pictures missing  
-3. Some of the future fixes/improvements: 
+1. App connected to NubaMenu API. During first launch donwloads DB and images. Receives updates via Firebase cloud messaging.
+2. Content provider and SQLite DB.
+3. Some pictures missing.  
+4. Filter for vegetarian, vegan or gluten free items.
 
-Add online(connection to api and fetching data from website,Facebook comments, rating stars), add features, desserts, listview to recyclerview, nuba logo in action bar, add search, settings?, list land add short description and portrait tablet, new icons for v, ve, gf, meat?, tablet list+detail(two pane mode), add addresses and phones for each location(where? Info setting?), title for every tab?, add times for lunch and dinner and hours of work(on pics?), clickable picks in detail?, setting for currency, all strings into string.XML, check all descriptions, icons for "ve option","gf option", more explicit icons?,
-Filter save in preferences or using Data Binding, fix Detail.xml for tablet
+Some of the future fixes/improvements/additions:
+
+Two pane mode for tablets
+Settings
+Search
+Comments
+Item ratings
 
 4. <a href="https://www.dropbox.com/s/o7zonipyi30u77o/NubaMenu_12.01.15.apk?dl=0">Download apk (12.01.15)</a>
 
