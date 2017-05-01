@@ -20,7 +20,7 @@ Item ratings
 
 Phone(OnePlus One) Portrait
 
-<img src="http://i.imgur.com/vSUdhUK.jpg" height="250"><img src="http://i.imgur.com/uoldzeE.jpg" height="250"><img src="http://i.imgur.com/PbTr9gx.png" height="250"><img src="http://i.imgur.com/MoSDG6k.png" height="250"><img src="http://i.imgur.com/QoRsLnk.png" height="250"><img src="http://i.imgur.com/FdttZuL.jpg" height="250">
+  <img src="http://i.imgur.com/vSUdhUK.jpg" height="250"> <img src="http://i.imgur.com/uoldzeE.jpg" height="250"> <img src="http://i.imgur.com/PbTr9gx.png" height="250">  <img src="http://i.imgur.com/MoSDG6k.png" height="250">  <img src="http://i.imgur.com/QoRsLnk.png" height="250">  <img src="http://i.imgur.com/FdttZuL.jpg" height="250">
 
 Phone(OnePlus One) Landscape
 
