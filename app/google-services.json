@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1056248705025",
+    "firebase_url": "https://nubamenu.firebaseio.com",
+    "project_id": "nubamenu",
+    "storage_bucket": "nubamenu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056248705025:android:3a159bcfc71b8cbd",
+        "android_client_info": {
+          "package_name": "ca.nuba.nubamenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056248705025-j8cmv3isftpamnqohhts0ksc0tr63dd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.nuba.nubamenu",
+            "certificate_hash": "30ab8a74429d3ff68a02929b42bbfc6413365e55"
+          }
+        },
+        {
+          "client_id": "1056248705025-3pqs21j3ocrhe3c7pgruvh11b1ll2tgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjpWMUGX68yjndcq7bEIK97vKr1NuLPIU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056248705025-3pqs21j3ocrhe3c7pgruvh11b1ll2tgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

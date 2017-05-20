@@ -1,63 +1,74 @@
 package ca.nuba.nubamenu;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class TabsAdapter extends FragmentPagerAdapter {
+import ca.nuba.nubamenu.data.NubaContract;
 
-    private String tabLunchTitles[] = new String[] { "Mezze", "Lunch Plate", "Pita", "Salad","Soup", "To Share", "Beverages"};
-    private String tabDinnerTitles[] = new String[] {"Cold Mezze", "Hot Mezze","To Share", "Soups, Salads & More","Mains"};
-    private String tabBrunchTitles[] = new String[] {"Brunch","SIGNATURE BRUNCH BEVERAGES"};
-    final int L_PAGE_COUNT = tabLunchTitles.length;
-    final int D_PAGE_COUNT = tabDinnerTitles.length;
-    final int B_PAGE_COUNT = tabBrunchTitles.length;
-    private Context context;
-    private String location;
-    private String menuType;
+import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE;
+import static ca.nuba.nubamenu.Utility.ARG_PAGE_NUMBER;
+import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 
-    public TabsAdapter(FragmentManager fm, Context context, String location, String menuType) {
+
+public class NewTabsAdapter extends FragmentStatePagerAdapter {
+    static final String LOG_TAG = NewTabsAdapter.class.getSimpleName();
+    Context mContext;
+    Cursor mCursor;
+    String type;
+
+    public NewTabsAdapter(FragmentManager fm){
         super(fm);
-        this.context = context;
-        this.location = location;
-        this.menuType = menuType;
     }
 
-    @Override
-    public int getCount() {
-        switch (menuType){
-            case "Lunch":{
-                return L_PAGE_COUNT;
-            }
-            case "Dinner":{
-                return D_PAGE_COUNT;
-            }
-            case "Brunch":{
-                return B_PAGE_COUNT;
-            }
-            default: {
-                return 0;
-            }
-        }
+    public NewTabsAdapter(FragmentManager fm, Context context){
+        super(fm);
+        mContext = context;
+        SharedPreferences prefs = mContext.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        type = prefs.getString(TYPE_EXTRA, null);
+        //Log.v(LOG_TAG, "type - " + type);
+        mCursor = context.getContentResolver().query(
+                NubaContract.NubaMenuEntry.CONTENT_URI,
+                new String[]{"DISTINCT " + NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE},
+                Utility.sNubaMenuWithLike,
+                new String[]{type+"%"},
+                null);
     }
 
     @Override
     public Fragment getItem(int position) {
-        //return MenuActivityFragment.newInstance(position + 1, location, menuType);
-        return null;
+        Fragment fragment = new MenuActivityFragment();
+
+        Bundle args = new Bundle();
+        mCursor.moveToPosition(position);
+
+        args.putString(ARG_PAGE, mCursor.getString(0));
+        args.putInt(ARG_PAGE_NUMBER, position);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public int getCount() {
+        return mCursor.getCount();
+        //return 10;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (menuType.equals("Lunch")){
-            return tabLunchTitles[position];
-        } else if (menuType.equals("Dinner")){
-            return tabDinnerTitles[position];
-        } else {
-            return tabBrunchTitles[position];
-        }
+        //return "OBJECT "+ (position +1);
+        mCursor.moveToPosition(position);
+        return Utility.formatMenuType(mCursor.getString(0));
     }
 
-    //TODO: if small number of tabs - take whole screen (in getTabView)
+    public String getPageTitleUncut(int position) {
+        mCursor.moveToPosition(position);
+        return mCursor.getString(0);
+    }
 }
