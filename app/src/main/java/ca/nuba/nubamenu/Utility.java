@@ -30,7 +30,7 @@ import ca.nuba.nubamenu.data.NubaDbHelper;
 
 
 /**
- * Created by Borys on 2017-03-04.
+ * Class with a bunch of widely used variables, URIs for menu filter and helper functions
  */
 
 public class Utility {
@@ -66,8 +66,6 @@ public class Utility {
 
     public static final String sNubaMenuWithLike =
             NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ?";
-
-
 
     public static final  String sNubaMezzesWithLike =
             NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? OR "+
@@ -144,9 +142,17 @@ public class Utility {
     public static final int COL_NUBA_WEB_ID = 10;
 
 
-
-    /** Add ripple effect as second layer to ImageButtons*/
-
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    /**
+     * Add ripple effect as second layer to ImageButtons
+     * @param button button to which ripple effect will be added
+     * @param picture drawable resource that will be used as src
+     * @param context context
+     */
     public static void imageButtonPressEffect(ImageButton button, int picture, Context context){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
@@ -178,6 +184,11 @@ public class Utility {
         }
     }
 
+    /**
+     * Format cursor menu type to string used for tabs names
+     * @param menuType menuType from cursor
+     * @return returns formatted string of menu type
+     */
     public static String formatMenuType(String menuType){
         switch (menuType){
             case "lunchMezze": return "Mezze";
@@ -198,11 +209,15 @@ public class Utility {
         }
     }
 
+    /**
+     * Drops database for testing purposes
+     * @param context context
+     */
     public static void dropDB(Context context){
         context.deleteDatabase(NubaDbHelper.DATABASE_NAME);
     }
 
-/**    public static void imageDownload(Context context, String fromUrl, String toUrl){
+/*    public static void imageDownload(Context context, String fromUrl, String toUrl){
         //Log.v(LOG_TAG, "URL - "+fromUrl);
         //Log.v(LOG_TAG, "URL - "+toUrl);
         Picasso.with(context).load(fromUrl).into(getTarget(toUrl, context));
@@ -251,8 +266,13 @@ public class Utility {
         return target;
         //return mTarget;
     }*/
-
-public static void imageDownload(final Context context, final String fromUrl, final String toUrl){
+    /**
+     * Download images
+     * @param context context
+     * @param fromUrl web URL from where image will be downloaded
+     * @param toUrl path to where image will be save on device
+     */
+    public static void imageDownload(final Context context, final String fromUrl, final String toUrl){
 
         Log.v("Utility", "imageDownload called");
 
@@ -352,23 +372,24 @@ public static void imageDownload(final Context context, final String fromUrl, fi
         };
     }*/
 
-
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
+    
+    /**
+     * Verifying external storage permissions
+     * @param activity activity
+     */
     public static void verifyStoragePermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
         if (permission != PackageManager.PERMISSION_GRANTED){
-
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
 
     }
 
+    /**
+     * Cuts nuba_img/ from image name
+     * @param fileName image file name
+     * @return image file name without nuba_img/
+     */
     public static String imageNameCutter(String fileName){
         return fileName.replace("nuba_img/","");
     }
