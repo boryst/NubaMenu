@@ -1,46 +1,46 @@
 [
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_color_highlight_material.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_color_highlight_material.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_switch_track.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_switch_track.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_spinner.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_spinner.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/design_tint_password_toggle.xml",
-        "source": "/Users/Borys/.android/build-cache/8477c6ff4b4c355b22012774d752ed7dfeacfca6/output/res/color-v23/design_tint_password_toggle.xml"
+        "source": "/Users/Borys/.android/build-cache/309d2a8591da441bba81f9bcc4fb1c3373a66050/output/res/color-v23/design_tint_password_toggle.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_seek_thumb.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_btn_colored_text_material.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_btn_colored_text_material.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_btn_checkable.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_btn_checkable.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_edittext.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_edittext.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_thumb.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_switch_thumb.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_switch_thumb.xml"
     },
     {
         "merged": "/Users/Borys/StudioProjects/NubaMenu/app/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
-        "source": "/Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/res/color-v23/abc_tint_default.xml"
+        "source": "/Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/res/color-v23/abc_tint_default.xml"
     }
 ]

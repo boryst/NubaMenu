@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:2:1-53:12
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:2:1-76:12
 	package
 		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:3:5-31
 		INJECTED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml
@@ -26,19 +26,19 @@ ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml
 	android:name
 		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:6:22-77
 application
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:7:5-51:19
-MERGED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/8477c6ff4b4c355b22012774d752ed7dfeacfca6/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/06bc8bf01b41f6463295357e14b1210d3a7cbb67/output/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/2e0275156cf8b67d0619f6e8fd30aa3a4081c8fa/output/AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:transition:25.2.0] /Users/Borys/.android/build-cache/b8664d4f1015ebe0e0b917687c31dec74b666e9c/output/AndroidManifest.xml:22:5-20
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:7:5-74:19
+MERGED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/309d2a8591da441bba81f9bcc4fb1c3373a66050/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/2bcee6640cffd18d387f9467adb2ff95ddcacb01/output/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/dc0b14516203d1cee2daca06d34dc630e32a8e6c/output/AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:transition:25.2.0] /Users/Borys/.android/build-cache/77cd6b52a4491e533aa694b35ac4447a7a8fb228/output/AndroidManifest.xml:22:5-20
 MERGED from [com.facebook.android:facebook-android-sdk:4.6.0] /Users/Borys/.android/build-cache/cc28815baa823dd3791cb18f71065c6d1fe531e1/output/AndroidManifest.xml:28:5-20
-MERGED from [com.android.support:support-v4:25.2.0] /Users/Borys/.android/build-cache/a96daba6cd3d5f7f68a36ccfc01b77ae7dbaf566/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:25.2.0] /Users/Borys/.android/build-cache/1eda15338025b83fd43ac0e330dff142cc0933f4/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:25.2.0] /Users/Borys/.android/build-cache/dfb51be91e94a582677f4cd9b3d8ab106ae07cde/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:25.2.0] /Users/Borys/.android/build-cache/7f689eb23d803e0faa7ed92a17b806f51e58b71e/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:25.2.0] /Users/Borys/.android/build-cache/ddf5269669e362bb004d7944e76a7501f59f6747/output/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-compat:25.2.0] /Users/Borys/.android/build-cache/85aa9d07320f48161e05e3e35bafb266e86298ac/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.2.0] /Users/Borys/.android/build-cache/43d893becad59d3067d7c3c55fb82ab2f5e4f011/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.2.0] /Users/Borys/.android/build-cache/e78f97175c2977b993103fe862a8514fbaacd53c/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.2.0] /Users/Borys/.android/build-cache/9d2ee198bf5d28391806c141376f00be5eae1621/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.2.0] /Users/Borys/.android/build-cache/0e875f2770096248abd16692c75b7d9650721d47/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.2.0] /Users/Borys/.android/build-cache/ca654f9ba32fe85c89d18d17e3aee81113cd0d62/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.2.0] /Users/Borys/.android/build-cache/e736b9cd095514feed2561b4b41e4b56d81e2ef5/output/AndroidManifest.xml:25:5-20
 	android:label
 		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:10:9-41
 	android:allowBackup
@@ -49,75 +49,111 @@ MERGED from [com.android.support:support-compat:25.2.0] /Users/Borys/.android/bu
 		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:12:9-40
 	android:logo
 		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:11:9-43
+meta-data#com.google.firebase.messaging.default_notification_icon
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:14:9-16:55
+	android:resource
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:16:13-53
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:15:13-83
+meta-data#com.google.firebase.messaging.default_notificaton_color
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:17:9-19:47
+	android:resource
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:19:13-45
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:18:13-83
 provider#ca.nuba.nubamenu.data.NubaProvider
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:14:9-16:48
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:21:9-23:48
 	android:authorities
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:15:13-51
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:22:13-51
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:16:13-46
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:23:13-46
 activity#ca.nuba.nubamenu.MainActivity
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:18:9-26:20
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:25:9-33:20
 	android:label
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:20:13-45
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:27:13-45
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:19:13-41
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:26:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:21:13-25:29
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:28:13-32:29
 action#android.intent.action.MAIN
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:22:17-69
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:29:17-69
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:22:25-66
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:29:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:24:17-77
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:31:17-77
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:24:27-74
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:31:27-74
 activity#ca.nuba.nubamenu.MenuSelectActivity
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:27:9-34:20
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:34:9-41:20
 	android:label
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:29:13-63
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:36:13-63
 	android:parentActivityName
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:30:13-55
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:37:13-55
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:28:13-47
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:35:13-47
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:31:13-33:48
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:38:13-40:48
 	android:value
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:33:17-45
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:40:17-45
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:32:17-63
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:39:17-63
 activity#ca.nuba.nubamenu.MenuActivity
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:35:9-42:20
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:42:9-49:20
 	android:label
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:37:13-56
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:44:13-56
 	android:parentActivityName
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:38:13-61
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:45:13-61
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:36:13-41
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:43:13-41
 activity#ca.nuba.nubamenu.DetailActivity
-ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:43:9-50:20
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:50:9-57:20
 	android:label
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:45:13-58
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:52:13-58
 	android:parentActivityName
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:46:13-55
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:53:13-55
 	android:name
-		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:44:13-43
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:51:13-43
+service#ca.nuba.nubamenu.service.NubaFirebaseMessagingService
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:59:9-63:19
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:59:18-70
+intent-filter#com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:60:13-62:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:61:17-77
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:61:25-75
+service#ca.nuba.nubamenu.NubaFirebaseInstanceIDService
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:65:9-69:19
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:65:18-63
+intent-filter#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:66:13-68:29
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:67:17-79
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:67:25-77
+service#ca.nuba.nubamenu.service.FetchNubaMenuService
+ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:71:9-73:19
+	android:name
+		ADDED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml:71:18-62
 uses-sdk
 INJECTED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/8477c6ff4b4c355b22012774d752ed7dfeacfca6/output/AndroidManifest.xml:21:5-23:62
-MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/Borys/.android/build-cache/458d4a137cddfb90ac8742ea8de6220bbc6279e9/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/06bc8bf01b41f6463295357e14b1210d3a7cbb67/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/2e0275156cf8b67d0619f6e8fd30aa3a4081c8fa/output/AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:transition:25.2.0] /Users/Borys/.android/build-cache/b8664d4f1015ebe0e0b917687c31dec74b666e9c/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/309d2a8591da441bba81f9bcc4fb1c3373a66050/output/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.2.0] /Users/Borys/.android/build-cache/e92a5ddefed113db281d0175d1c57260c303dd0a/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/2bcee6640cffd18d387f9467adb2ff95ddcacb01/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.2.0] /Users/Borys/.android/build-cache/dc0b14516203d1cee2daca06d34dc630e32a8e6c/output/AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:transition:25.2.0] /Users/Borys/.android/build-cache/77cd6b52a4491e533aa694b35ac4447a7a8fb228/output/AndroidManifest.xml:20:5-44
 MERGED from [com.facebook.android:facebook-android-sdk:4.6.0] /Users/Borys/.android/build-cache/cc28815baa823dd3791cb18f71065c6d1fe531e1/output/AndroidManifest.xml:24:5-26:41
-MERGED from [com.android.support:support-v4:25.2.0] /Users/Borys/.android/build-cache/a96daba6cd3d5f7f68a36ccfc01b77ae7dbaf566/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.2.0] /Users/Borys/.android/build-cache/1eda15338025b83fd43ac0e330dff142cc0933f4/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.2.0] /Users/Borys/.android/build-cache/dfb51be91e94a582677f4cd9b3d8ab106ae07cde/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-utils:25.2.0] /Users/Borys/.android/build-cache/7f689eb23d803e0faa7ed92a17b806f51e58b71e/output/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:recyclerview-v7:25.2.0] /Users/Borys/.android/build-cache/015239a00ee8e63d30f5e0d0bb20c16b2e6d3a31/output/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-core-ui:25.2.0] /Users/Borys/.android/build-cache/ddf5269669e362bb004d7944e76a7501f59f6747/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:25.2.0] /Users/Borys/.android/build-cache/85aa9d07320f48161e05e3e35bafb266e86298ac/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-v4:25.2.0] /Users/Borys/.android/build-cache/43d893becad59d3067d7c3c55fb82ab2f5e4f011/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.2.0] /Users/Borys/.android/build-cache/e78f97175c2977b993103fe862a8514fbaacd53c/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.2.0] /Users/Borys/.android/build-cache/9d2ee198bf5d28391806c141376f00be5eae1621/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.2.0] /Users/Borys/.android/build-cache/0e875f2770096248abd16692c75b7d9650721d47/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:recyclerview-v7:25.2.0] /Users/Borys/.android/build-cache/76cb49b2fb55dbead54f1a1953e5454943fee5f5/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-core-ui:25.2.0] /Users/Borys/.android/build-cache/ca654f9ba32fe85c89d18d17e3aee81113cd0d62/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.2.0] /Users/Borys/.android/build-cache/e736b9cd095514feed2561b4b41e4b56d81e2ef5/output/AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/8477c6ff4b4c355b22012774d752ed7dfeacfca6/output/AndroidManifest.xml:23:9-59
+		ADDED from [com.android.support:design:25.2.0] /Users/Borys/.android/build-cache/309d2a8591da441bba81f9bcc4fb1c3373a66050/output/AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
 		INJECTED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Borys/StudioProjects/NubaMenu/app/src/main/AndroidManifest.xml
