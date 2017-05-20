@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
 
     AlertDialog.Builder alert;
 
-    NewTabsAdapter mTabsAdapter;
+    TabsAdapter mTabsAdapter;
     ViewPager mViewPager;
 
 
@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
         final int tabNumber = prefs.getInt(TAB_NUMBER_EXTRA, 0);
 
 
-        mTabsAdapter = new NewTabsAdapter(getSupportFragmentManager(), this);
+        mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setAdapter(mTabsAdapter);
 

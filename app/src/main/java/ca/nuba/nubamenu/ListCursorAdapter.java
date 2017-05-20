@@ -31,12 +31,12 @@ import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
  * Created by Borys on 2017-03-05.
  */
 
-public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder>{
-    public static final String LOG_TAG = MyListCursorAdapter.class.getSimpleName();
+public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapter.ViewHolder>{
+    public static final String LOG_TAG = ListCursorAdapter.class.getSimpleName();
 
     Context mContext;
     int tabNumber;
-    public MyListCursorAdapter(Context context, Cursor cursor, int tabNumber){
+    public ListCursorAdapter(Context context, Cursor cursor, int tabNumber){
         super(context,cursor);
         this.mContext = context;
         this.tabNumber = tabNumber;
@@ -73,19 +73,19 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, Cursor cursor) {
 
-        final MyListItem myListItem = MyListItem.fromCursor(cursor);
+        final ListItem listItem = ListItem.fromCursor(cursor);
 
 
         //File img = new File(mContext.getFilesDir() + "/" + imageNameCutter(myListItem.getIconPath()));
-        File img = new File(mContext.getFilesDir() + "/" + myListItem.getIconPath());
+        File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
         if (!img.exists()){
-            Log.v(LOG_TAG, "Image "+myListItem.getIconPath()+" does not exist");
+            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
             //Picasso.with(mContext).load("http:/boryst.com/"+myListItem.getPicPath()).into(viewHolder.list_item_icon);
-            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + myListItem.getIconPath(), myListItem.getIconPath());
+            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
 
 
 
-            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + myListItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
 
 
         } else {
@@ -96,7 +96,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
             Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);
         }
 
-        if (myListItem.getVegetarian()){
+        if (listItem.getVegetarian()){
             viewHolder.list_item_vegetarian_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.v).into(viewHolder.list_item_vegetarian_icon);
         } else {
@@ -106,7 +106,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 //            Picasso.with(mContext).load(R.drawable.vg).into(viewHolder.list_item_vegetarian_icon);
 //        }
 
-        if (myListItem.getVegan()){
+        if (listItem.getVegan()){
             viewHolder.list_item_vegan_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.ve).into(viewHolder.list_item_vegan_icon);
         } else {
@@ -116,7 +116,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 //            Picasso.with(mContext).load(R.drawable.veg).into(viewHolder.list_item_vegan_icon);
 //        }
 
-        if (myListItem.getGlutenFree()){
+        if (listItem.getGlutenFree()){
             viewHolder.list_item_gluten_icon.setVisibility(VISIBLE);
             Picasso.with(mContext).load(R.drawable.gf).into(viewHolder.list_item_gluten_icon);
         } else {
@@ -127,10 +127,10 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 //        }
 
 
-        viewHolder.list_item_name.setText(myListItem.getName());
+        viewHolder.list_item_name.setText(listItem.getName());
         //Picasso.with(mContext).load("http://boryst.com/"+myListItem.getIconPath()).into(viewHolder.list_item_icon);
 //        viewHolder.list_item_price.setText(String.valueOf(myListItem.getPrice()));
-        viewHolder.list_item_price.setText("$" +String.format(Locale.CANADA, "%.2f", myListItem.getPrice()));
+        viewHolder.list_item_price.setText("$" +String.format(Locale.CANADA, "%.2f", listItem.getPrice()));
 
         viewHolder.basicView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -138,7 +138,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
                 SharedPreferences.Editor editor = mContext.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putInt(POSITION_EXTRA, viewHolder.getAdapterPosition());
                 editor.putInt(TAB_NUMBER_EXTRA, tabNumber);
-                editor.putInt(ITEM_ID_EXTRA, myListItem.getId());
+                editor.putInt(ITEM_ID_EXTRA, listItem.getId());
                 editor.apply();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);

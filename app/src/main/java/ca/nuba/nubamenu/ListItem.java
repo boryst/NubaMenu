@@ -3,7 +3,7 @@ package ca.nuba.nubamenu;
 import android.database.Cursor;
 
 
-public class MyListItem{
+public class ListItem {
     private String name, menuType, description, picPath, iconPath;
     private double price;
     private Boolean vegetarian;
@@ -85,7 +85,7 @@ public class MyListItem{
         return name;
     }
 
-    public static MyListItem fromCursor(Cursor cursor) {
+    public static ListItem fromCursor(Cursor cursor) {
         //TODO return your MyListItem from cursor.
 //        Log.v("MyListItem", cursor.getString(Utility.COL_NUBA_MENU_NAME) +
 //        " - "+cursor.getString(Utility.COL_NUBA_MENU_MENU_TYPE) +
@@ -93,21 +93,21 @@ public class MyListItem{
 //        );
 
 
-        MyListItem myListItem = new MyListItem();
-        myListItem.setId(cursor.getInt(Utility.COL_NUBA_MENU_ID));
-        myListItem.setName(cursor.getString(Utility.COL_NUBA_MENU_NAME));
-        myListItem.setPrice(cursor.getDouble(Utility.COL_NUBA_MENU_PRICE));
-        myListItem.setVegetarian(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN)));
+        ListItem listItem = new ListItem();
+        listItem.setId(cursor.getInt(Utility.COL_NUBA_MENU_ID));
+        listItem.setName(cursor.getString(Utility.COL_NUBA_MENU_NAME));
+        listItem.setPrice(cursor.getDouble(Utility.COL_NUBA_MENU_PRICE));
+        listItem.setVegetarian(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN)));
         //Log.v("MyListItem","cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN) - "+cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN));
         //Log.v("MyListItem","Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN)) - "+String.valueOf(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN))));
-        myListItem.setVegan(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN)));
-        myListItem.setGlutenFree(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE)));
-        myListItem.setDescription(cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION));
-        myListItem.setPicPath(cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH));
-        myListItem.setIconPath(cursor.getString(Utility.COL_NUBA_MENU_ICON_PATH));
+        listItem.setVegan(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN)));
+        listItem.setGlutenFree(Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE)));
+        listItem.setDescription(cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION));
+        listItem.setPicPath(cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH));
+        listItem.setIconPath(cursor.getString(Utility.COL_NUBA_MENU_ICON_PATH));
 
 
-        return myListItem;
+        return listItem;
     }
 
     public int getId() {

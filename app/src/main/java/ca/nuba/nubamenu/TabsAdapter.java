@@ -17,17 +17,17 @@ import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 
 
-public class NewTabsAdapter extends FragmentStatePagerAdapter {
-    static final String LOG_TAG = NewTabsAdapter.class.getSimpleName();
+public class TabsAdapter extends FragmentStatePagerAdapter {
+    static final String LOG_TAG = TabsAdapter.class.getSimpleName();
     Context mContext;
     Cursor mCursor;
     String type;
 
-    public NewTabsAdapter(FragmentManager fm){
+    public TabsAdapter(FragmentManager fm){
         super(fm);
     }
 
-    public NewTabsAdapter(FragmentManager fm, Context context){
+    public TabsAdapter(FragmentManager fm, Context context){
         super(fm);
         mContext = context;
         SharedPreferences prefs = mContext.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);

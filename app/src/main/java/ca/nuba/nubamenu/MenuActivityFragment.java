@@ -51,7 +51,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     CursorLoader cursorLoader;
     private static final int MENU_LOADER = 0;
-    MyListCursorAdapter myListCursorAdapter;
+    ListCursorAdapter listCursorAdapter;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -188,7 +188,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                         selectionArgs,
                         null
                 );
-                myListCursorAdapter.swapCursor(cursor);
+                listCursorAdapter.swapCursor(cursor);
             }
 
         } else {
@@ -219,8 +219,8 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
 
 //        myListCursorAdapter = new MyListCursorAdapter(getActivity(),mCursor, mPageNumber);
-        myListCursorAdapter = new MyListCursorAdapter(getActivity(), null, mPageNumber);
-        recyclerView.setAdapter(myListCursorAdapter);
+        listCursorAdapter = new ListCursorAdapter(getActivity(), null, mPageNumber);
+        recyclerView.setAdapter(listCursorAdapter);
 
 
 //        if (mCursor != null) {
@@ -459,7 +459,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                             selectionArgs,
                             null
                     );
-                    myListCursorAdapter.swapCursor(cursor);
+                    listCursorAdapter.swapCursor(cursor);
             }
         });
 
@@ -492,12 +492,12 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        myListCursorAdapter.swapCursor(cursor);
+        listCursorAdapter.swapCursor(cursor);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        myListCursorAdapter.swapCursor(null);
+        listCursorAdapter.swapCursor(null);
 
     }
 
