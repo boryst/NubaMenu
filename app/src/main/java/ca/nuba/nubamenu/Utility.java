@@ -126,7 +126,8 @@ public class Utility {
             NubaContract.NubaMenuEntry.COLUMN_DESCRIPTION,
             NubaContract.NubaMenuEntry.COLUMN_PIC_PATH,
             NubaContract.NubaMenuEntry.COLUMN_ICON_PATH,
-            NubaContract.NubaMenuEntry.COLUMN_WEB_ID
+            NubaContract.NubaMenuEntry.COLUMN_WEB_ID,
+            NubaMenuEntry.COLUMN_LOCATION
     };
 
     public static final int COL_NUBA_MENU_ID = 0;
@@ -140,6 +141,7 @@ public class Utility {
     public static final int COL_NUBA_MENU_PIC_PATH = 8;
     public static final int COL_NUBA_MENU_ICON_PATH = 9;
     public static final int COL_NUBA_WEB_ID = 10;
+    public static final int COL_NUBA_LOCATION = 11;
 
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;

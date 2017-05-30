@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
@@ -247,6 +248,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         if (cursor != null){
             cursor.moveToFirst();
+            Timber.v("location - "+cursor.getString(Utility.COL_NUBA_LOCATION));
             picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
             name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
             price = cursor.getDouble(Utility.COL_NUBA_MENU_PRICE);
@@ -296,6 +298,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
 
             descTextView.setText(desc);
+
+            Timber.v("location - "+cursor.getString(Utility.COL_NUBA_LOCATION));
 
         }
 

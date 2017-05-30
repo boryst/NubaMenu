@@ -99,6 +99,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
             final String NUBA_PIC_PATH = "pic_path";
             final String NUBA_ICON_PATH = "icon_path";
             final String NUBA_WED_ID = "web_id";
+            final String NUBA_LOCATION = "location";
 
 
             JSONObject menuDataJason = new JSONObject(nubaMenuJsonStr);
@@ -121,6 +122,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_PIC_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_PIC_PATH)));
                     contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_ICON_PATH)));
                     contentValues.put(NubaMenuEntry.COLUMN_WEB_ID, menuInfo.getInt(NUBA_WED_ID));
+                    contentValues.put(NubaMenuEntry.COLUMN_LOCATION, menuInfo.getString((NUBA_LOCATION)));
 
                     mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
                     Log.v(LOG_TAG, "Inserting");

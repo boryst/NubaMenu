@@ -10,6 +10,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
+import timber.log.Timber;
+
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Picasso.with(this).setIndicatorsEnabled(true);
+        Timber.plant(new Timber.DebugTree());
 
         //Log.v(LOG_TAG, "Token: "+ FirebaseInstanceId.getInstance().getToken());
 

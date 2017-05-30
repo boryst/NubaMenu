@@ -31,6 +31,7 @@ public class NubaContract {
          public static final String COLUMN_PIC_PATH = "pic_path";
          public static final String COLUMN_ICON_PATH = "icon_path";
          public static final String COLUMN_WEB_ID = "web_id";
+         public static final String COLUMN_LOCATION = "location";
 
          public static Uri buildNubaMenuUriWithID(long id){
             /**  content://ca.nuba.nubamenu/nuba_menu/id  */
