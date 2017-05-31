@@ -298,9 +298,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
 
             descTextView.setText(desc);
-
-            Timber.v("location - "+cursor.getString(Utility.COL_NUBA_LOCATION));
-
+            
         }
 
 //        Log.v(LOG_TAG, "name - "+name+", picPath - "+picturePath);
