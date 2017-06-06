@@ -1,11 +1,9 @@
 package ca.nuba.nubamenu;
 
-import android.content.res.Resources;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -16,12 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +34,6 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,6 +42,7 @@ import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
+import static ca.nuba.nubamenu.Utility.ITEM_WEB_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
 
@@ -66,15 +65,22 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     float numStars;
     float numStarsStatic, numStarsStatic2;
     int numRatings;
+    public static int mWebId;
 
     ImageView imageView, imageViewV, imageViewVe, imageViewGf;
     TextView nameTextView, priceTextView, descTextView;
+    Button leaveCommentButton;
+
     private RecyclerView mRecyclerView;
     private static final int DETAIL_LOADER = 0;
     private CursorLoader cursorLoader;
     private String mUsername;
     private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
     private List<Comment> mCommentsList;
+    AlertDialog.Builder alert;
+
+
+
 
 
 
@@ -103,32 +109,33 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mFirebaseStorage = FirebaseStorage.getInstance();
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
-        //mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("");
+        mWebId = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_WEB_ID_EXTRA, 0);
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(String.valueOf(mWebId));
         //mChatPhotosStorageReference = mFirebaseStorage.getReference().child("");
 
         mCommentsList = new ArrayList<>();
         mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList);
 
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    onSignedInInitialize(user.getDisplayName());
-                } else {
-                    onSigneOutCleanUp();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(true)
-                                    .setProviders(Arrays.asList(
-                                            new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                                    .build(),
-                            RC_SIGN_IN);
-                }
-            }
-        };
+//        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null){
+//                    onSignedInInitialize(user.getDisplayName());
+//                } else {
+//                    onSigneOutCleanUp();
+//                    startActivityForResult(
+//                            AuthUI.getInstance()
+//                                    .createSignInIntentBuilder()
+//                                    .setIsSmartLockEnabled(true)
+//                                    .setProviders(Arrays.asList(
+//                                            new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+//                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+//                                    .build(),
+//                            RC_SIGN_IN);
+//                }
+//            }
+//        };
 
     }
 
@@ -145,9 +152,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         imageViewVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
         imageViewGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
         descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
+        leaveCommentButton = (Button) rootView.findViewById(R.id.btn_comment);
+
+
+
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
 
-        mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
+        //mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
+
+        leaveCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                writeComment();
+            }
+        });
+
 
         //final RatingBar ratingIndicatorBar = (RatingBar) rootView.findViewById(R.id.detailIndicatorBar);
         //final TextView ratingIndicatorBarTextView = (TextView) rootView.findViewById(R.id.detailIndicatorBarTextView);
@@ -168,6 +187,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 //                }
 //        );
 
+
+
         return rootView;
     }
 
@@ -179,44 +200,44 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
 
-    public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
+//    public static int calculateInSampleSize(
+//            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+//        // Raw height and width of image
+//        final int height = options.outHeight;
+//        final int width = options.outWidth;
+//        int inSampleSize = 1;
+//
+//        if (height > reqHeight || width > reqWidth) {
+//
+//            final int halfHeight = height / 2;
+//            final int halfWidth = width / 2;
+//
+//            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+//            // height and width larger than the requested height and width.
+//            while ((halfHeight / inSampleSize) > reqHeight
+//                    && (halfWidth / inSampleSize) > reqWidth) {
+//                inSampleSize *= 2;
+//            }
+//        }
+//
+//        return inSampleSize;
+//    }
 
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(res, resId, options);
-    }
+//    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+//                                                         int reqWidth, int reqHeight) {
+//
+//        // First decode with inJustDecodeBounds=true to check dimensions
+//        final BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        BitmapFactory.decodeResource(res, resId, options);
+//
+//        // Calculate inSampleSize
+//        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+//
+//        // Decode bitmap with inSampleSize set
+//        options.inJustDecodeBounds = false;
+//        return BitmapFactory.decodeResource(res, resId, options);
+//    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -274,21 +295,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 Picasso.with(getActivity()).load(R.drawable.v).into(imageViewV);
             } else{
                 imageViewV.setVisibility(View.GONE);
-//                Picasso.with(getActivity()).load(R.drawable.vg).into(imageViewV);
             }
 
             if (ve){
                 Picasso.with(getActivity()).load(R.drawable.ve).into(imageViewVe);
             } else{
                 imageViewVe.setVisibility(View.GONE);
-//                Picasso.with(getActivity()).load(R.drawable.veg).into(imageViewVe);
             }
 
             if (gf){
                 Picasso.with(getActivity()).load(R.drawable.gf).into(imageViewGf);
             } else{
                 imageViewGf.setVisibility(View.GONE);
-//                Picasso.with(getActivity()).load(R.drawable.gfg).into(imageViewGf);
             }
 
             descTextView.setText(desc);
@@ -338,5 +356,38 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             };
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
+    }
+
+    public void writeComment() {
+        alert = new AlertDialog.Builder(getActivity());
+        final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
+        alert.setView(container);
+
+        final RatingBar commentRatingBar = (RatingBar) container.findViewById(R.id.rb_comment);
+        final EditText commentEditText = (EditText) container.findViewById(R.id.et_comment);
+
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String commentText = commentEditText.getText().toString();
+                float commentRating = commentRatingBar.getRating();
+
+                final Comment comment = new Comment(mUsername, commentText, commentRating);
+                Timber.v("commentText - "+commentText);
+                Timber.v("commentRating - "+commentRating);
+                mMessagesDatabaseReference.push().setValue(comment);
+
+                dialog.dismiss();
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
 }

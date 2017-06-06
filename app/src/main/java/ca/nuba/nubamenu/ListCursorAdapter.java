@@ -22,6 +22,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
+import static ca.nuba.nubamenu.Utility.ITEM_WEB_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.POSITION_EXTRA;
 import static ca.nuba.nubamenu.Utility.TAB_NUMBER_EXTRA;
@@ -139,6 +140,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
                 editor.putInt(POSITION_EXTRA, viewHolder.getAdapterPosition());
                 editor.putInt(TAB_NUMBER_EXTRA, tabNumber);
                 editor.putInt(ITEM_ID_EXTRA, listItem.getId());
+                editor.putInt(ITEM_WEB_ID_EXTRA, listItem.getWebId());
                 editor.apply();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);

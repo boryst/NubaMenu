@@ -53,6 +53,7 @@ public class Utility {
     public static final String POSITION_EXTRA = "POSITION";
     public static final String TAB_NUMBER_EXTRA = "TAB_NUMBER_EXTRA";
     public static final String ITEM_ID_EXTRA = "ITEM_ID_EXTRA";
+    public static final String ITEM_WEB_ID_EXTRA = "ITEM_WEB_ID_EXTRA";
 
     public static final String ARG_PAGE = "ARG_PAGE";
     public static final String ARG_PAGE_NUMBER = "ARG_PAGE_NUMBER";
