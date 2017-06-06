@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
@@ -89,15 +89,15 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:textSize="20sp" />
 
-
-        <!--<TextView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Your Meal Rating"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="20sp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--/>-->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            />
         <!--<LinearLayout-->
             <!--android:layout_width="fill_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -105,42 +105,7 @@
             <!--android:orientation="horizontal"-->
             <!--android:paddingLeft="10dp"-->
             <!--android:paddingRight="10dp"-->
-            <!-->-->
-            <!--<RatingBar-->
-                <!--android:id="@+id/detailBar"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:numStars="5"-->
-                <!--android:stepSize="1"-->
-                <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/detailBarTextView"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:text="0.0"-->
-
-                <!--android:textSize="30sp" />-->
-        <!--</LinearLayout>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Average Meal Rating"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="20sp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginBottom="5dp"-->
-            <!--/>-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:paddingRight="10dp"-->
-            <!-->-->
+            <!--&gt;-->
             <!--<RatingBar-->
                 <!--android:id="@+id/detailIndicatorBar"-->
                 <!--android:layout_width="wrap_content"-->
@@ -160,6 +125,11 @@
                 <!--android:textSize="30sp" />-->
         <!--</LinearLayout>-->
 
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comments_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>
