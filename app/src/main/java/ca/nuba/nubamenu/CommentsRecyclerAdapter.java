@@ -2,6 +2,7 @@ package ca.nuba.nubamenu;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * Created by Borys on 2017-06-04.
  */
@@ -17,6 +20,8 @@ import java.util.List;
 public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecyclerAdapter.ViewHolder>{
     private Context mContext;
     private List<Comment> mList;
+    int lengthFilterSize = 100;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView author, text;
@@ -33,6 +38,7 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecycl
     public CommentsRecyclerAdapter(Context context, List<Comment> list){
         this.mContext = context;
         this.mList = list;
+//        Timber.v("list count - "+getItemCount());
     }
 
     @Override
@@ -43,15 +49,36 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecycl
         return vh;    }
 
     @Override
-    public void onBindViewHolder(CommentsRecyclerAdapter.ViewHolder holder, int position) {
-        Comment comment = mList.get(position);
+    public void onBindViewHolder(final CommentsRecyclerAdapter.ViewHolder holder, int position) {
+        final Comment comment = mList.get(position);
+
+        holder.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
         holder.author.setText(comment.getAuthor());
         holder.text.setText(comment.getCommentText());
         holder.ratingBar.setRating(comment.getRating());
+
+
+        holder.text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
+                    lengthFilterSize = comment.getCommentText().length();
+                    Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+
+                } else if (lengthFilterSize != 100){
+                    lengthFilterSize = 100;
+                    Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+                }
+                holder.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
+                holder.text.setText(comment.getCommentText());
+                Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
     }
 }

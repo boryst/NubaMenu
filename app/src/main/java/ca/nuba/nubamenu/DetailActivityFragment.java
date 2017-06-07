@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,6 +79,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
     private List<Comment> mCommentsList;
     AlertDialog.Builder alert;
+    float avgRating;
 
 
 
@@ -115,6 +117,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         mCommentsList = new ArrayList<>();
         mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList);
+        attachDatabaseReadListener();
+
+
+
+
 
 //        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
 //            @Override
@@ -158,7 +165,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
 
-        //mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
+        mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         leaveCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +174,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 writeComment();
             }
         });
+
 
 
         //final RatingBar ratingIndicatorBar = (RatingBar) rootView.findViewById(R.id.detailIndicatorBar);
@@ -261,8 +270,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(String.valueOf(cursor.getInt(Utility.COL_NUBA_WEB_ID)));
 
 
-            Timber.v("location - "+cursor.getString(Utility.COL_NUBA_LOCATION));
-            Timber.v("WEB_ID "+ cursor.getInt(Utility.COL_NUBA_WEB_ID));
+//            Timber.v("location - "+cursor.getString(Utility.COL_NUBA_LOCATION));
+//            Timber.v("WEB_ID "+ cursor.getInt(Utility.COL_NUBA_WEB_ID));
 
             picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
             name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
@@ -327,14 +336,27 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         super.onActivityCreated(savedInstanceState);
     }
 
+//    avgRating = 0;
+//
+//        for (int i = 0; i < mCommentsList.size(); i++) {
+//        avgRating += mCommentsList.get(i).getRating();
+//    }
+//        if (mCommentsList.size() >0) {
+//        avgRating /= mCommentsList.size();
+//    }
+//        Timber.v("avgRating - "+avgRating);
+
     private void attachDatabaseReadListener(){
+//        Timber.v("Inside attachDatabaseReadListener");
         if (mChildEventListener == null) {
 
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Comment comment = dataSnapshot.getValue(Comment.class);
-                    mCommentsList.add(comment);
+//                    Timber.v("key --"+dataSnapshot.getKey());
+                    mCommentsList.add(0,comment);
+                    avgRating += mCommentsList.get(0).getRating();
                     mCommentsRecyclerAdapter.notifyDataSetChanged();
                 }
 
