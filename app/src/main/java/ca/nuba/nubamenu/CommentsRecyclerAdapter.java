@@ -2,6 +2,8 @@ package ca.nuba.nubamenu;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,17 +19,21 @@ import timber.log.Timber;
  * Created by Borys on 2017-06-04.
  */
 
-public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecyclerAdapter.ViewHolder>{
+public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
     private Context mContext;
     private List<Comment> mList;
-    int lengthFilterSize = 100;
+    private String mUserName;
+    private int lengthFilterSize = 100;
+    private View itemView;
+    private static final int ITEM_TYPE_NORMAL = 1;
+    private static final int ITEM_TYPE_OWN = 2;
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolderNormal extends RecyclerView.ViewHolder {
         public TextView author, text;
         public RatingBar ratingBar;
 
-        public ViewHolder(View view) {
+        public ViewHolderNormal (View view) {
             super(view);
             author = (TextView) view.findViewById(R.id.comment_author);
             text     = (TextView) view.findViewById(R.id.comment_text);
@@ -35,55 +41,133 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecycl
         }
     }
 
+    public class ViewHolderOwnReview extends RecyclerView.ViewHolder {
+        public TextView author, text;
+        public RatingBar ratingBar;
+
+        public ViewHolderOwnReview(View view) {
+            super(view);
+            author = (TextView) view.findViewById(R.id.comment_author);
+            text     = (TextView) view.findViewById(R.id.comment_text);
+            ratingBar = (RatingBar) view.findViewById(R.id.comments_rating_bar);
+
+        }
+    }
+
     public CommentsRecyclerAdapter(Context context, List<Comment> list){
         this.mContext = context;
         this.mList = list;
-//        Timber.v("list count - "+getItemCount());
     }
 
-    @Override
-    public CommentsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_comment, parent, false);
-
-
-
-        ViewHolder vh = new ViewHolder(itemView);
-        return vh;    }
 
     @Override
-    public void onBindViewHolder(final CommentsRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final Comment comment = mList.get(position);
 
-        holder.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-        holder.author.setText(comment.getAuthor());
-        holder.text.setText(comment.getCommentText());
-        holder.ratingBar.setRating(comment.getRating());
+        Timber.v("onBindViewHolder.viewType - "+ holder.getItemViewType());
+
+        switch (holder.getItemViewType()){
+            case ITEM_TYPE_NORMAL:{
+                final ViewHolderNormal viewHolderNormal = (ViewHolderNormal) holder;
+
+                viewHolderNormal.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
+                viewHolderNormal.author.setText(comment.getAuthor());
+                viewHolderNormal.text.setText(comment.getCommentText());
+                viewHolderNormal.ratingBar.setRating(comment.getRating());
 
 
-        holder.text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
-                    lengthFilterSize = comment.getCommentText().length();
-                    Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+                viewHolderNormal.text.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
+                            lengthFilterSize = comment.getCommentText().length();
+                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
 
-                } else if (lengthFilterSize != 100){
-                    lengthFilterSize = 100;
-                    Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
-                }
-                holder.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-                holder.text.setText(comment.getCommentText());
-                Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+                        } else if (lengthFilterSize != 100){
+                            lengthFilterSize = 100;
+                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+                        }
+                        viewHolderNormal.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
+                        viewHolderNormal.text.setText(comment.getCommentText());
+                        Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
 
+                    }
+                });
+                break;
             }
-        });
+
+            case ITEM_TYPE_OWN:{
+                final ViewHolderOwnReview viewHolderOwnReview = (ViewHolderOwnReview) holder;
+
+                viewHolderOwnReview.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
+                viewHolderOwnReview.author.setText(comment.getAuthor());
+                viewHolderOwnReview.text.setText(comment.getCommentText());
+                viewHolderOwnReview.ratingBar.setRating(comment.getRating());
+
+
+                viewHolderOwnReview.text.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
+                            lengthFilterSize = comment.getCommentText().length();
+                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+
+                        } else if (lengthFilterSize != 100){
+                            lengthFilterSize = 100;
+                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+                        }
+                        viewHolderOwnReview.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
+                        viewHolderOwnReview.text.setText(comment.getCommentText());
+                        Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
+
+                    }
+                });
+                break;
+            }
+        }
+
+
+
     }
 
     @Override
     public int getItemCount() {
         return mList.size();
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Timber.v("onCreateViewHolder.viewType - "+ viewType);
+        switch (viewType) {
+            case ITEM_TYPE_NORMAL: {
+                itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_item_comment, parent, false);
+                return new ViewHolderNormal(itemView);
+
+            }
+            case ITEM_TYPE_OWN: {
+                itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_item_comment_my, parent, false);
+                return new ViewHolderOwnReview(itemView);
+            }
+
+            default:{
+                itemView = LayoutInflater.from(parent.getContext())
+                                .inflate(R.layout.list_item_comment, parent, false);
+                return new ViewHolderNormal(itemView);
+
+            }
+        }
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mList.get(position).getAuthor().equals("Borys Tkachenko")){
+            return ITEM_TYPE_OWN;
+        } else {
+            return ITEM_TYPE_NORMAL;
+        }
     }
 }

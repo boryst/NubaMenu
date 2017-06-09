@@ -137,7 +137,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         attachDatabaseReadListener();
 
 
-
 //TODO: Count average rating on server via Firabase Functions
         mCommentsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
