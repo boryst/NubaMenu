@@ -43,8 +43,13 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsRecycl
 
     @Override
     public CommentsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_comment, parent, false);
+
+
+
         ViewHolder vh = new ViewHolder(itemView);
         return vh;    }
 

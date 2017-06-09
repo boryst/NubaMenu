@@ -1,4 +1,4 @@
-package ca.nuba.nubamenu;
+package ca.nuba.nubamenu.service;
 
 import android.util.Log;
 
