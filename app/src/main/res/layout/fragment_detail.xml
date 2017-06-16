@@ -131,7 +131,27 @@
             android:layout_marginBottom="5dp"
             />
 
+        <EditText
+            android:id="@+id/et_own_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
 
+        <Button
+            android:id="@+id/btn_edit_own_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:visibility="gone"
+            />
+        <Button
+            android:id="@+id/btn_delete_own_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:visibility="gone"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/comments_recyclerview"

@@ -81,8 +81,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     ImageView imageView, imageViewV, imageViewVe, imageViewGf;
     TextView nameTextView, priceTextView, descTextView, ratingTextView;
-    Button leaveCommentButton;
+    Button buttonWriteReview, buttonEditReview, buttonDeleteReview; ;
     RatingBar ratingBar;
+    EditText editTextOwnReview;
 
     private RecyclerView mRecyclerView;
     private static final int DETAIL_LOADER = 0;
@@ -169,15 +170,22 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
-        nameTextView = (TextView) rootView.findViewById(R.id.textViewDetailName);
-        priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
         imageViewV = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
         imageViewVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
         imageViewGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
+
+        nameTextView = (TextView) rootView.findViewById(R.id.textViewDetailName);
+        priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
         descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
-        leaveCommentButton = (Button) rootView.findViewById(R.id.btn_comment);
-        ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
         ratingTextView = (TextView) rootView.findViewById(R.id.detail_rating_bar_textview);
+
+        buttonWriteReview = (Button) rootView.findViewById(R.id.btn_comment);
+        buttonEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
+        buttonDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
+
+        ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
+
+        editTextOwnReview = (EditText) rootView.findViewById(R.id.et_own_review);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
 
@@ -186,7 +194,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
 
-        leaveCommentButton.setOnClickListener(new View.OnClickListener() {
+        buttonWriteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -303,7 +311,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 //TODO: Move to onPause?
                 detachAuthStateListener();
 
-                leaveCommentButton.setVisibility(View.INVISIBLE);
+                buttonWriteReview.setVisibility(View.GONE);
                 dialog.dismiss();
 
             }
@@ -377,10 +385,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Comment comment = dataSnapshot.getValue(Comment.class);
-                    mCommentsList.add(0,comment);
-                    //mRating += mCommentsList.get(0).getRating();
-                    Timber.v("mUsername @@- "+mUsername);
-                    mCommentsRecyclerAdapter.notifyDataSetChanged();
+                    if (comment.getAuthor().equals(mUsername)){
+                        editTextOwnReview.setVisibility(View.VISIBLE);
+                        buttonDeleteReview.setVisibility(View.VISIBLE);
+                        buttonEditReview.setVisibility(View.VISIBLE);
+                        editTextOwnReview.setText(comment.getCommentText());
+                        buttonWriteReview.setVisibility(View.GONE);
+                    } else {
+                        mCommentsList.add(0, comment);
+                        //mRating += mCommentsList.get(0).getRating();
+                        Timber.v("mUsername @@- " + mUsername);
+                        mCommentsRecyclerAdapter.notifyDataSetChanged();
+                    }
                 }
 
                 @Override
@@ -453,6 +469,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
                     writeComment();
+
                     onSignedInInitialize(user.getDisplayName());
                 } else {
                     onSigneOutCleanUp();
