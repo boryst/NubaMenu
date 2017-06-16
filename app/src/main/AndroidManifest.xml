@@ -62,14 +62,10 @@
             </intent-filter>
         </service>
 
-        <service android:name=".NubaFirebaseInstanceIDService">
+        <service android:name=".service.NubaFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
-        </service>
-
-        <service android:name=".service.FetchNubaMenuService">
-
         </service>
     </application>
 

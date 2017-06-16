@@ -80,8 +80,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public static int mWebId;
 
     ImageView imageView, imageViewV, imageViewVe, imageViewGf;
-    TextView nameTextView, priceTextView, descTextView;
+    TextView nameTextView, priceTextView, descTextView, ratingTextView;
     Button leaveCommentButton;
+    RatingBar ratingBar;
 
     private RecyclerView mRecyclerView;
     private static final int DETAIL_LOADER = 0;
@@ -90,21 +91,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
     private List<Comment> mCommentsList;
     private AlertDialog.Builder alert;
-    private float avgRating;
+    private float mRating;
     private long numberOfComments;
-
-
-
-
-
 
 
     //Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCommentsDatabaseReference;
+    private DatabaseReference mMenuItemAvgRatingReference;
     private ChildEventListener mChildEventListener;
+    private ValueEventListener mValueAvgRatingListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private FirebaseAuth.AuthStateListener mAuthStateListenerForUserName;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mChatPhotosStorageReference;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -125,25 +124,35 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
         mWebId = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_WEB_ID_EXTRA, 0);
-        //mCommentsDatabaseReference = mFirebaseDatabase.getReference().child(String.valueOf(mWebId));
-        mCommentsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId));
-        Timber.v("mCommentsDatabaseReference - "+mCommentsDatabaseReference.getRef());
+//        mCommentsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId));
+        mCommentsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews");
+        mMenuItemAvgRatingReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("avg_rating");
+
+
+        //Timber.v("mCommentsDatabaseReference - "+mCommentsDatabaseReference.getRef());
 
 
         //mChatPhotosStorageReference = mFirebaseStorage.getReference().child("");
 
+        initializeAuthListener();
+        initializeAuthListenerForUserName();
+
+
         mCommentsList = new ArrayList<>();
-        mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList);
+        mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUsername);
+        Timber.v("mUsername ## "+mUsername);
+
         attachDatabaseReadListener();
+        attachAvgRatingReadListener();
 
 
-//TODO: Count average rating on server via Firabase Functions
+
         mCommentsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 numberOfComments = dataSnapshot.getChildrenCount();
 
-                Timber.v("numberOfComments - "+numberOfComments+", sum of ratings - "+avgRating+"\n AvgRating - "+avgRating/numberOfComments);
+                //Timber.v("numberOfComments - "+numberOfComments+", sum of ratings - "+avgRating+"\n AvgRating - "+avgRating/numberOfComments);
             }
 
             @Override
@@ -152,28 +161,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
 
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-
-                    writeComment();
-                    onSignedInInitialize(user.getDisplayName());
-                    Timber.v("You're signed in");
-                } else {
-                    onSigneOutCleanUp();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(true)
-                                    .setProviders(Arrays.asList(
-                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                                    .build(),
-                            RC_SIGN_IN);
-                }
-            }
-        };
 
     }
 
@@ -189,11 +176,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         imageViewGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
         descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
         leaveCommentButton = (Button) rootView.findViewById(R.id.btn_comment);
+        ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
+        ratingTextView = (TextView) rootView.findViewById(R.id.detail_rating_bar_textview);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
 
         mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 
         leaveCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,6 +299,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 Timber.v("commentRating - "+commentRating);
                 mCommentsDatabaseReference.push().setValue(comment);
 
+
+                //TODO: Move to onPause?
+                detachAuthStateListener();
+
+                leaveCommentButton.setVisibility(View.INVISIBLE);
                 dialog.dismiss();
 
             }
@@ -315,7 +311,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                detachAuthStateListener();
                 dialog.dismiss();
+
             }
         });
 
@@ -325,10 +323,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onPause() {
         super.onPause();
-        if (mAuthStateListener != null) {
-            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
-        }
+        detachAuthStateListener();
         detachDatabaseReadListener();
+        detachAvgRatingReadListener();
     }
 
     @Override
@@ -367,20 +364,22 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void onSigneOutCleanUp(){
-        mUsername = ANONYMOUS;
+        Timber.v("onSigneOutCleanUp");
+//        mUsername = ANONYMOUS;
     }
 
     private void attachDatabaseReadListener(){
-//        Timber.v("Inside attachDatabaseReadListener");
         if (mChildEventListener == null) {
 
+            //mFirebaseAuth.addAuthStateListener(mAuthStateListenerForUserName);
+            Timber.v("mUsername == "+mUsername);
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Comment comment = dataSnapshot.getValue(Comment.class);
-//                    Timber.v("key --"+dataSnapshot.getKey());
                     mCommentsList.add(0,comment);
-                    avgRating += mCommentsList.get(0).getRating();
+                    //mRating += mCommentsList.get(0).getRating();
+                    Timber.v("mUsername @@- "+mUsername);
                     mCommentsRecyclerAdapter.notifyDataSetChanged();
                 }
 
@@ -401,6 +400,96 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 }
             };
             mCommentsDatabaseReference.addChildEventListener(mChildEventListener);
+            Timber.v("mUsername ** "+mUsername);
+
+        }
+    }
+
+    /**
+     *
+     */
+    private void attachAvgRatingReadListener(){
+        if (mValueAvgRatingListener == null){
+            mValueAvgRatingListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null) {
+                        Timber.v("dataSnapshot - "+String.valueOf(dataSnapshot));
+                        AvgRating avgRating = dataSnapshot.getValue(AvgRating.class);
+                        if (avgRating != null) {
+
+                            Timber.v("rating - " + avgRating.getCurrent_avg_rating() + ", number - " + avgRating.getNum_of_ratings());
+                            mRating = avgRating.getCurrent_avg_rating();
+                            ratingTextView.setText(String.valueOf(avgRating.getNum_of_ratings()));
+                            ratingBar.setRating(mRating);
+                        } else {
+                            Timber.v("No data in avgRating");
+                            ratingTextView.setText("No reviews");
+
+                        }
+                    } else {
+                        Timber.v("No data in dataSnapshot");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+        mMenuItemAvgRatingReference.addValueEventListener(mValueAvgRatingListener);
+        }
+    }
+
+
+    //TODO: if user left a comment - hide button "leavea comment" and add "edit"
+
+
+    private void initializeAuthListener(){
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    writeComment();
+                    onSignedInInitialize(user.getDisplayName());
+                } else {
+                    onSigneOutCleanUp();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(true)
+                                    .setProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            }
+        };
+    }
+
+
+    private void initializeAuthListenerForUserName(){
+        mAuthStateListenerForUserName = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    onSignedInInitialize(user.getDisplayName());
+                    Timber.v("mUser ^^ "+mUsername);
+                    mCommentsRecyclerAdapter.setUserName(mUsername);
+                }
+            }
+        };
+        mFirebaseAuth.addAuthStateListener(mAuthStateListenerForUserName);
+
+    }
+
+    private void detachAuthStateListener(){
+        if (mAuthStateListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+            mAuthStateListener = null;
         }
     }
 
@@ -410,5 +499,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mChildEventListener = null;
         }
     }
-    //TODO: if user left a comment - hide button "leavea comment" and add "edit"
+
+    private void detachAvgRatingReadListener(){
+        if (mValueAvgRatingListener != null){
+            mMenuItemAvgRatingReference.removeEventListener(mValueAvgRatingListener);
+            mValueAvgRatingListener = null;
+        }
+    }
 }

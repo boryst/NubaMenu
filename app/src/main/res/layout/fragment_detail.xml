@@ -79,7 +79,32 @@
                 android:textSize="30sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+            <RatingBar
+                android:id="@+id/detail_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                />
 
+            <TextView
+                android:id="@+id/detail_rating_bar_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0.0"
+
+                android:textSize="30sp" />
+        </LinearLayout>
         <TextView
             android:id="@+id/textViewDetailDesc"
             android:layout_width="match_parent"
@@ -99,38 +124,13 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Comments"
+            android:text="Reviews"
             android:gravity="center"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             />
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:paddingRight="10dp"-->
-            <!--&gt;-->
-            <!--<RatingBar-->
-                <!--android:id="@+id/detailIndicatorBar"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:numStars="5"-->
-                <!--android:stepSize="0.1"-->
-                <!--android:isIndicator="true"-->
-                <!--/>-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/detailIndicatorBarTextView"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:text="0.0"-->
-
-                <!--android:textSize="30sp" />-->
-        <!--</LinearLayout>-->
 
 
         <android.support.v7.widget.RecyclerView

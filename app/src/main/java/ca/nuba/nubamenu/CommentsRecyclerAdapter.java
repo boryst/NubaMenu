@@ -54,9 +54,10 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
         }
     }
 
-    public CommentsRecyclerAdapter(Context context, List<Comment> list){
+    public CommentsRecyclerAdapter(Context context, List<Comment> list, String userName){
         this.mContext = context;
         this.mList = list;
+        this.mUserName = userName;
     }
 
 
@@ -64,9 +65,6 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final Comment comment = mList.get(position);
-
-        Timber.v("onBindViewHolder.viewType - "+ holder.getItemViewType());
-
         switch (holder.getItemViewType()){
             case ITEM_TYPE_NORMAL:{
                 final ViewHolderNormal viewHolderNormal = (ViewHolderNormal) holder;
@@ -75,7 +73,6 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
                 viewHolderNormal.author.setText(comment.getAuthor());
                 viewHolderNormal.text.setText(comment.getCommentText());
                 viewHolderNormal.ratingBar.setRating(comment.getRating());
-
 
                 viewHolderNormal.text.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,29 +102,21 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
                 viewHolderOwnReview.text.setText(comment.getCommentText());
                 viewHolderOwnReview.ratingBar.setRating(comment.getRating());
 
-
                 viewHolderOwnReview.text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
                             lengthFilterSize = comment.getCommentText().length();
-                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
-
                         } else if (lengthFilterSize != 100){
                             lengthFilterSize = 100;
-                            Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
                         }
                         viewHolderOwnReview.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
                         viewHolderOwnReview.text.setText(comment.getCommentText());
-                        Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
-
                     }
                 });
                 break;
             }
         }
-
-
 
     }
 
@@ -138,7 +127,6 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Timber.v("onCreateViewHolder.viewType - "+ viewType);
         switch (viewType) {
             case ITEM_TYPE_NORMAL: {
                 itemView = LayoutInflater.from(parent.getContext())
@@ -164,10 +152,14 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
-        if (mList.get(position).getAuthor().equals("Borys Tkachenko")){
+        if (mList.get(position).getAuthor().equals(mUserName)){
             return ITEM_TYPE_OWN;
         } else {
             return ITEM_TYPE_NORMAL;
         }
+    }
+
+    public void setUserName(String username){
+        this.mUserName = username;
     }
 }
