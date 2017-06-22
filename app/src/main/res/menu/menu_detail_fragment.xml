@@ -2,10 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context="ca.nuba.nubamenu.DetailActivity">
 
-    <item android:id="@+id/sign_out"
-        android:orderInCategory="102"
-        app:showAsAction="never"
-        android:title="Sign Out"
-        android:visible="true"
-        />
+    <!--<item android:id="@+id/sign_out"-->
+        <!--android:orderInCategory="102"-->
+        <!--app:showAsAction="never"-->
+        <!--android:title="Sign Out"-->
+        <!--android:visible="true"-->
+
+        <!--/>-->
 </menu>

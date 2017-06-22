@@ -23,6 +23,7 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
     private Context mContext;
     private List<Comment> mList;
     private String mUserName;
+    private String mUserId;
     private int lengthFilterSize = 100;
     private View itemView;
     private static final int ITEM_TYPE_NORMAL = 1;
@@ -54,10 +55,11 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
         }
     }
 
-    public CommentsRecyclerAdapter(Context context, List<Comment> list, String userName){
+    public CommentsRecyclerAdapter(Context context, List<Comment> list, String userId){
         this.mContext = context;
         this.mList = list;
-        this.mUserName = userName;
+        this.mUserId = userId;
+
     }
 
 
@@ -135,8 +137,11 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
             }
             case ITEM_TYPE_OWN: {
+//                TODO: Uncomment if need unique view
+//                itemView = LayoutInflater.from(parent.getContext())
+//                        .inflate(R.layout.list_item_comment_my, parent, false);
                 itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_item_comment_my, parent, false);
+                        .inflate(R.layout.list_item_comment, parent, false);
                 return new ViewHolderOwnReview(itemView);
             }
 
@@ -152,14 +157,14 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
-        if (mList.get(position).getAuthor().equals(mUserName)){
+        if (mList.get(position).getUserId().equals(mUserId)){
             return ITEM_TYPE_OWN;
         } else {
             return ITEM_TYPE_NORMAL;
         }
     }
 
-    public void setUserName(String username){
-        this.mUserName = username;
+    public void setUserId(String userId){
+        this.mUserId = userId;
     }
 }

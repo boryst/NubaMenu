@@ -8,12 +8,14 @@ public class Comment {
     private String author;
     private String commentText;
     private float rating;
+    private String userId;
 
     Comment(){}
-    Comment(String author, String commentText, float rating){
+    Comment(String author, String commentText, float rating, String userId){
         this.author = author;
         this.commentText = commentText;
         this.rating = rating;
+        this.userId = userId;
     }
 
     public String getAuthor() {
@@ -40,4 +42,11 @@ public class Comment {
         this.rating = rating;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
