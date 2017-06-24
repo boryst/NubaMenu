@@ -543,6 +543,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Comment comment = dataSnapshot.getValue(Comment.class);
                     if (comment.getUserId().equals(mUserId)){
+                        Timber.v("Signed in, has review");
+
 
 
                         textViewOwnReview.setVisibility(View.VISIBLE);
@@ -563,7 +565,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                         buttonWriteReview.setVisibility(View.GONE);
                     } else {
-//                        Timber.v("userId - "+mUserId);
 
                         mCommentsKey.add(0, dataSnapshot.getKey());
                         mCommentsList.add(0, comment);
@@ -671,13 +672,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
-                    Timber.v("--User - "+user.getDisplayName());
+//                    Timber.v("--User - "+user.getDisplayName());
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
                     mCommentsRecyclerAdapter.setUserId(mUserId);
 
                     buttonSignIn.setVisibility(View.GONE);
                     buttonSignOut.setVisibility(View.VISIBLE);
-                    buttonWriteReview.setVisibility(View.GONE);
+//                    buttonWriteReview.setVisibility(View.GONE);
 
                 } else {
 //                    Timber.v("--User - no user");
