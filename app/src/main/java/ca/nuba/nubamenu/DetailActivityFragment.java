@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -113,6 +114,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mChatPhotosStorageReference;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private RelativeLayout relativeLayoutOwnReview;
 
     public DetailActivityFragment() {
     }
@@ -190,6 +192,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
         buttonDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
 
+        relativeLayoutOwnReview = (RelativeLayout) rootView.findViewById(R.id.rl_own_review);
 
         ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
         ratingBarOwnRating = (RatingBar) rootView.findViewById(R.id.rb_own_rating);
@@ -208,9 +211,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             @Override
             public void onClick(View view) {
                 if (mAuthStateListener != null){
-
-//                    mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-//                    attachAuthStateListener();
                     writeComment();
                 }
             }
@@ -228,24 +228,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                                         new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                                 .build(),
                         RC_SIGN_IN);
-//                if (mAuthStateListener != null){
-//                    Timber.v("buttonSignIn.setOnClickListener != null");
-//                    attachAuthStateListener();
-//
-//                } else {
-//                    Timber.v("buttonSignIn.setOnClickListener == null");
-//                    initializeAuthListener();
-//                    attachAuthStateListener();
-//                }
+
             }
         });
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Timber.v("buttonSignOut.setOnClickListener - before");
                 AuthUI.getInstance().signOut(getActivity());
-//                Timber.v("buttonSignOut.setOnClickListener - after");
                 onSignOutCleanUp();
             }
         });
@@ -253,9 +243,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonEditReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Timber.v("ownReviewKey - "+String.valueOf(ownReviewKey)+", ownReviewText - "+String.valueOf(ownReviewText));
                 if (ownReviewKey != null && ownReviewText != null) {
                     editReview(ownReviewText, ownReviewRating, ownReviewKey);
+                }
+            }
+        });
+
+        buttonDeleteReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ownReviewKey != null){
+                    deleteReview(ownReviewKey);
                 }
             }
         });
@@ -362,6 +360,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
                 //Timber.v("commentText - "+commentText);
                 //Timber.v("commentRating - "+commentRating);
+                buttonWriteReview.setVisibility(View.GONE);
+
                 mCommentsDatabaseReference.push().setValue(comment);
 
 
@@ -401,11 +401,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         editReviewAlertBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String commentText = reviewEditText.getText().toString();
-                Timber.v("commentText - "+commentText);
+//                Timber.v("commentText - "+commentText);
                 float commentRating = reviewRatingBar.getRating();
-                Timber.v("commentRating - "+commentRating);
+//                Timber.v("commentRating - "+commentRating);
 
-//                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
 
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("author",mUsername);
@@ -413,6 +412,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 map.put("rating", commentRating);
                 map.put("userId", mUserId);
                 reviewReference.updateChildren(map);
+
+                ownReviewText = commentText;
+                ownReviewRating = commentRating;
+                textViewOwnReview.setText(commentText);
+                ratingBarOwnRating.setRating(commentRating);
 
                 dialog.dismiss();
 
@@ -429,30 +433,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         editReviewAlertBuilder.show();
     }
 
-    public void deleteReview() {
+    public void deleteReview(String reviewId) {
         deleteConfirmation = new AlertDialog.Builder(getActivity());
-        final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
+        final View container = getActivity().getLayoutInflater().inflate(R.layout.alert_delete_review, null);
         deleteConfirmation.setView(container);
-
-        final RatingBar commentRatingBar = (RatingBar) container.findViewById(R.id.rb_comment);
-        final EditText commentEditText = (EditText) container.findViewById(R.id.et_comment);
+        final DatabaseReference reviewReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews").child(reviewId);
 
 
         deleteConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String commentText = commentEditText.getText().toString();
-                float commentRating = commentRatingBar.getRating();
 
-                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
-                //Timber.v("commentText - "+commentText);
-                //Timber.v("commentRating - "+commentRating);
-                mCommentsDatabaseReference.push().setValue(comment);
-
-
-                //TODO: Move to onPause?
-                //detachAuthStateListener();
-                //TODO: Uncomment for production
-                //buttonWriteReview.setVisibility(View.GONE);
+                relativeLayoutOwnReview.setVisibility(View.GONE);
+                reviewReference.removeValue();
                 dialog.dismiss();
 
             }
@@ -460,7 +452,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         deleteConfirmation.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //detachAuthStateListener();
                 dialog.dismiss();
 
             }
@@ -513,6 +504,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     buttonEditReview.setVisibility(View.VISIBLE);
                     ratingBarOwnRating.setVisibility(View.VISIBLE);
                     textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
+                    relativeLayoutOwnReview.setVisibility(View.VISIBLE);
 
                     buttonWriteReview.setVisibility(View.GONE);
                     textViewOwnReview.setText(ownComment.getCommentText());
@@ -525,6 +517,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                 } else {
 //                    writeComment();
+                    buttonWriteReview.setVisibility(View.VISIBLE);
                 }
                 buttonSignIn.setVisibility(View.GONE);
                 buttonSignOut.setVisibility(View.VISIBLE);
@@ -539,30 +532,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.sign_out: {
-//                AuthUI.getInstance().signOut(getActivity());
-//                onSignOutCleanUp();
-////                signOutMenuItem.setVisible(false);
-//                return true;
-//            }
-//            default: {
-//                return super.onOptionsItemSelected(item);
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_detail_fragment, menu);
-//        signOutMenuItem = menu.findItem(R.id.sign_out);
-////        if (!mUserId.equals(ANONYMOUS)){
-////            signOutMenuItem.setVisible(true);
-////        }
-////        super.onCreateOptionsMenu(menu, inflater);
-//    }
 
 
 
@@ -581,6 +550,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         buttonEditReview.setVisibility(View.VISIBLE);
                         ratingBarOwnRating.setVisibility(View.VISIBLE);
                         textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
+                        relativeLayoutOwnReview.setVisibility(View.VISIBLE);
 
 
                         ownReviewKey = dataSnapshot.getKey();
@@ -590,10 +560,16 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         textViewOwnReview.setText(comment.getCommentText());
                         ratingBarOwnRating.setRating(comment.getRating());
                         textViewOwnReviewAuthor.setText(comment.getAuthor());
+
+                        buttonWriteReview.setVisibility(View.GONE);
                     } else {
+//                        Timber.v("userId - "+mUserId);
+
                         mCommentsKey.add(0, dataSnapshot.getKey());
                         mCommentsList.add(0, comment);
                         mCommentsRecyclerAdapter.notifyDataSetChanged();
+
+
                     }
                 }
 
@@ -601,11 +577,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Timber.v("--Child changed");
                     Timber.v("--onChildChanged.key - "+dataSnapshot.getKey());
+                    Timber.v("--onChildChanged.s - "+s);
+
+
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    Timber.v("--Child removed");
+                    Timber.v("--onChildRemoved");
+                    Timber.v("--onChildRemoved.key - "+dataSnapshot.getKey());
 
                 }
 
@@ -660,11 +640,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     FirebaseUser user = firebaseAuth.getCurrentUser();
 
                     if (user != null) {
-                        Timber.v("onAuthStateChanged, user != null, user - "+user.getDisplayName());
+//                        Timber.v("onAuthStateChanged, user != null, user - "+user.getDisplayName());
                         onSignedInInitialize(user.getDisplayName(), user.getUid());
 //                        writeComment();
                     } else {
-                        Timber.v("+++onAuthStateChanged, user == null");
+//                        Timber.v("+++onAuthStateChanged, user == null");
 
 
     //                    onSignOutCleanUp();
@@ -700,7 +680,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     buttonWriteReview.setVisibility(View.GONE);
 
                 } else {
-                    Timber.v("--User - no user");
+//                    Timber.v("--User - no user");
                 }
             }
         };
@@ -726,7 +706,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     private void detachAuthStateListener(){
         if (mAuthStateListener != null) {
-            Timber.v("detachAuthStateListener");
+//            Timber.v("detachAuthStateListener");
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
     }
@@ -763,7 +743,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void onSignOutCleanUp(){
-        Timber.v("onSigneOutCleanUp");
+//        Timber.v("onSigneOutCleanUp");
         Comment myComment = new Comment(mUsername, String.valueOf(textViewOwnReview.getText()), ratingBarOwnRating.getRating(), mUserId);
 
         mUsername = ANONYMOUS;
@@ -774,19 +754,22 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonDeleteReview.setVisibility(View.GONE);
         ratingBarOwnRating.setVisibility(View.GONE);
         textViewOwnReviewAuthor.setVisibility(View.GONE);
+        relativeLayoutOwnReview.setVisibility(View.GONE);
 
         buttonSignOut.setVisibility(View.GONE);
         buttonSignIn.setVisibility(View.VISIBLE);
         buttonWriteReview.setVisibility(View.GONE);
 
-        mCommentsList.add(0, myComment);
-        mCommentsKey.add(0, ownReviewKey);
-        mCommentsRecyclerAdapter.notifyDataSetChanged();
-
+        if (textViewOwnReview.getText().length() != 0) {
+            mCommentsList.add(0, myComment);
+            mCommentsKey.add(0, ownReviewKey);
+            mCommentsRecyclerAdapter.notifyDataSetChanged();
+        }
         //detachAuthStateListener();
         //mAuthStateListener = null;
 
     }
 }
 
-//TODO: Combine mCommentsKey and mCommentsList
+//TODO: 1. Combine mCommentsKey and mCommentsList
+//TODO: 2. Replace views.visibility to ReletiveLayout.setVisibility
