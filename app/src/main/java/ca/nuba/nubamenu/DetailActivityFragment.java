@@ -672,7 +672,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
-//                    Timber.v("--User - "+user.getDisplayName());
+
+                    Timber.v("--User - "+user.getDisplayName());
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
                     mCommentsRecyclerAdapter.setUserId(mUserId);
 
@@ -681,7 +682,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 //                    buttonWriteReview.setVisibility(View.GONE);
 
                 } else {
-//                    Timber.v("--User - no user");
+                    Timber.v("--User - no user");
+                    buttonWriteReview.setVisibility(View.GONE);
                 }
             }
         };
