@@ -43,8 +43,10 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import ca.nuba.nubamenu.data.NubaContract;
 import timber.log.Timber;
@@ -79,7 +81,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public static int mWebId;
 
     ImageView imageView, imageViewV, imageViewVe, imageViewGf;
-    TextView nameTextView, priceTextView, descTextView, ratingTextView;
+    TextView nameTextView, priceTextView, descTextView, ratingTextView, textViewOwnReviewAuthor;
     Button buttonWriteReview, buttonEditReview, buttonDeleteReview, buttonSignOut;
     SignInButton buttonSignIn;
     RatingBar ratingBar, ratingBarOwnRating;
@@ -89,12 +91,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private RecyclerView mRecyclerView;
     private static final int DETAIL_LOADER = 0;
     private CursorLoader cursorLoader;
-    private String mUsername, ownReviewKey;
+    private String mUsername, ownReviewKey, ownReviewText;
     private String mUserId;
     private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
     private List<Comment> mCommentsList;
-    private AlertDialog.Builder alert, editReviewAlertBuilder;
-    private float mRating;
+    private List<String> mCommentsKey;
+    private AlertDialog.Builder alert, editReviewAlertBuilder, deleteConfirmation;
+    private float mRating, ownReviewRating;
     private long numberOfComments;
 
 
@@ -139,6 +142,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
         mCommentsList = new ArrayList<>();
+        mCommentsKey = new ArrayList<>();
 //        mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUsername);
         mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUserId);
 
@@ -191,6 +195,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         ratingBarOwnRating = (RatingBar) rootView.findViewById(R.id.rb_own_rating);
 
         textViewOwnReview = (TextView) rootView.findViewById(R.id.tv_own_review);
+        textViewOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_own_author);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
 
@@ -238,19 +243,23 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Timber.v("buttonSignOut.setOnClickListener - before");
+//                Timber.v("buttonSignOut.setOnClickListener - before");
                 AuthUI.getInstance().signOut(getActivity());
-                Timber.v("buttonSignOut.setOnClickListener - after");
+//                Timber.v("buttonSignOut.setOnClickListener - after");
                 onSignOutCleanUp();
             }
         });
 
-//        buttonEditReview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                editReview();
-//            }
-//        });
+        buttonEditReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Timber.v("ownReviewKey - "+String.valueOf(ownReviewKey)+", ownReviewText - "+String.valueOf(ownReviewText));
+                if (ownReviewKey != null && ownReviewText != null) {
+                    editReview(ownReviewText, ownReviewRating, ownReviewKey);
+                }
+            }
+        });
+
         return rootView;
     }
 
@@ -377,6 +386,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     public void editReview(String reviewText, float reviewRating, String reviewId) {
+        Timber.v("EditReview");
         editReviewAlertBuilder = new AlertDialog.Builder(getActivity());
         final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
         editReviewAlertBuilder.setView(container);
@@ -391,8 +401,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         editReviewAlertBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String commentText = reviewEditText.getText().toString();
+                Timber.v("commentText - "+commentText);
                 float commentRating = reviewRatingBar.getRating();
-                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
+                Timber.v("commentRating - "+commentRating);
+
+//                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
+
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("author",mUsername);
+                map.put("commentText", commentText);
+                map.put("rating", commentRating);
+                map.put("userId", mUserId);
+                reviewReference.updateChildren(map);
+
                 dialog.dismiss();
 
             }
@@ -407,6 +428,47 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         editReviewAlertBuilder.show();
     }
+
+    public void deleteReview() {
+        deleteConfirmation = new AlertDialog.Builder(getActivity());
+        final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
+        deleteConfirmation.setView(container);
+
+        final RatingBar commentRatingBar = (RatingBar) container.findViewById(R.id.rb_comment);
+        final EditText commentEditText = (EditText) container.findViewById(R.id.et_comment);
+
+
+        deleteConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String commentText = commentEditText.getText().toString();
+                float commentRating = commentRatingBar.getRating();
+
+                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
+                //Timber.v("commentText - "+commentText);
+                //Timber.v("commentRating - "+commentRating);
+                mCommentsDatabaseReference.push().setValue(comment);
+
+
+                //TODO: Move to onPause?
+                //detachAuthStateListener();
+                //TODO: Uncomment for production
+                //buttonWriteReview.setVisibility(View.GONE);
+                dialog.dismiss();
+
+            }
+        });
+
+        deleteConfirmation.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //detachAuthStateListener();
+                dialog.dismiss();
+
+            }
+        });
+
+        deleteConfirmation.show();
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -427,12 +489,16 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                 boolean isThere = false;
                 Comment ownComment = new Comment();
+                String ownKey = new String();
 
                 for (int i = 0; i < mCommentsList.size(); i++) {
                     if (mCommentsList.get(i).getUserId().equals(mUserId)) {
                         isThere = true;
 
                         ownComment = mCommentsList.get(i);
+                        ownKey = mCommentsKey.get(i);
+
+                        mCommentsKey.remove(i);
                         mCommentsList.remove(i);
                         mCommentsRecyclerAdapter.notifyDataSetChanged();
                         break;
@@ -446,10 +512,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     buttonDeleteReview.setVisibility(View.VISIBLE);
                     buttonEditReview.setVisibility(View.VISIBLE);
                     ratingBarOwnRating.setVisibility(View.VISIBLE);
+                    textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
 
                     buttonWriteReview.setVisibility(View.GONE);
                     textViewOwnReview.setText(ownComment.getCommentText());
                     ratingBarOwnRating.setRating(ownComment.getRating());
+                    textViewOwnReviewAuthor.setText(ownComment.getAuthor());
+
+                    ownReviewKey = ownKey;
+                    ownReviewText = ownComment.getCommentText();
+                    ownReviewRating = ownComment.getRating();
+
                 } else {
 //                    writeComment();
                 }
@@ -460,13 +533,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
             } else if (resultCode == RESULT_CANCELED){
-//                getActivity().finish();
-                Timber.v("Sing in canceled!");
 
-                //TODO: Something if sign in canceled
                 detachAuthStateListener();
-//                mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
-
             }
         }
     }
@@ -501,40 +569,44 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private void initializeDatabaseReadListener(){
         if (mChildEventListener == null) {
 
-            //mFirebaseAuth.addAuthStateListener(mAuthStateListenerForUserName);
-            //Timber.v("mUsername == "+mUsername);
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Comment comment = dataSnapshot.getValue(Comment.class);
-//                    if (comment.getAuthor().equals(mUsername)){
                     if (comment.getUserId().equals(mUserId)){
+
 
                         textViewOwnReview.setVisibility(View.VISIBLE);
                         buttonDeleteReview.setVisibility(View.VISIBLE);
                         buttonEditReview.setVisibility(View.VISIBLE);
                         ratingBarOwnRating.setVisibility(View.VISIBLE);
+                        textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
+
 
                         ownReviewKey = dataSnapshot.getKey();
-                        Timber.v("key - "+dataSnapshot.getKey()+", s - "+s);
+                        ownReviewText = comment.getCommentText();
+                        ownReviewRating = comment.getRating();
+
                         textViewOwnReview.setText(comment.getCommentText());
                         ratingBarOwnRating.setRating(comment.getRating());
-                        //TODO: Uncomment for production
-                        //buttonWriteReview.setVisibility(View.GONE);
+                        textViewOwnReviewAuthor.setText(comment.getAuthor());
                     } else {
+                        mCommentsKey.add(0, dataSnapshot.getKey());
                         mCommentsList.add(0, comment);
-                        //mRating += mCommentsList.get(0).getRating();
-//                        Timber.v("mUsername @@- " + mUsername);
                         mCommentsRecyclerAdapter.notifyDataSetChanged();
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    Timber.v("--Child changed");
+                    Timber.v("--onChildChanged.key - "+dataSnapshot.getKey());
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    Timber.v("--Child removed");
+
                 }
 
                 @Override
@@ -664,6 +736,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mCommentsDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
             mCommentsList.clear();
+            mCommentsKey.clear();
         }
     }
 
@@ -700,16 +773,20 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonEditReview.setVisibility(View.GONE);
         buttonDeleteReview.setVisibility(View.GONE);
         ratingBarOwnRating.setVisibility(View.GONE);
+        textViewOwnReviewAuthor.setVisibility(View.GONE);
 
         buttonSignOut.setVisibility(View.GONE);
         buttonSignIn.setVisibility(View.VISIBLE);
-
         buttonWriteReview.setVisibility(View.GONE);
 
         mCommentsList.add(0, myComment);
+        mCommentsKey.add(0, ownReviewKey);
         mCommentsRecyclerAdapter.notifyDataSetChanged();
-        detachAuthStateListener();
-        mAuthStateListener = null;
-        Timber.v("onSigneOutCleanUp end");
+
+        //detachAuthStateListener();
+        //mAuthStateListener = null;
+
     }
 }
+
+//TODO: Combine mCommentsKey and mCommentsList
