@@ -13,7 +13,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,13 +34,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -64,36 +59,20 @@ import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
  * A placeholder fragment containing a simple view.
  */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
-    public static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
 
     public static final String ANONYMOUS = "anonymous";
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
-    public static final String FRIENDLY_MSG_LENGTH_KEY = "friendly_msg_length";
     public static final int RC_SIGN_IN = 1;
-    private static final int RC_PHOTO_PICKER = 2;
 
     Boolean v, ve, gf;
-    String name, desc, page, picturePath;
     Double price;
-    int  tabPosition;
-    float numStars;
-    float numStarsStatic, numStarsStatic2;
-    int numRatings;
+
     public static int mWebId;
 
-    ImageView imageView, imageViewV, imageViewVe, imageViewGf;
-    TextView nameTextView, priceTextView, descTextView, ratingTextView, textViewOwnReviewAuthor;
-    Button buttonWriteReview, buttonEditReview, buttonDeleteReview, buttonSignOut;
-    SignInButton buttonSignIn;
-    RatingBar ratingBar, ratingBarOwnRating;
-    TextView textViewOwnReview;
     MenuItem signOutMenuItem;
 
-    private RecyclerView mRecyclerView;
     private static final int DETAIL_LOADER = 0;
     private CursorLoader cursorLoader;
-    private String mUsername, ownReviewKey, ownReviewText;
-    private String mUserId;
+    private String mUsername, mUserId, ownReviewKey, ownReviewText, name, desc, picturePath;
     private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
     private List<Comment> mCommentsList;
     private List<String> mCommentsKey;
@@ -101,6 +80,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private float mRating, ownReviewRating;
     private long numberOfComments;
 
+    //Views
+    private ImageView imageView, imageViewV, imageViewVe, imageViewGf;
+    private TextView nameTextView, priceTextView, descTextView, ratingTextView, textViewOwnReviewAuthor, textViewOwnReview;
+    private Button buttonWriteReview, buttonEditReview, buttonDeleteReview, buttonSignOut;
+    private SignInButton buttonSignIn;
+    private RatingBar ratingBar, ratingBarOwnRating;
+    private RecyclerView mRecyclerView;
 
     //Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -111,9 +97,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseAuth.AuthStateListener mAuthStateListenerForUserName;
-    private FirebaseStorage mFirebaseStorage;
-    private StorageReference mChatPhotosStorageReference;
-    private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private RelativeLayout relativeLayoutOwnReview;
 
     public DetailActivityFragment() {
@@ -129,23 +112,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         //Initialize firabase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseStorage = FirebaseStorage.getInstance();
-        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
         mWebId = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_WEB_ID_EXTRA, 0);
         mCommentsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews");
-        mMenuItemAvgRatingReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("avg_rating");
+        mMenuItemAvgRatingReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("avgRating");
 
         initializeAuthListener();
 
         initializeAuthListenerForUserId();
         attachAuthListenerForUserId();
 
-
-
         mCommentsList = new ArrayList<>();
         mCommentsKey = new ArrayList<>();
-//        mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUsername);
         mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUserId);
 
         initializeDatabaseReadListener();
@@ -153,8 +131,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         initializeAvgRatingReadListener();
         attachAvgRatingReadListener();
-
-
 
 
         mCommentsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -261,11 +237,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         return rootView;
     }
 
-    public static BigDecimal round(float d, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd;
-    }
 
 
 
@@ -299,7 +270,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 /* Assign data to views*/
             File img = new File(getActivity().getFilesDir() + "/" + picturePath);
             if (!img.exists()){
-                Log.v(LOG_TAG, "Image "+picturePath+" does not exist");
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
                 Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(imageView);
             } else {
@@ -445,6 +415,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                 relativeLayoutOwnReview.setVisibility(View.GONE);
                 reviewReference.removeValue();
+                buttonWriteReview.setVisibility(View.VISIBLE);
                 dialog.dismiss();
 
             }
@@ -610,8 +581,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         AvgRating avgRating = dataSnapshot.getValue(AvgRating.class);
                         if (avgRating != null) {
 
-                            mRating = avgRating.getCurrent_avg_rating();
-                            ratingTextView.setText(String.valueOf(avgRating.getNum_of_ratings()));
+                            mRating = avgRating.getCurrentAvgRating();
+                            ratingTextView.setText(String.valueOf(avgRating.getNumOfRatings()));
                             ratingBar.setRating(mRating);
                         } else {
                             Timber.v("No data in avgRating");
@@ -709,7 +680,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     private void detachAuthStateListener(){
         if (mAuthStateListener != null) {
-//            Timber.v("detachAuthStateListener");
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
     }
@@ -730,6 +700,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         }
     }
 
+    private void detachAuthStateListenerForUserId(){
+        if (mAuthStateListenerForUserName != null){
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListenerForUserName);
+        }
+    }
+
     private void terminateAuthStateListener(){
         if (mAuthStateListener != null) {
             mAuthStateListener = null;
@@ -740,13 +716,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private void onSignedInInitialize(String username, String userId){
         mUsername = username;
         mUserId = userId;
-//        if (signOutMenuItem != null) {
-//            signOutMenuItem.setVisible(true);
-//        }
     }
 
     private void onSignOutCleanUp(){
-//        Timber.v("onSigneOutCleanUp");
         Comment myComment = new Comment(mUsername, String.valueOf(textViewOwnReview.getText()), ratingBarOwnRating.getRating(), mUserId);
 
         mUsername = ANONYMOUS;
@@ -768,9 +740,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mCommentsKey.add(0, ownReviewKey);
             mCommentsRecyclerAdapter.notifyDataSetChanged();
         }
-        //detachAuthStateListener();
-        //mAuthStateListener = null;
+    }
 
+    @Override
+    public void onStop() {
+        detachAuthStateListener();
+        detachAvgRatingReadListener();
+        detachDatabaseReadListener();
+        detachAuthStateListenerForUserId();
+        super.onStop();
     }
 }
 

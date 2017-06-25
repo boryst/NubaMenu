@@ -8,28 +8,28 @@ package ca.nuba.nubamenu;
 public class AvgRating {
 
 
-    private float current_avg_rating;
-    private int num_of_ratings;
+    private float currentAvgRating;
+    private int numOfRatings;
 
     AvgRating(){}
-    AvgRating(float current_avg_rating, int num_of_ratings){
-        this.current_avg_rating = current_avg_rating;
-        this.num_of_ratings = num_of_ratings;
+    AvgRating(float currentAvgRating, int numOfRatings){
+        this.currentAvgRating = currentAvgRating;
+        this.numOfRatings = numOfRatings;
     }
-    public float getCurrent_avg_rating() {
-        return current_avg_rating;
-    }
-
-    public void setCurrent_avg_rating(float current_avg_rating) {
-        this.current_avg_rating = current_avg_rating;
+    public float getCurrentAvgRating() {
+        return currentAvgRating;
     }
 
-    public int getNum_of_ratings() {
-        return num_of_ratings;
+    public void setCurrentAvgRating(float currentAvgRating) {
+        this.currentAvgRating = currentAvgRating;
     }
 
-    public void setNum_of_ratings(int num_of_ratings) {
-        this.num_of_ratings = num_of_ratings;
+    public int getNumOfRatings() {
+        return numOfRatings;
+    }
+
+    public void setNumOfRatings(int numOfRatings) {
+        this.numOfRatings = numOfRatings;
     }
 
 }
