@@ -14,7 +14,6 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,41 +55,44 @@ import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Menu item details
  */
+
+//TODO: refactor names
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    public static final String ANONYMOUS = "anonymous";
-    public static final int RC_SIGN_IN = 1;
+    private static final String ANONYMOUS = "anonymous";
+    private static final int RC_SIGN_IN = 1;
+    private static final int DETAIL_LOADER = 0;
 
-    Boolean v, ve, gf;
-    Double price;
+    //Menu details variables
+//    private Boolean v, ve, gf;
+//    private Double price;
+//    private String name, desc, picturePath;
 
     public static int mWebId;
 
-    MenuItem signOutMenuItem;
-
-    private static final int DETAIL_LOADER = 0;
-    private CursorLoader cursorLoader;
-    private String mUsername, mUserId, ownReviewKey, ownReviewText, name, desc, picturePath;
-    private CommentsRecyclerAdapter mCommentsRecyclerAdapter;
-    private List<Comment> mCommentsList;
-    private List<String> mCommentsKey;
-    private AlertDialog.Builder alert, editReviewAlertBuilder, deleteConfirmation;
+//    private CursorLoader cursorLoader;
+    private String mUsername, mUserId, ownReviewKey, ownReviewText;
+    private ReviewsRecyclerAdapter mReviewsRecyclerAdapter;
+    private List<Review> mReviewsList;
+    private List<String> mReviewsKey;
+//    private AlertDialog.Builder alert, editReviewAlertBuilder, deleteConfirmation;
     private float mRating, ownReviewRating;
-    private long numberOfComments;
+//    private long numberOfComments;
 
     //Views
-    private ImageView imageView, imageViewV, imageViewVe, imageViewGf;
+    //TODO: shorten views names
+    private ImageView ivPicture, ivV, ivVe, ivGf;
     private TextView nameTextView, priceTextView, descTextView, ratingTextView, textViewOwnReviewAuthor, textViewOwnReview;
     private Button buttonWriteReview, buttonEditReview, buttonDeleteReview, buttonSignOut;
     private SignInButton buttonSignIn;
     private RatingBar ratingBar, ratingBarOwnRating;
-    private RecyclerView mRecyclerView;
+//    private RecyclerView mRecyclerView;
 
     //Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference;
+    private DatabaseReference mReviewsDatabaseReference;
     private DatabaseReference mMenuItemAvgRatingReference;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueAvgRatingListener;
@@ -114,7 +116,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mWebId = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_WEB_ID_EXTRA, 0);
-        mCommentsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews");
+        mReviewsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews");
         mMenuItemAvgRatingReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("avgRating");
 
         initializeAuthListener();
@@ -122,9 +124,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         initializeAuthListenerForUserId();
         attachAuthListenerForUserId();
 
-        mCommentsList = new ArrayList<>();
-        mCommentsKey = new ArrayList<>();
-        mCommentsRecyclerAdapter = new CommentsRecyclerAdapter(getActivity(), mCommentsList, mUserId);
+        mReviewsList = new ArrayList<>();
+        mReviewsKey = new ArrayList<>();
+        mReviewsRecyclerAdapter = new ReviewsRecyclerAdapter(getActivity(), mReviewsList, mUserId);
 
         initializeDatabaseReadListener();
         attachDatabaseReadListener();
@@ -133,17 +135,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         attachAvgRatingReadListener();
 
 
-        mCommentsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                numberOfComments = dataSnapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        mReviewsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                numberOfComments = dataSnapshot.getChildrenCount();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
     }
@@ -152,10 +154,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        imageView = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
-        imageViewV = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
-        imageViewVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
-        imageViewGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
+        ivPicture = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
+        ivV = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
+        ivVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
+        ivGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
 
         nameTextView = (TextView) rootView.findViewById(R.id.textViewDetailName);
         priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
@@ -164,7 +166,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         buttonSignIn = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
         buttonSignOut = (Button) rootView.findViewById(R.id.btn_sign_out);
-        buttonWriteReview = (Button) rootView.findViewById(R.id.btn_comment);
+        buttonWriteReview = (Button) rootView.findViewById(R.id.btn_fragment_detail_write_review);
         buttonEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
         buttonDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
 
@@ -176,9 +178,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         textViewOwnReview = (TextView) rootView.findViewById(R.id.tv_own_review);
         textViewOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_own_author);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comments_recyclerview);
+        RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_fragment_detail_reviews);
 
-        mRecyclerView.setAdapter(mCommentsRecyclerAdapter);
+        mRecyclerView.setAdapter(mReviewsRecyclerAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -187,7 +189,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             @Override
             public void onClick(View view) {
                 if (mAuthStateListener != null){
-                    writeComment();
+                    writeReview();
                 }
             }
         });
@@ -243,7 +245,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        cursorLoader = new CursorLoader(
+        CursorLoader cursorLoader = new CursorLoader(
                 getActivity(),
                 NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_ID_EXTRA, 0)),
                 Utility.NUBA_MENU_PROJECTION,
@@ -257,46 +259,44 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null){
             cursor.moveToFirst();
-//            mCommentsDatabaseReference = mFirebaseDatabase.getReference().child(String.valueOf(cursor.getInt(Utility.COL_NUBA_WEB_ID)));
 
-            picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
-            name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
-            price = cursor.getDouble(Utility.COL_NUBA_MENU_PRICE);
-            v = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN));
-            ve = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN));
-            gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
-            desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
+            String picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
+            String name = cursor.getString(Utility.COL_NUBA_MENU_NAME);
+            Double price = cursor.getDouble(Utility.COL_NUBA_MENU_PRICE);
+            boolean v = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGETARIAN));
+            boolean ve = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN));
+            boolean gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
+            String desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
 
 /* Assign data to views*/
             File img = new File(getActivity().getFilesDir() + "/" + picturePath);
             if (!img.exists()){
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
-                Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(imageView);
+                Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(ivPicture);
             } else {
-                Picasso.with(getActivity()).load(img).into(imageView);
+                Picasso.with(getActivity()).load(img).into(ivPicture);
             }
 
             nameTextView.setText(name);
-            //priceTextView.setText(String.valueOf(price));
             priceTextView.setText("$" +String.format(Locale.CANADA, "%.2f", price));
 
 
             if (v){
-                Picasso.with(getActivity()).load(R.drawable.v).into(imageViewV);
+                Picasso.with(getActivity()).load(R.drawable.v).into(ivV);
             } else{
-                imageViewV.setVisibility(View.GONE);
+                ivV.setVisibility(View.GONE);
             }
 
             if (ve){
-                Picasso.with(getActivity()).load(R.drawable.ve).into(imageViewVe);
+                Picasso.with(getActivity()).load(R.drawable.ve).into(ivVe);
             } else{
-                imageViewVe.setVisibility(View.GONE);
+                ivVe.setVisibility(View.GONE);
             }
 
             if (gf){
-                Picasso.with(getActivity()).load(R.drawable.gf).into(imageViewGf);
+                Picasso.with(getActivity()).load(R.drawable.gf).into(ivGf);
             } else{
-                imageViewGf.setVisibility(View.GONE);
+                ivGf.setVisibility(View.GONE);
             }
 
             descTextView.setText(desc);
@@ -313,42 +313,29 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void writeComment() {
-        alert = new AlertDialog.Builder(getActivity());
-        final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
+    public void writeReview() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        final View container = getActivity().getLayoutInflater().inflate(R.layout.write_review, null);
         alert.setView(container);
 
-        final RatingBar commentRatingBar = (RatingBar) container.findViewById(R.id.rb_comment);
-        final EditText commentEditText = (EditText) container.findViewById(R.id.et_comment);
+        final RatingBar reviewRatingBar = (RatingBar) container.findViewById(R.id.rb_write_review_rating);
+        final EditText reviewEditText = (EditText) container.findViewById(R.id.et_write_review_text);
 
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String commentText = commentEditText.getText().toString();
-                float commentRating = commentRatingBar.getRating();
-
-                final Comment comment = new Comment(mUsername, commentText, commentRating, mUserId);
-                //Timber.v("commentText - "+commentText);
-                //Timber.v("commentRating - "+commentRating);
+                String reviewText = reviewEditText.getText().toString();
+                float reviewRating = reviewRatingBar.getRating();
+                final Review review = new Review(mUsername, reviewText, reviewRating, mUserId);
                 buttonWriteReview.setVisibility(View.GONE);
-
-                mCommentsDatabaseReference.push().setValue(comment);
-
-
-                //TODO: Move to onPause?
-                //detachAuthStateListener();
-                //TODO: Uncomment for production
-                //buttonWriteReview.setVisibility(View.GONE);
+                mReviewsDatabaseReference.push().setValue(review);
                 dialog.dismiss();
-
             }
         });
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //detachAuthStateListener();
                 dialog.dismiss();
-
             }
         });
 
@@ -357,12 +344,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     public void editReview(String reviewText, float reviewRating, String reviewId) {
         Timber.v("EditReview");
-        editReviewAlertBuilder = new AlertDialog.Builder(getActivity());
-        final View container = getActivity().getLayoutInflater().inflate(R.layout.leave_comment, null);
+        AlertDialog.Builder editReviewAlertBuilder = new AlertDialog.Builder(getActivity());
+        final View container = getActivity().getLayoutInflater().inflate(R.layout.write_review, null);
         editReviewAlertBuilder.setView(container);
 
-        final RatingBar reviewRatingBar = (RatingBar) container.findViewById(R.id.rb_comment);
-        final EditText reviewEditText = (EditText) container.findViewById(R.id.et_comment);
+        final RatingBar reviewRatingBar = (RatingBar) container.findViewById(R.id.rb_write_review_rating);
+        final EditText reviewEditText = (EditText) container.findViewById(R.id.et_write_review_text);
         reviewRatingBar.setRating(reviewRating);
         reviewEditText.setText(reviewText);
 
@@ -370,23 +357,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         editReviewAlertBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String commentText = reviewEditText.getText().toString();
-//                Timber.v("commentText - "+commentText);
-                float commentRating = reviewRatingBar.getRating();
-//                Timber.v("commentRating - "+commentRating);
+                String reviewText = reviewEditText.getText().toString();
+                float reviewRating = reviewRatingBar.getRating();
 
 
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("author",mUsername);
-                map.put("commentText", commentText);
-                map.put("rating", commentRating);
+                map.put("reviewText", reviewText);
+                map.put("rating", reviewRating);
                 map.put("userId", mUserId);
                 reviewReference.updateChildren(map);
 
-                ownReviewText = commentText;
-                ownReviewRating = commentRating;
-                textViewOwnReview.setText(commentText);
-                ratingBarOwnRating.setRating(commentRating);
+                ownReviewText = reviewText;
+                ownReviewRating = reviewRating;
+                textViewOwnReview.setText(reviewText);
+                ratingBarOwnRating.setRating(reviewRating);
 
                 dialog.dismiss();
 
@@ -404,7 +389,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     public void deleteReview(String reviewId) {
-        deleteConfirmation = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder deleteConfirmation = new AlertDialog.Builder(getActivity());
         final View container = getActivity().getLayoutInflater().inflate(R.layout.alert_delete_review, null);
         deleteConfirmation.setView(container);
         final DatabaseReference reviewReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews").child(reviewId);
@@ -450,19 +435,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             if (resultCode == RESULT_OK){
 
                 boolean isThere = false;
-                Comment ownComment = new Comment();
+                Review ownReview = new Review();
                 String ownKey = new String();
 
-                for (int i = 0; i < mCommentsList.size(); i++) {
-                    if (mCommentsList.get(i).getUserId().equals(mUserId)) {
+                for (int i = 0; i < mReviewsList.size(); i++) {
+                    if (mReviewsList.get(i).getUserId().equals(mUserId)) {
                         isThere = true;
 
-                        ownComment = mCommentsList.get(i);
-                        ownKey = mCommentsKey.get(i);
+                        ownReview = mReviewsList.get(i);
+                        ownKey = mReviewsKey.get(i);
 
-                        mCommentsKey.remove(i);
-                        mCommentsList.remove(i);
-                        mCommentsRecyclerAdapter.notifyDataSetChanged();
+                        mReviewsKey.remove(i);
+                        mReviewsList.remove(i);
+                        mReviewsRecyclerAdapter.notifyDataSetChanged();
                         break;
                     }
                 }
@@ -478,16 +463,16 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     relativeLayoutOwnReview.setVisibility(View.VISIBLE);
 
                     buttonWriteReview.setVisibility(View.GONE);
-                    textViewOwnReview.setText(ownComment.getCommentText());
-                    ratingBarOwnRating.setRating(ownComment.getRating());
-                    textViewOwnReviewAuthor.setText(ownComment.getAuthor());
+                    textViewOwnReview.setText(ownReview.getReviewText());
+                    ratingBarOwnRating.setRating(ownReview.getRating());
+                    textViewOwnReviewAuthor.setText(ownReview.getAuthor());
 
                     ownReviewKey = ownKey;
-                    ownReviewText = ownComment.getCommentText();
-                    ownReviewRating = ownComment.getRating();
+                    ownReviewText = ownReview.getReviewText();
+                    ownReviewRating = ownReview.getRating();
 
                 } else {
-//                    writeComment();
+//                    writeReview();
                     buttonWriteReview.setVisibility(View.VISIBLE);
                 }
                 buttonSignIn.setVisibility(View.GONE);
@@ -512,11 +497,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Comment comment = dataSnapshot.getValue(Comment.class);
-                    if (comment.getUserId().equals(mUserId)){
+                    Review review = dataSnapshot.getValue(Review.class);
+                    if (review.getUserId().equals(mUserId)){
                         Timber.v("Signed in, has review");
-
-
 
                         textViewOwnReview.setVisibility(View.VISIBLE);
                         buttonDeleteReview.setVisibility(View.VISIBLE);
@@ -527,21 +510,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
                         ownReviewKey = dataSnapshot.getKey();
-                        ownReviewText = comment.getCommentText();
-                        ownReviewRating = comment.getRating();
+                        ownReviewText = review.getReviewText();
+                        ownReviewRating = review.getRating();
 
-                        textViewOwnReview.setText(comment.getCommentText());
-                        ratingBarOwnRating.setRating(comment.getRating());
-                        textViewOwnReviewAuthor.setText(comment.getAuthor());
+                        textViewOwnReview.setText(review.getReviewText());
+                        ratingBarOwnRating.setRating(review.getRating());
+                        textViewOwnReviewAuthor.setText(review.getAuthor());
 
                         buttonWriteReview.setVisibility(View.GONE);
                     } else {
 
-                        mCommentsKey.add(0, dataSnapshot.getKey());
-                        mCommentsList.add(0, comment);
-                        mCommentsRecyclerAdapter.notifyDataSetChanged();
-
-
+                        mReviewsKey.add(0, dataSnapshot.getKey());
+                        mReviewsList.add(0, review);
+                        mReviewsRecyclerAdapter.notifyDataSetChanged();
                     }
                 }
 
@@ -550,8 +531,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     Timber.v("--Child changed");
                     Timber.v("--onChildChanged.key - "+dataSnapshot.getKey());
                     Timber.v("--onChildChanged.s - "+s);
-
-
                 }
 
                 @Override
@@ -608,27 +587,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mAuthStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                    Timber.v("onAuthStateChanged");
                     FirebaseUser user = firebaseAuth.getCurrentUser();
-
                     if (user != null) {
-//                        Timber.v("onAuthStateChanged, user != null, user - "+user.getDisplayName());
                         onSignedInInitialize(user.getDisplayName(), user.getUid());
-//                        writeComment();
-                    } else {
-//                        Timber.v("+++onAuthStateChanged, user == null");
-
-
-    //                    onSignOutCleanUp();
-
-//                        startActivityForResult(
-//                                AuthUI.getInstance()
-//                                        .createSignInIntentBuilder()
-//                                        .setIsSmartLockEnabled(true)
-//                                        .setProviders(Arrays.asList(
-//                                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-//                                        .build(),
-//                                RC_SIGN_IN);
                     }
                 }
             };
@@ -646,7 +607,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                     Timber.v("--User - "+user.getDisplayName());
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
-                    mCommentsRecyclerAdapter.setUserId(mUserId);
+                    mReviewsRecyclerAdapter.setUserId(mUserId);
 
                     buttonSignIn.setVisibility(View.GONE);
                     buttonSignOut.setVisibility(View.VISIBLE);
@@ -669,7 +630,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void attachDatabaseReadListener(){
-        mCommentsDatabaseReference.addChildEventListener(mChildEventListener);
+        mReviewsDatabaseReference.addChildEventListener(mChildEventListener);
     }
 
     private void attachAuthListenerForUserId() {
@@ -686,10 +647,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     private void detachDatabaseReadListener(){
         if (mChildEventListener != null){
-            mCommentsDatabaseReference.removeEventListener(mChildEventListener);
+            mReviewsDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
-            mCommentsList.clear();
-            mCommentsKey.clear();
+            mReviewsList.clear();
+            mReviewsKey.clear();
         }
     }
 
@@ -719,7 +680,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void onSignOutCleanUp(){
-        Comment myComment = new Comment(mUsername, String.valueOf(textViewOwnReview.getText()), ratingBarOwnRating.getRating(), mUserId);
+        Review myReview = new Review(mUsername, String.valueOf(textViewOwnReview.getText()), ratingBarOwnRating.getRating(), mUserId);
 
         mUsername = ANONYMOUS;
         mUserId = ANONYMOUS;
@@ -736,9 +697,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonWriteReview.setVisibility(View.GONE);
 
         if (textViewOwnReview.getText().length() != 0) {
-            mCommentsList.add(0, myComment);
-            mCommentsKey.add(0, ownReviewKey);
-            mCommentsRecyclerAdapter.notifyDataSetChanged();
+            mReviewsList.add(0, myReview);
+            mReviewsKey.add(0, ownReviewKey);
+            mReviewsRecyclerAdapter.notifyDataSetChanged();
         }
     }
 
@@ -752,5 +713,5 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 }
 
-//TODO: 1. Combine mCommentsKey and mCommentsList
+//TODO: 1. Combine mReviewsKey and mReviewsList
 //TODO: 2. Replace views.visibility to ReletiveLayout.setVisibility

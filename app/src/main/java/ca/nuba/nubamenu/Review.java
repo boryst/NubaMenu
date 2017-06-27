@@ -1,19 +1,18 @@
 package ca.nuba.nubamenu;
 
 /**
- * Created by Borys on 2017-06-04.
+ * Review fields for Firebase
  */
-
-public class Comment {
+public class Review {
     private String author;
-    private String commentText;
+    private String reviewText;
     private float rating;
     private String userId;
 
-    Comment(){}
-    Comment(String author, String commentText, float rating, String userId){
+    Review(){}
+    Review(String author, String reviewText, float rating, String userId){
         this.author = author;
-        this.commentText = commentText;
+        this.reviewText = reviewText;
         this.rating = rating;
         this.userId = userId;
     }
@@ -26,12 +25,12 @@ public class Comment {
         this.author = author;
     }
 
-    public String getCommentText() {
-        return commentText;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
     public float getRating() {

@@ -16,12 +16,12 @@ import java.util.List;
 import timber.log.Timber;
 
 /**
- * Created by Borys on 2017-06-04.
+ * Adapter for reviews in DetailFragment
  */
 
-public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
+public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
     private Context mContext;
-    private List<Comment> mList;
+    private List<Review> mList;
     private String mUserName;
     private String mUserId;
     private int lengthFilterSize = 100;
@@ -36,9 +36,9 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
         public ViewHolderNormal (View view) {
             super(view);
-            author = (TextView) view.findViewById(R.id.comment_author);
-            text     = (TextView) view.findViewById(R.id.comment_text);
-            ratingBar = (RatingBar) view.findViewById(R.id.comments_rating_bar);
+            author = (TextView) view.findViewById(R.id.tv_list_item_review_author);
+            text     = (TextView) view.findViewById(R.id.tv_list_item_review_text);
+            ratingBar = (RatingBar) view.findViewById(R.id.rb_list_item_review_rating);
         }
     }
 
@@ -48,14 +48,14 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
         public ViewHolderOwnReview(View view) {
             super(view);
-            author = (TextView) view.findViewById(R.id.comment_author);
-            text     = (TextView) view.findViewById(R.id.comment_text);
-            ratingBar = (RatingBar) view.findViewById(R.id.comments_rating_bar);
+            author = (TextView) view.findViewById(R.id.tv_list_item_review_author);
+            text     = (TextView) view.findViewById(R.id.tv_list_item_review_text);
+            ratingBar = (RatingBar) view.findViewById(R.id.rb_list_item_review_rating);
 
         }
     }
 
-    public CommentsRecyclerAdapter(Context context, List<Comment> list, String userId){
+    public ReviewsRecyclerAdapter(Context context, List<Review> list, String userId){
         this.mContext = context;
         this.mList = list;
         this.mUserId = userId;
@@ -66,21 +66,21 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        final Comment comment = mList.get(position);
+        final Review review = mList.get(position);
         switch (holder.getItemViewType()){
             case ITEM_TYPE_NORMAL:{
                 final ViewHolderNormal viewHolderNormal = (ViewHolderNormal) holder;
 
                 viewHolderNormal.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-                viewHolderNormal.author.setText(comment.getAuthor());
-                viewHolderNormal.text.setText(comment.getCommentText());
-                viewHolderNormal.ratingBar.setRating(comment.getRating());
+                viewHolderNormal.author.setText(review.getAuthor());
+                viewHolderNormal.text.setText(review.getReviewText());
+                viewHolderNormal.ratingBar.setRating(review.getRating());
 
                 viewHolderNormal.text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
-                            lengthFilterSize = comment.getCommentText().length();
+                        if (lengthFilterSize < review.getReviewText().length() && lengthFilterSize == 100){
+                            lengthFilterSize = review.getReviewText().length();
                             Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
 
                         } else if (lengthFilterSize != 100){
@@ -88,7 +88,7 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
                             Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
                         }
                         viewHolderNormal.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-                        viewHolderNormal.text.setText(comment.getCommentText());
+                        viewHolderNormal.text.setText(review.getReviewText());
                         Timber.v("FilterSize - "+String.valueOf(lengthFilterSize));
 
                     }
@@ -100,20 +100,20 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
                 final ViewHolderOwnReview viewHolderOwnReview = (ViewHolderOwnReview) holder;
 
                 viewHolderOwnReview.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-                viewHolderOwnReview.author.setText(comment.getAuthor());
-                viewHolderOwnReview.text.setText(comment.getCommentText());
-                viewHolderOwnReview.ratingBar.setRating(comment.getRating());
+                viewHolderOwnReview.author.setText(review.getAuthor());
+                viewHolderOwnReview.text.setText(review.getReviewText());
+                viewHolderOwnReview.ratingBar.setRating(review.getRating());
 
                 viewHolderOwnReview.text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (lengthFilterSize < comment.getCommentText().length() && lengthFilterSize == 100){
-                            lengthFilterSize = comment.getCommentText().length();
+                        if (lengthFilterSize < review.getReviewText().length() && lengthFilterSize == 100){
+                            lengthFilterSize = review.getReviewText().length();
                         } else if (lengthFilterSize != 100){
                             lengthFilterSize = 100;
                         }
                         viewHolderOwnReview.text.setFilters(new InputFilter[]{new InputFilter.LengthFilter(lengthFilterSize)});
-                        viewHolderOwnReview.text.setText(comment.getCommentText());
+                        viewHolderOwnReview.text.setText(review.getReviewText());
                     }
                 });
                 break;
@@ -132,22 +132,22 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<ViewHolder>{
         switch (viewType) {
             case ITEM_TYPE_NORMAL: {
                 itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_item_comment, parent, false);
+                        .inflate(R.layout.list_item_review, parent, false);
                 return new ViewHolderNormal(itemView);
 
             }
             case ITEM_TYPE_OWN: {
 //                TODO: Uncomment if need unique view
 //                itemView = LayoutInflater.from(parent.getContext())
-//                        .inflate(R.layout.list_item_comment_my, parent, false);
+//                        .inflate(R.layout.list_item_my_review, parent, false);
                 itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_item_comment, parent, false);
+                        .inflate(R.layout.list_item_review, parent, false);
                 return new ViewHolderOwnReview(itemView);
             }
 
             default:{
                 itemView = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.list_item_comment, parent, false);
+                                .inflate(R.layout.list_item_review, parent, false);
                 return new ViewHolderNormal(itemView);
 
             }

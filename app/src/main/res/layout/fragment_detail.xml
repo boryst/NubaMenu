@@ -133,7 +133,7 @@
                 android:visibility="gone"
                 />
             <Button
-                android:id="@+id/btn_comment"
+                android:id="@+id/btn_fragment_detail_write_review"
                 android:text="Write a review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/comments_recyclerview"
+            android:id="@+id/rv_fragment_detail_reviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
