@@ -8,8 +8,6 @@ import android.view.MenuItem;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-
 import timber.log.Timber;
 
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
@@ -27,25 +25,6 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this).setIndicatorsEnabled(true);
         Timber.plant(new Timber.DebugTree());
 
-        //Log.v(LOG_TAG, "Token: "+ FirebaseInstanceId.getInstance().getToken());
-
-//        Cursor cursor = this.getContentResolver().query(
-//                NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(1),
-//                Utility.NUBA_MENU_PROJECTION,
-//                null,
-//                null,
-//                null);
-//        cursor.moveToFirst();
-//        Log.v(LOG_TAG, "--Cursor"+String.valueOf(cursor.getString(Utility.COL_NUBA_MENU_NAME)));
-
-
-        File dirFiles = getFilesDir();
-        int i = 1;
-        for (String strFile : dirFiles.list()) {
-            //Log.v(LOG_TAG, "Direcroty file "+i+" - "+strFile);
-            i+=1;
-
-        }
         setTitle(getString(R.string.main_activity_title));
 
         if (getSupportActionBar() != null){
@@ -54,59 +33,6 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setIcon(R.drawable.nuba_logo);
         //getSupportActionBar().setHomeButtonEnabled(true);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        //Log.v(LOG_TAG, "Query - "+ sNubaMezzesWithLike)
-/** Only first pages of each type of menu*/
-/*        Cursor mCursor = this.getContentResolver().query(
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                new String[]{NubaContract.NubaMenuEntry.COLUMN_ICON_PATH},
-                sNubaMezzesWithLike,
-                new String[]{"lunchMezze","dinnerColdMezze","brunchAll"},
-                null);*/
-/** Only lunchMezze */
-/*        Cursor mCursor = this.getContentResolver().query(
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                new String[]{NubaContract.NubaMenuEntry.COLUMN_ICON_PATH},
-                Utility.sNubaMenuWithLike,
-                new String[]{"lunchMezze"},
-                null);*/
-/** All menu */
-/**        Cursor mCursor = this.getContentResolver().query(
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                new String[]{NubaContract.NubaMenuEntry.COLUMN_ICON_PATH},
-                null,
-                null,
-                null);
-
-        if (mCursor != null) {
-            Log.v(LOG_TAG, "Cursor size - "+mCursor.getCount());
-            mCursor.moveToPosition(-1);
-
-            while (mCursor.moveToNext()){
-                    //Log.v(LOG_TAG, "image "+mCursor.getPosition()+" - "+mCursor.getString(0));
-                    File img = new File(this.getFilesDir() + "/" + Utility.imageNameCutter(mCursor.getString(0)));
-                    if (!img.exists()) {
-                        Log.v(LOG_TAG, "File "+Utility.imageNameCutter(mCursor.getString(0))+" does not exist");
-                        Utility.imageDownload(this, "http://boryst.com/" + mCursor.getString(0), Utility.imageNameCutter(mCursor.getString(0)));
-                    }
-//                else {
-//                    img.delete();
-//                }
-
-            }
-
-//            mCursor.moveToFirst();
-//            File img = new File(this.getFilesDir() + "/" + Utility.imageNameCutter(mCursor.getString(1)));
-//            if (!img.exists()) {
-//                Log.v(LOG_TAG, "File "+Utility.imageNameCutter(mCursor.getString(1))+"does not exist");
-//                Utility.imageDownload(this, "http://boryst.com/" + mCursor.getString(1), Utility.imageNameCutter(mCursor.getString(1)));
-//            }
-
-            mCursor.close();
-        }*/
-
-
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
         editor.putString(FILTER_VEGETARIAN, null);

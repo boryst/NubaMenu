@@ -84,10 +84,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     //Views
     //TODO: shorten views names
     private ImageView ivPicture, ivV, ivVe, ivGf;
-    private TextView nameTextView, priceTextView, descTextView, ratingTextView, textViewOwnReviewAuthor, textViewOwnReview;
-    private Button buttonWriteReview, buttonEditReview, buttonDeleteReview, buttonSignOut;
+    private TextView nameTextView, priceTextView, descTextView, ratingTextView, tvOwnReviewAuthor, tvOwnReviewText;
+    private Button buttonWriteReview, btnOwnEditReview, btnOwnDeleteReview, buttonSignOut;
     private SignInButton buttonSignIn;
-    private RatingBar ratingBar, ratingBarOwnRating;
+    private RatingBar ratingBar, rbOwnReviewRaring;
 //    private RecyclerView mRecyclerView;
 
     //Firebase instance variables
@@ -99,7 +99,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseAuth.AuthStateListener mAuthStateListenerForUserName;
-    private RelativeLayout relativeLayoutOwnReview;
+    private RelativeLayout rlOwnReview;
 
     public DetailActivityFragment() {
     }
@@ -167,16 +167,20 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         buttonSignIn = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
         buttonSignOut = (Button) rootView.findViewById(R.id.btn_sign_out);
         buttonWriteReview = (Button) rootView.findViewById(R.id.btn_fragment_detail_write_review);
-        buttonEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
-        buttonDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
 
-        relativeLayoutOwnReview = (RelativeLayout) rootView.findViewById(R.id.rl_own_review);
+        //My review views
+        rlOwnReview = (RelativeLayout) rootView.findViewById(R.id.rl_own_review);
+        tvOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_own_author);
+        tvOwnReviewText = (TextView) rootView.findViewById(R.id.tv_own_review);
+        rbOwnReviewRaring = (RatingBar) rootView.findViewById(R.id.rb_own_rating);
+        btnOwnEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
+        btnOwnDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
+
 
         ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
-        ratingBarOwnRating = (RatingBar) rootView.findViewById(R.id.rb_own_rating);
 
-        textViewOwnReview = (TextView) rootView.findViewById(R.id.tv_own_review);
-        textViewOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_own_author);
+
+
 
         RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_fragment_detail_reviews);
 
@@ -218,7 +222,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
 
-        buttonEditReview.setOnClickListener(new View.OnClickListener() {
+        btnOwnEditReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ownReviewKey != null && ownReviewText != null) {
@@ -227,7 +231,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
 
-        buttonDeleteReview.setOnClickListener(new View.OnClickListener() {
+        btnOwnDeleteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ownReviewKey != null){
@@ -245,14 +249,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader cursorLoader = new CursorLoader(
+        return new CursorLoader(
                 getActivity(),
                 NubaContract.NubaMenuEntry.buildNubaMenuUriWithID(getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_ID_EXTRA, 0)),
                 Utility.NUBA_MENU_PROJECTION,
                 null,
                 null,
                 null);
-        return cursorLoader;
     }
 
     @Override
@@ -278,7 +281,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
 
             nameTextView.setText(name);
-            priceTextView.setText("$" +String.format(Locale.CANADA, "%.2f", price));
+            String formatedPrice = "$" +String.format(Locale.CANADA, "%.2f", price);
+            priceTextView.setText(formatedPrice);
 
 
             if (v){
@@ -361,7 +365,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 float reviewRating = reviewRatingBar.getRating();
 
 
-                Map<String, Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<>();
                 map.put("author",mUsername);
                 map.put("reviewText", reviewText);
                 map.put("rating", reviewRating);
@@ -370,8 +374,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                 ownReviewText = reviewText;
                 ownReviewRating = reviewRating;
-                textViewOwnReview.setText(reviewText);
-                ratingBarOwnRating.setRating(reviewRating);
+                tvOwnReviewText.setText(reviewText);
+                rbOwnReviewRaring.setRating(reviewRating);
 
                 dialog.dismiss();
 
@@ -398,7 +402,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         deleteConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                relativeLayoutOwnReview.setVisibility(View.GONE);
+                rlOwnReview.setVisibility(View.GONE);
                 reviewReference.removeValue();
                 buttonWriteReview.setVisibility(View.VISIBLE);
                 dialog.dismiss();
@@ -455,17 +459,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                 if (isThere){
                     //If there is a review left before, let it to be edited
-                    textViewOwnReview.setVisibility(View.VISIBLE);
-                    buttonDeleteReview.setVisibility(View.VISIBLE);
-                    buttonEditReview.setVisibility(View.VISIBLE);
-                    ratingBarOwnRating.setVisibility(View.VISIBLE);
-                    textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
-                    relativeLayoutOwnReview.setVisibility(View.VISIBLE);
+                    rlOwnReview.setVisibility(View.VISIBLE);
+//                    tvOwnReviewAuthor.setVisibility(View.VISIBLE);
+//                    tvOwnReviewText.setVisibility(View.VISIBLE);
+//                    rbOwnReviewRaring.setVisibility(View.VISIBLE);
+//                    btnOwnDeleteReview.setVisibility(View.VISIBLE);
+//                    btnOwnEditReview.setVisibility(View.VISIBLE);
 
                     buttonWriteReview.setVisibility(View.GONE);
-                    textViewOwnReview.setText(ownReview.getReviewText());
-                    ratingBarOwnRating.setRating(ownReview.getRating());
-                    textViewOwnReviewAuthor.setText(ownReview.getAuthor());
+                    tvOwnReviewText.setText(ownReview.getReviewText());
+                    rbOwnReviewRaring.setRating(ownReview.getRating());
+                    tvOwnReviewAuthor.setText(ownReview.getAuthor());
 
                     ownReviewKey = ownKey;
                     ownReviewText = ownReview.getReviewText();
@@ -501,21 +505,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     if (review.getUserId().equals(mUserId)){
                         Timber.v("Signed in, has review");
 
-                        textViewOwnReview.setVisibility(View.VISIBLE);
-                        buttonDeleteReview.setVisibility(View.VISIBLE);
-                        buttonEditReview.setVisibility(View.VISIBLE);
-                        ratingBarOwnRating.setVisibility(View.VISIBLE);
-                        textViewOwnReviewAuthor.setVisibility(View.VISIBLE);
-                        relativeLayoutOwnReview.setVisibility(View.VISIBLE);
+                        rlOwnReview.setVisibility(View.VISIBLE);
+//                        tvOwnReviewAuthor.setVisibility(View.VISIBLE);
+//                        tvOwnReviewText.setVisibility(View.VISIBLE);
+//                        rbOwnReviewRaring.setVisibility(View.VISIBLE);
+//                        btnOwnEditReview.setVisibility(View.VISIBLE);
+//                        btnOwnDeleteReview.setVisibility(View.VISIBLE);
 
 
                         ownReviewKey = dataSnapshot.getKey();
                         ownReviewText = review.getReviewText();
                         ownReviewRating = review.getRating();
 
-                        textViewOwnReview.setText(review.getReviewText());
-                        ratingBarOwnRating.setRating(review.getRating());
-                        textViewOwnReviewAuthor.setText(review.getAuthor());
+                        tvOwnReviewText.setText(review.getReviewText());
+                        rbOwnReviewRaring.setRating(review.getRating());
+                        tvOwnReviewAuthor.setText(review.getAuthor());
 
                         buttonWriteReview.setVisibility(View.GONE);
                     } else {
@@ -565,7 +569,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                             ratingBar.setRating(mRating);
                         } else {
                             Timber.v("No data in avgRating");
-                            ratingTextView.setText("No reviews");
+                            ratingTextView.setTextSize(10);
+                            ratingTextView.setText(R.string.detail_activity_no_reviews);
 
                         }
                     } else {
@@ -680,23 +685,23 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     private void onSignOutCleanUp(){
-        Review myReview = new Review(mUsername, String.valueOf(textViewOwnReview.getText()), ratingBarOwnRating.getRating(), mUserId);
+        Review myReview = new Review(mUsername, String.valueOf(tvOwnReviewText.getText()), rbOwnReviewRaring.getRating(), mUserId);
 
         mUsername = ANONYMOUS;
         mUserId = ANONYMOUS;
 
-        textViewOwnReview.setVisibility(View.GONE);
-        buttonEditReview.setVisibility(View.GONE);
-        buttonDeleteReview.setVisibility(View.GONE);
-        ratingBarOwnRating.setVisibility(View.GONE);
-        textViewOwnReviewAuthor.setVisibility(View.GONE);
-        relativeLayoutOwnReview.setVisibility(View.GONE);
+        rlOwnReview.setVisibility(View.GONE);
+//        tvOwnReviewAuthor.setVisibility(View.GONE);
+//        tvOwnReviewText.setVisibility(View.GONE);
+//        rbOwnReviewRaring.setVisibility(View.GONE);
+//        btnOwnEditReview.setVisibility(View.GONE);
+//        btnOwnDeleteReview.setVisibility(View.GONE);
 
         buttonSignOut.setVisibility(View.GONE);
         buttonSignIn.setVisibility(View.VISIBLE);
         buttonWriteReview.setVisibility(View.GONE);
 
-        if (textViewOwnReview.getText().length() != 0) {
+        if (tvOwnReviewText.getText().length() != 0) {
             mReviewsList.add(0, myReview);
             mReviewsKey.add(0, ownReviewKey);
             mReviewsRecyclerAdapter.notifyDataSetChanged();
@@ -715,3 +720,4 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 //TODO: 1. Combine mReviewsKey and mReviewsList
 //TODO: 2. Replace views.visibility to ReletiveLayout.setVisibility
+//TODO: 3. Get rid off auth state listener

@@ -49,7 +49,7 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // prepare
-/**        int strokeWidth = 5; // 3px not dp
+/*        int strokeWidth = 5; // 3px not dp
         int roundRadius = 15; // 8px not dp
         int strokeColor = Color.parseColor("#2E3135");
         int fillColor = Color.parseColor("#DFDFE0");

@@ -9,11 +9,13 @@
     <string name="title_activity_tab_plates">TabPlates</string>
     <string name="title_activity_tab_pitas">TabPitas</string>
     <string name="title_activity_tab_mezzes">TabMezzes</string>
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail">Detail Activity</string>
     <string name="title_activity_filter">FilterActivity</string>
     <string name="main_activity_title">Select Location</string>
     <string name="imageButton_contentDesc_nuba_gasstown">Nuba Gasstown</string>
     <string name="imageButton_contentDesc_nuba_kitsilano">Nuba Kitsilano</string>
     <string name="imageButton_contentDesc_nuba_mount_pleasant">Nuba Mount Pleasant</string>
     <string name="imageButton_contentDesc_nuba_yaletown">Nuba Yaletown</string>
+    <string name="detail_activity_no_reviews">No reviews</string>
+    <string name="reviews">Reviews</string>
 </resources>

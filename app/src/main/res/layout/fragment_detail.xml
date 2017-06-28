@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Reviews"
+            android:text="@string/reviews"
             android:gravity="center"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
@@ -161,6 +161,7 @@
             android:background="@color/authui_colorAccent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
             >
             <TextView
                 android:id="@+id/tv_own_author"
@@ -168,7 +169,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:visibility="gone"
                 />
 
             <RatingBar
@@ -184,13 +184,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tv_own_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_below="@id/rb_own_rating"
                 android:layout_alignParentLeft="true"
 
@@ -200,7 +198,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit"
-                android:visibility="gone"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/tv_own_review"
 
@@ -210,7 +207,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delete"
-                android:visibility="gone"
                 android:layout_toRightOf="@id/btn_edit_own_review"
                 android:layout_below="@+id/tv_own_review"
 
