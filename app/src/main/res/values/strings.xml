@@ -18,4 +18,12 @@
     <string name="imageButton_contentDesc_nuba_yaletown">Nuba Yaletown</string>
     <string name="detail_activity_no_reviews">No reviews</string>
     <string name="reviews">Reviews</string>
+    <string name="default_price">0.0</string>
+    <string name="sign_out_btn_title">Sign Out</string>
+    <string name="write_review_btn_title">Write a review</string>
+    <string name="edit_btn_title">Edit</string>
+    <string name="delete_btn_title">Delete</string>
+    <string name="v_icon_description">V icon</string>
+    <string name="ve_icon_description">Ve icon</string>
+    <string name="gf_icon_description">Gf icon</string>
 </resources>

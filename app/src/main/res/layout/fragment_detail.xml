@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imgViewDetailImage"
+            android:id="@+id/iv_detail_picture"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -31,7 +31,7 @@
 
 
         <TextView
-            android:id="@+id/textViewDetailName"
+            android:id="@+id/tv_detail_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -49,28 +49,34 @@
             >
 
             <ImageView
-                android:id="@+id/imgViewDetailVegetarianIcon"
+                android:id="@+id/iv_detail_v_icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:contentDescription="@string/v_icon_description"
+                />
 
             <ImageView
-                android:id="@+id/imgViewDetailVeganIcon"
+                android:id="@+id/iv_detail_ve_icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:contentDescription="@string/ve_icon_description"
+                />
 
             <ImageView
-                android:id="@+id/imgViewDetailGlutenIcon"
+                android:id="@+id/iv_detail_gf_icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:contentDescription="@string/gf_icon_description"
+                />
 
             <TextView
-                android:id="@+id/textViewDetailPrice"
+                android:id="@+id/tv_detail_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -88,7 +94,7 @@
             android:paddingRight="10dp"
             >
             <RatingBar
-                android:id="@+id/detail_rating_bar"
+                android:id="@+id/rb_detail_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:numStars="5"
@@ -97,16 +103,17 @@
                 />
 
             <TextView
-                android:id="@+id/detail_rating_bar_textview"
+                android:id="@+id/tv_detail_num_ratings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="0.0"
+                android:layout_marginEnd="10dp"
+                android:text="@string/default_price"
 
                 android:textSize="30sp" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textViewDetailDesc"
+            android:id="@+id/tv_detail_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -120,21 +127,21 @@
             android:layout_height="wrap_content">
 
             <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_sign_in"
+                android:id="@+id/btn_detail_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 />
             <Button
-                android:id="@+id/btn_sign_out"
-                android:text="Sign Out"
+                android:id="@+id/btn_detail_sign_out"
+                android:text="@string/sign_out_btn_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 />
             <Button
-                android:id="@+id/btn_fragment_detail_write_review"
-                android:text="Write a review"
+                android:id="@+id/btn_detail_write_review"
+                android:text="@string/write_review_btn_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -154,7 +161,7 @@
             />
 
         <RelativeLayout
-            android:id="@+id/rl_own_review"
+            android:id="@+id/rl_detail_own_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -164,15 +171,16 @@
             android:visibility="gone"
             >
             <TextView
-                android:id="@+id/tv_own_author"
+                android:id="@+id/tv_detail_own_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 />
 
             <RatingBar
-            android:id="@+id/rb_own_rating"
+            android:id="@+id/rb_detail_own_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:numStars="5"
@@ -186,30 +194,30 @@
                 android:layout_alignParentTop="true"
                 />
             <TextView
-                android:id="@+id/tv_own_review"
+                android:id="@+id/tv_detail_own_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rb_own_rating"
+                android:layout_below="@id/rb_detail_own_rating"
                 android:layout_alignParentLeft="true"
-
+                android:layout_alignParentStart="true"
                 />
             <Button
-                android:id="@+id/btn_edit_own_review"
+                android:id="@+id/btn_detail_edit_own_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit"
+                android:text="@string/edit_btn_title"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/tv_own_review"
-
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detail_own_review"
                 />
             <Button
                 android:id="@+id/btn_delete_own_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
-                android:layout_toRightOf="@id/btn_edit_own_review"
-                android:layout_below="@+id/tv_own_review"
-
+                android:text="@string/delete_btn_title"
+                android:layout_toRightOf="@id/btn_detail_edit_own_review"
+                android:layout_toEndOf="@id/btn_detail_edit_own_review"
+                android:layout_below="@+id/tv_detail_own_review"
                 />
         </RelativeLayout>
 

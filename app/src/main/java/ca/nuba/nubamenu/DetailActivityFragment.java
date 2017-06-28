@@ -65,30 +65,22 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private static final int RC_SIGN_IN = 1;
     private static final int DETAIL_LOADER = 0;
 
-    //Menu details variables
-//    private Boolean v, ve, gf;
-//    private Double price;
-//    private String name, desc, picturePath;
+    //Menu item id in MySQL database on a server
+    private static int mWebId;
 
-    public static int mWebId;
-
-//    private CursorLoader cursorLoader;
-    private String mUsername, mUserId, ownReviewKey, ownReviewText;
+    private String mUsername, mUserId, mOwnReviewKey, mOwnReviewText;
     private ReviewsRecyclerAdapter mReviewsRecyclerAdapter;
     private List<Review> mReviewsList;
     private List<String> mReviewsKey;
-//    private AlertDialog.Builder alert, editReviewAlertBuilder, deleteConfirmation;
-    private float mRating, ownReviewRating;
-//    private long numberOfComments;
+    private float mRating, mOwnReviewRating;
 
     //Views
-    //TODO: shorten views names
     private ImageView ivPicture, ivV, ivVe, ivGf;
-    private TextView nameTextView, priceTextView, descTextView, ratingTextView, tvOwnReviewAuthor, tvOwnReviewText;
-    private Button buttonWriteReview, btnOwnEditReview, btnOwnDeleteReview, buttonSignOut;
-    private SignInButton buttonSignIn;
-    private RatingBar ratingBar, rbOwnReviewRaring;
-//    private RecyclerView mRecyclerView;
+    private TextView tvName, tvPrice, tvDescription, tvRating, tvOwnReviewAuthor, tvOwnReviewText;
+    private Button btnWriteReview, btnOwnEditReview, btnOwnDeleteReview, btnSignOut;
+    private SignInButton btnSignIn;
+    private RatingBar rbRating, rbOwnReviewRaring;
+    private RelativeLayout rlOwnReview;
 
     //Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -99,7 +91,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseAuth.AuthStateListener mAuthStateListenerForUserName;
-    private RelativeLayout rlOwnReview;
 
     public DetailActivityFragment() {
     }
@@ -116,17 +107,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mWebId = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).getInt(ITEM_WEB_ID_EXTRA, 0);
+        //Reference to "reviews" child in FB database
         mReviewsDatabaseReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews");
+        //Reference to "avgRating" child in FB database
         mMenuItemAvgRatingReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("avgRating");
 
+        //Listeners initialization and attachment
+        //TODO: Do I need this?
         initializeAuthListener();
 
         initializeAuthListenerForUserId();
         attachAuthListenerForUserId();
-
-        mReviewsList = new ArrayList<>();
-        mReviewsKey = new ArrayList<>();
-        mReviewsRecyclerAdapter = new ReviewsRecyclerAdapter(getActivity(), mReviewsList, mUserId);
 
         initializeDatabaseReadListener();
         attachDatabaseReadListener();
@@ -134,6 +125,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         initializeAvgRatingReadListener();
         attachAvgRatingReadListener();
 
+        mReviewsList = new ArrayList<>();
+        mReviewsKey = new ArrayList<>();
+        mReviewsRecyclerAdapter = new ReviewsRecyclerAdapter(getActivity(), mReviewsList, mUserId);
 
 //        mReviewsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
@@ -154,33 +148,29 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        ivPicture = (ImageView) rootView.findViewById(R.id.imgViewDetailImage);
-        ivV = (ImageView) rootView.findViewById(R.id.imgViewDetailVegetarianIcon);
-        ivVe = (ImageView) rootView.findViewById(R.id.imgViewDetailVeganIcon);
-        ivGf = (ImageView) rootView.findViewById(R.id.imgViewDetailGlutenIcon);
 
-        nameTextView = (TextView) rootView.findViewById(R.id.textViewDetailName);
-        priceTextView = (TextView) rootView.findViewById(R.id.textViewDetailPrice);
-        descTextView = (TextView) rootView.findViewById(R.id.textViewDetailDesc);
-        ratingTextView = (TextView) rootView.findViewById(R.id.detail_rating_bar_textview);
+        //Menu item detail views
+        ivPicture = (ImageView) rootView.findViewById(R.id.iv_detail_picture);
+        tvName = (TextView) rootView.findViewById(R.id.tv_detail_name);
+        ivV = (ImageView) rootView.findViewById(R.id.iv_detail_v_icon);
+        ivVe = (ImageView) rootView.findViewById(R.id.iv_detail_ve_icon);
+        ivGf = (ImageView) rootView.findViewById(R.id.iv_detail_gf_icon);
+        tvPrice = (TextView) rootView.findViewById(R.id.tv_detail_price);
+        rbRating = (RatingBar) rootView.findViewById(R.id.rb_detail_rating);
+        tvRating = (TextView) rootView.findViewById(R.id.tv_detail_num_ratings);
+        tvDescription = (TextView) rootView.findViewById(R.id.tv_detail_description);
 
-        buttonSignIn = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
-        buttonSignOut = (Button) rootView.findViewById(R.id.btn_sign_out);
-        buttonWriteReview = (Button) rootView.findViewById(R.id.btn_fragment_detail_write_review);
+        btnSignIn = (SignInButton) rootView.findViewById(R.id.btn_detail_sign_in);
+        btnSignOut = (Button) rootView.findViewById(R.id.btn_detail_sign_out);
+        btnWriteReview = (Button) rootView.findViewById(R.id.btn_detail_write_review);
 
         //My review views
-        rlOwnReview = (RelativeLayout) rootView.findViewById(R.id.rl_own_review);
-        tvOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_own_author);
-        tvOwnReviewText = (TextView) rootView.findViewById(R.id.tv_own_review);
-        rbOwnReviewRaring = (RatingBar) rootView.findViewById(R.id.rb_own_rating);
-        btnOwnEditReview = (Button) rootView.findViewById(R.id.btn_edit_own_review);
+        rlOwnReview = (RelativeLayout) rootView.findViewById(R.id.rl_detail_own_review);
+        tvOwnReviewAuthor = (TextView) rootView.findViewById(R.id.tv_detail_own_author);
+        tvOwnReviewText = (TextView) rootView.findViewById(R.id.tv_detail_own_review);
+        rbOwnReviewRaring = (RatingBar) rootView.findViewById(R.id.rb_detail_own_rating);
+        btnOwnEditReview = (Button) rootView.findViewById(R.id.btn_detail_edit_own_review);
         btnOwnDeleteReview = (Button) rootView.findViewById(R.id.btn_delete_own_review);
-
-
-        ratingBar = (RatingBar) rootView.findViewById(R.id.detail_rating_bar);
-
-
-
 
         RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_fragment_detail_reviews);
 
@@ -188,8 +178,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-
-        buttonWriteReview.setOnClickListener(new View.OnClickListener() {
+        btnWriteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mAuthStateListener != null){
@@ -198,10 +187,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
 
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //Initialize sign in flow using AuthUI
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
@@ -214,9 +203,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             }
         });
 
-        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Sign out using AuthUI
                 AuthUI.getInstance().signOut(getActivity());
                 onSignOutCleanUp();
             }
@@ -225,8 +215,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         btnOwnEditReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ownReviewKey != null && ownReviewText != null) {
-                    editReview(ownReviewText, ownReviewRating, ownReviewKey);
+                if (mOwnReviewKey != null && mOwnReviewText != null) {
+                    editReview(mOwnReviewText, mOwnReviewRating, mOwnReviewKey);
                 }
             }
         });
@@ -234,18 +224,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         btnOwnDeleteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ownReviewKey != null){
-                    deleteReview(ownReviewKey);
+                if (mOwnReviewKey != null){
+                    deleteReview(mOwnReviewKey);
                 }
             }
         });
 
         return rootView;
     }
-
-
-
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -271,19 +257,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             boolean gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
             String desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
 
-/* Assign data to views*/
+            //Assign data to views
+
             File img = new File(getActivity().getFilesDir() + "/" + picturePath);
             if (!img.exists()){
+                //Load image from server and download it
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
                 Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(ivPicture);
             } else {
+                //Load image from local storage
                 Picasso.with(getActivity()).load(img).into(ivPicture);
             }
 
-            nameTextView.setText(name);
+            tvName.setText(name);
             String formatedPrice = "$" +String.format(Locale.CANADA, "%.2f", price);
-            priceTextView.setText(formatedPrice);
-
+            tvPrice.setText(formatedPrice);
 
             if (v){
                 Picasso.with(getActivity()).load(R.drawable.v).into(ivV);
@@ -303,7 +291,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 ivGf.setVisibility(View.GONE);
             }
 
-            descTextView.setText(desc);
+            tvDescription.setText(desc);
         }
     }
 
@@ -318,52 +306,50 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     public void writeReview() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder writeReviewAlert = new AlertDialog.Builder(getActivity());
         final View container = getActivity().getLayoutInflater().inflate(R.layout.write_review, null);
-        alert.setView(container);
 
         final RatingBar reviewRatingBar = (RatingBar) container.findViewById(R.id.rb_write_review_rating);
         final EditText reviewEditText = (EditText) container.findViewById(R.id.et_write_review_text);
 
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        writeReviewAlert.setView(container);
+        writeReviewAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String reviewText = reviewEditText.getText().toString();
                 float reviewRating = reviewRatingBar.getRating();
                 final Review review = new Review(mUsername, reviewText, reviewRating, mUserId);
-                buttonWriteReview.setVisibility(View.GONE);
+                btnWriteReview.setVisibility(View.GONE);
                 mReviewsDatabaseReference.push().setValue(review);
                 dialog.dismiss();
             }
         });
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        writeReviewAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
             }
         });
 
-        alert.show();
+        writeReviewAlert.show();
     }
 
     public void editReview(String reviewText, float reviewRating, String reviewId) {
-        Timber.v("EditReview");
-        AlertDialog.Builder editReviewAlertBuilder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder editReviewAlert = new AlertDialog.Builder(getActivity());
         final View container = getActivity().getLayoutInflater().inflate(R.layout.write_review, null);
-        editReviewAlertBuilder.setView(container);
 
         final RatingBar reviewRatingBar = (RatingBar) container.findViewById(R.id.rb_write_review_rating);
         final EditText reviewEditText = (EditText) container.findViewById(R.id.et_write_review_text);
-        reviewRatingBar.setRating(reviewRating);
-        reviewEditText.setText(reviewText);
 
         final DatabaseReference reviewReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews").child(reviewId);
 
-        editReviewAlertBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        reviewRatingBar.setRating(reviewRating);
+        reviewEditText.setText(reviewText);
+
+        editReviewAlert.setView(container);
+        editReviewAlert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String reviewText = reviewEditText.getText().toString();
                 float reviewRating = reviewRatingBar.getRating();
-
 
                 Map<String, Object> map = new HashMap<>();
                 map.put("author",mUsername);
@@ -372,64 +358,46 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 map.put("userId", mUserId);
                 reviewReference.updateChildren(map);
 
-                ownReviewText = reviewText;
-                ownReviewRating = reviewRating;
+                mOwnReviewText = reviewText;
+                mOwnReviewRating = reviewRating;
                 tvOwnReviewText.setText(reviewText);
                 rbOwnReviewRaring.setRating(reviewRating);
 
                 dialog.dismiss();
-
             }
         });
 
-        editReviewAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        editReviewAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
-
             }
         });
 
-        editReviewAlertBuilder.show();
+        editReviewAlert.show();
     }
 
     public void deleteReview(String reviewId) {
-        AlertDialog.Builder deleteConfirmation = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder deleteReviewConfirmationAlert = new AlertDialog.Builder(getActivity());
         final View container = getActivity().getLayoutInflater().inflate(R.layout.alert_delete_review, null);
-        deleteConfirmation.setView(container);
         final DatabaseReference reviewReference = mFirebaseDatabase.getReference("nubawebids").child(String.valueOf(mWebId)).child("reviews").child(reviewId);
 
-
-        deleteConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        deleteReviewConfirmationAlert.setView(container);
+        deleteReviewConfirmationAlert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-
                 rlOwnReview.setVisibility(View.GONE);
                 reviewReference.removeValue();
-                buttonWriteReview.setVisibility(View.VISIBLE);
+                btnWriteReview.setVisibility(View.VISIBLE);
                 dialog.dismiss();
-
             }
         });
 
-        deleteConfirmation.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        deleteReviewConfirmationAlert.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
-
             }
         });
 
-        deleteConfirmation.show();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Timber.v("onPause");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Timber.v("onResume");
+        deleteReviewConfirmationAlert.show();
     }
 
     @Override
@@ -455,73 +423,49 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         break;
                     }
                 }
-                Timber.v("isThere - "+isThere);
-
                 if (isThere){
                     //If there is a review left before, let it to be edited
                     rlOwnReview.setVisibility(View.VISIBLE);
-//                    tvOwnReviewAuthor.setVisibility(View.VISIBLE);
-//                    tvOwnReviewText.setVisibility(View.VISIBLE);
-//                    rbOwnReviewRaring.setVisibility(View.VISIBLE);
-//                    btnOwnDeleteReview.setVisibility(View.VISIBLE);
-//                    btnOwnEditReview.setVisibility(View.VISIBLE);
 
-                    buttonWriteReview.setVisibility(View.GONE);
+                    btnWriteReview.setVisibility(View.GONE);
                     tvOwnReviewText.setText(ownReview.getReviewText());
                     rbOwnReviewRaring.setRating(ownReview.getRating());
                     tvOwnReviewAuthor.setText(ownReview.getAuthor());
 
-                    ownReviewKey = ownKey;
-                    ownReviewText = ownReview.getReviewText();
-                    ownReviewRating = ownReview.getRating();
+                    mOwnReviewKey = ownKey;
+                    mOwnReviewText = ownReview.getReviewText();
+                    mOwnReviewRating = ownReview.getRating();
 
                 } else {
-//                    writeReview();
-                    buttonWriteReview.setVisibility(View.VISIBLE);
+                    btnWriteReview.setVisibility(View.VISIBLE);
                 }
-                buttonSignIn.setVisibility(View.GONE);
-                buttonSignOut.setVisibility(View.VISIBLE);
-//                buttonWriteReview.setVisibility(View.VISIBLE);
-
-
+                btnSignIn.setVisibility(View.GONE);
+                btnSignOut.setVisibility(View.VISIBLE);
 
             } else if (resultCode == RESULT_CANCELED){
-
                 detachAuthStateListener();
             }
         }
     }
 
-
-
-
     private void initializeDatabaseReadListener(){
         if (mChildEventListener == null) {
-
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Review review = dataSnapshot.getValue(Review.class);
                     if (review.getUserId().equals(mUserId)){
-                        Timber.v("Signed in, has review");
-
                         rlOwnReview.setVisibility(View.VISIBLE);
-//                        tvOwnReviewAuthor.setVisibility(View.VISIBLE);
-//                        tvOwnReviewText.setVisibility(View.VISIBLE);
-//                        rbOwnReviewRaring.setVisibility(View.VISIBLE);
-//                        btnOwnEditReview.setVisibility(View.VISIBLE);
-//                        btnOwnDeleteReview.setVisibility(View.VISIBLE);
 
-
-                        ownReviewKey = dataSnapshot.getKey();
-                        ownReviewText = review.getReviewText();
-                        ownReviewRating = review.getRating();
+                        mOwnReviewKey = dataSnapshot.getKey();
+                        mOwnReviewText = review.getReviewText();
+                        mOwnReviewRating = review.getRating();
 
                         tvOwnReviewText.setText(review.getReviewText());
                         rbOwnReviewRaring.setRating(review.getRating());
                         tvOwnReviewAuthor.setText(review.getAuthor());
 
-                        buttonWriteReview.setVisibility(View.GONE);
+                        btnWriteReview.setVisibility(View.GONE);
                     } else {
 
                         mReviewsKey.add(0, dataSnapshot.getKey());
@@ -534,14 +478,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Timber.v("--Child changed");
                     Timber.v("--onChildChanged.key - "+dataSnapshot.getKey());
-                    Timber.v("--onChildChanged.s - "+s);
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                     Timber.v("--onChildRemoved");
                     Timber.v("--onChildRemoved.key - "+dataSnapshot.getKey());
-
                 }
 
                 @Override
@@ -565,16 +507,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         if (avgRating != null) {
 
                             mRating = avgRating.getCurrentAvgRating();
-                            ratingTextView.setText(String.valueOf(avgRating.getNumOfRatings()));
-                            ratingBar.setRating(mRating);
+                            tvRating.setText(String.valueOf(avgRating.getNumOfRatings()));
+                            rbRating.setRating(mRating);
                         } else {
-                            Timber.v("No data in avgRating");
-                            ratingTextView.setTextSize(10);
-                            ratingTextView.setText(R.string.detail_activity_no_reviews);
+                            tvRating.setTextSize(10);
+                            tvRating.setText(R.string.detail_activity_no_reviews);
 
                         }
                     } else {
-                        Timber.v("No data in dataSnapshot");
+                        Timber.e("No data in dataSnapshot");
                     }
                 }
 
@@ -609,18 +550,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
-
-                    Timber.v("--User - "+user.getDisplayName());
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
                     mReviewsRecyclerAdapter.setUserId(mUserId);
-
-                    buttonSignIn.setVisibility(View.GONE);
-                    buttonSignOut.setVisibility(View.VISIBLE);
-//                    buttonWriteReview.setVisibility(View.GONE);
-
+                    btnSignIn.setVisibility(View.GONE);
+                    btnSignOut.setVisibility(View.VISIBLE);
                 } else {
-                    Timber.v("--User - no user");
-                    buttonWriteReview.setVisibility(View.GONE);
+                    btnWriteReview.setVisibility(View.GONE);
                 }
             }
         };
@@ -691,19 +626,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mUserId = ANONYMOUS;
 
         rlOwnReview.setVisibility(View.GONE);
-//        tvOwnReviewAuthor.setVisibility(View.GONE);
-//        tvOwnReviewText.setVisibility(View.GONE);
-//        rbOwnReviewRaring.setVisibility(View.GONE);
-//        btnOwnEditReview.setVisibility(View.GONE);
-//        btnOwnDeleteReview.setVisibility(View.GONE);
-
-        buttonSignOut.setVisibility(View.GONE);
-        buttonSignIn.setVisibility(View.VISIBLE);
-        buttonWriteReview.setVisibility(View.GONE);
+        
+        btnSignOut.setVisibility(View.GONE);
+        btnSignIn.setVisibility(View.VISIBLE);
+        btnWriteReview.setVisibility(View.GONE);
 
         if (tvOwnReviewText.getText().length() != 0) {
             mReviewsList.add(0, myReview);
-            mReviewsKey.add(0, ownReviewKey);
+            mReviewsKey.add(0, mOwnReviewKey);
             mReviewsRecyclerAdapter.notifyDataSetChanged();
         }
     }

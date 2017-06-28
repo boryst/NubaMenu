@@ -30,7 +30,7 @@
 
 
             <TextView
-                android:id="@+id/textViewDetailName"
+                android:id="@+id/tv_detail_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -48,28 +48,28 @@
                 >
 
                 <ImageView
-                    android:id="@+id/imgViewDetailVegetarianIcon"
+                    android:id="@+id/iv_detail_v_icon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:id="@+id/imgViewDetailVeganIcon"
+                    android:id="@+id/iv_detail_ve_icon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:id="@+id/imgViewDetailGlutenIcon"
+                    android:id="@+id/iv_detail_gf_icon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/textViewDetailPrice"
+                    android:id="@+id/tv_detail_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
@@ -80,7 +80,7 @@
 
 
             <TextView
-                android:id="@+id/textViewDetailDesc"
+                android:id="@+id/tv_detail_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
