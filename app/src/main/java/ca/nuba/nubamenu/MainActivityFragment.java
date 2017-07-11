@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,19 @@ import static ca.nuba.nubamenu.Utility.imageButtonPressEffect;
 
 public class MainActivityFragment extends Fragment {
 
+    ImageButton imgBtnG, imgBtnY, imgBtnM, imgBtnK;
+    FragmentManager fm;
+    MenuSelectActivityFragment menuSelectActivityFragment;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        fm = getFragmentManager();
+        menuSelectActivityFragment = new MenuSelectActivityFragment();
+
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -37,10 +54,16 @@ public class MainActivityFragment extends Fragment {
             cursor.close();
         }
     }
-    //String mFlag;
-    ImageButton imgBtnG, imgBtnY, imgBtnM, imgBtnK;
 
-
+    @Override
+    public void onResume() {
+        getActivity().setTitle(getString(R.string.main_activity_title));
+        ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (ab != null){
+            ab.setDisplayHomeAsUpEnabled(false);
+        }
+        super.onResume();
+    }
 
     public MainActivityFragment() {
     }
@@ -48,16 +71,6 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // prepare
-/*        int strokeWidth = 5; // 3px not dp
-        int roundRadius = 15; // 8px not dp
-        int strokeColor = Color.parseColor("#2E3135");
-        int fillColor = Color.parseColor("#DFDFE0");
-
-        GradientDrawable gd = new GradientDrawable();
-        gd.setColor(fillColor);
-        gd.setCornerRadius(roundRadius);
-        gd.setStroke(strokeWidth, strokeColor);*/
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -74,12 +87,17 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+//                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
                 //intent.putExtra(LOCATION_EXTRA, LOCATION_GASTOWN);
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(LOCATION_EXTRA, LOCATION_GASTOWN);
                 editor.apply();
-                startActivity(intent);
+//                startActivity(intent);
+                fm.beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, android.R.anim.slide_out_right )
+                        .replace(R.id.fragment_container, menuSelectActivityFragment)
+                        .addToBackStack("MenuSelectFragment")
+                        .commit();
             }
         });
 

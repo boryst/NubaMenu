@@ -2,6 +2,7 @@ package ca.nuba.nubamenu;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,14 +26,17 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this).setIndicatorsEnabled(true);
         Timber.plant(new Timber.DebugTree());
 
-        setTitle(getString(R.string.main_activity_title));
-
         if (getSupportActionBar() != null){
             getSupportActionBar().setElevation(0f);
         }
-        //getSupportActionBar().setIcon(R.drawable.nuba_logo);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        MainActivityFragment mainActivityFragment = new MainActivityFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .add(R.id.fragment_container, mainActivityFragment)
+                .addToBackStack("MainFragment")
+                .commit();
+
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
         editor.putString(FILTER_VEGETARIAN, null);
