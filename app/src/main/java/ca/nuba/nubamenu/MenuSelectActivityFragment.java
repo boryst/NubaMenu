@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
@@ -30,6 +33,7 @@ public class MenuSelectActivityFragment extends Fragment {
 
     ImageButton imgBtnLunch, imgBtnDinner, imgBtnBrunch;
     Bundle extras = new Bundle();
+    FragmentManager fm;
 
     public MenuSelectActivityFragment() {
     }
@@ -215,33 +219,37 @@ public class MenuSelectActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+        fm = getFragmentManager();
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
     }
 
     @Override
     public void onResume() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+        location = prefs.getString(LOCATION_EXTRA, null);
+        getActivity().setTitle(location);
+
+        if (fm.getBackStackEntryCount() > 0){
+            ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (ab != null){
+                ab.setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
         super.onResume();
+    }
 
-
-/*        Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI,Utility.NUBA_MENU_PROJECTION, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()){
-            Log.v(LOG_TAG, "Checking cursor - "+cursor.getString(Utility.COL_NUBA_MENU_NAME));
-            cursor.close();
-        }*/
-
-/*        Intent intent = getActivity().getIntent();
-
-
-        if (intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA) != null) {
-            upLocation = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
-
-//            if (upLocation.equals("k")) {
-//                View rootView = new View;
-//                rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
-//            }*/
-
-//        }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                if (fm.getBackStackEntryCount() > 0){
+                    fm.popBackStack();
+                }
+            }
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 }

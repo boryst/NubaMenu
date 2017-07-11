@@ -1,6 +1,5 @@
 package ca.nuba.nubamenu;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -93,11 +92,7 @@ public class MainActivityFragment extends Fragment {
                 editor.putString(LOCATION_EXTRA, LOCATION_GASTOWN);
                 editor.apply();
 //                startActivity(intent);
-                fm.beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, android.R.anim.slide_out_right )
-                        .replace(R.id.fragment_container, menuSelectActivityFragment)
-                        .addToBackStack("MenuSelectFragment")
-                        .commit();
+                fragmentTransition();
             }
         });
 
@@ -109,13 +104,15 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+//                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
                 //intent.putExtra(LOCATION_EXTRA, LOCATION_KITSILANO);
 
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(LOCATION_EXTRA, LOCATION_KITSILANO);
                 editor.apply();
-                startActivity(intent);
+//                startActivity(intent);
+                fragmentTransition();
+
             }
         });
 
@@ -127,12 +124,14 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+//                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
 //                intent.putExtra(LOCATION_EXTRA, LOCATION_MOUNT);
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(LOCATION_EXTRA, LOCATION_MOUNT);
                 editor.apply();
-                startActivity(intent);
+                fragmentTransition();
+
+//                startActivity(intent);
             }
         });
 
@@ -144,16 +143,26 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
+//                Intent intent = new Intent(getActivity(), MenuSelectActivity.class);
                 //intent.putExtra(LOCATION_EXTRA, LOCATION_YALETOWN);
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(LOCATION_EXTRA, LOCATION_YALETOWN);
                 editor.apply();
-                startActivity(intent);
+//                startActivity(intent);
+                fragmentTransition();
+
             }
         });
 
         return rootView;
+    }
+
+    private void fragmentTransition(){
+        fm.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
+                .replace(R.id.fragment_container, menuSelectActivityFragment)
+                .addToBackStack("MenuSelectFragment")
+                .commit();
     }
 
 }
