@@ -2,14 +2,17 @@ package ca.nuba.nubamenu;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import ca.nuba.nubamenu.data.NubaContract;
 
@@ -39,7 +43,7 @@ import static ca.nuba.nubamenu.Utility.sNubaMenuWithVeFilter;
 import static ca.nuba.nubamenu.Utility.sNubaMenuWithVeGfFilter;
 
 
-public class MenuActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MenuActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, MenuItemClickListener {
     public static String LOG_TAG = MenuActivityFragment.class.getSimpleName();
 
 //    public static final String ARG_LOCATION = "ARG_LOCATION";
@@ -219,7 +223,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
 
 //        myListCursorAdapter = new MyListCursorAdapter(getActivity(),mCursor, mPageNumber);
-        listCursorAdapter = new ListCursorAdapter(getActivity(), null, mPageNumber);
+        listCursorAdapter = new ListCursorAdapter(getActivity(), null, mPageNumber, this);
         recyclerView.setAdapter(listCursorAdapter);
 
 
@@ -508,5 +512,19 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         super.onActivityCreated(savedInstanceState);
 
 
+    }
+
+
+    @Override
+    public void onMenuItemClick(ImageView sharedImageView) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("transition_name", ViewCompat.getTransitionName(sharedImageView));
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(),
+                sharedImageView,
+                ViewCompat.getTransitionName(sharedImageView)
+        );
+        startActivity(intent, options.toBundle());
     }
 }

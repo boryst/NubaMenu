@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#FFB74D</item>
+        <item name="colorPrimaryDark">#FFA726</item>
+        <item name="colorAccent">#EF6C00</item>
+        <item name="android:windowContentTransitions">true</item>
+        <!--<item name="displayOptions">useLogo|showHome</item>-->
+        <!--<item name="logo">@drawable/nuba_logo</item>-->
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+
+
+
+
+    <!--<style name="MenuTheme" parent="AppTheme">-->
+        <!--<item name="actionBarStyle">@style/ActionBar.Solid.Nuba.MyTitle</item>-->
+
+        <!--&lt;!&ndash;<item name="android:titleTextStyle">@style/NubaTextTitle</item>&ndash;&gt;-->
+    <!--</style>-->
+
+    <!--<style name="ActionBar.Solid.Nuba.MyTitle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">-->
+        <!--<item name="displayOptions">useLogo|showHome</item>-->
+        <!--<item name="logo">@drawable/nuba_logo</item>-->
+
+    <!--</style>-->
+
+
+    <!--<style name="NubaTextTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
+        <!--<item name="android:textColor">#000000</item>-->
+    <!--</style>-->
+
+
+
+</resources>

@@ -1,7 +1,6 @@
 package ca.nuba.nubamenu;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
@@ -35,12 +34,16 @@ import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
 public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapter.ViewHolder>{
     public static final String LOG_TAG = ListCursorAdapter.class.getSimpleName();
 
+
     Context mContext;
     int tabNumber;
-    public ListCursorAdapter(Context context, Cursor cursor, int tabNumber){
+    private final MenuItemClickListener menuItemClickListener;
+
+    public ListCursorAdapter(Context context, Cursor cursor, int tabNumber, MenuItemClickListener menuItemClickListener){
         super(context,cursor);
         this.mContext = context;
         this.tabNumber = tabNumber;
+        this.menuItemClickListener = menuItemClickListener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,10 +93,6 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
 
 
         } else {
-            //Log.v(LOG_TAG, "File exists");
-            //Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);
-            //Log.v(LOG_TAG, "image name - "+imageNameCutter(myListItem.getIconPath()));
-
             Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);
         }
 
@@ -143,8 +142,13 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
                 editor.putInt(ITEM_WEB_ID_EXTRA, listItem.getWebId());
                 editor.apply();
 
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                mContext.startActivity(intent);
+
+                menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
+//                ActivityOptionsCompat options = ActivityOptionsCompat.
+//                        makeSceneTransitionAnimation(, (View)viewHolder.list_item_icon , "list_item_icon");
+
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+//                mContext.startActivity(intent, options.toBundle());
             }
         });
     }
