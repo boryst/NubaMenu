@@ -3,11 +3,12 @@ package ca.nuba.nubamenu;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.MenuItem;
 
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
@@ -23,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
     String mLocation, mType;
     int mPage,tabPosition;
     private static String F_MENU = "f_menu";
+    private FragmentManager fm;
 
     AlertDialog.Builder alert;
 
@@ -33,9 +35,12 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final ActionBar actionBar = getSupportActionBar();
-
         super.onCreate(savedInstanceState);
+
+        final ActionBar actionBar = getSupportActionBar();
+        fm = getSupportFragmentManager();
+
+
         setContentView(R.layout.activity_menu);
 
         SharedPreferences prefs = this.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
@@ -72,7 +77,7 @@ public class MenuActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         if (actionBar !=null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setElevation(0f);
             setTitle(location+" - "+type);
         }
@@ -162,7 +167,16 @@ public class MenuActivity extends AppCompatActivity {
         editor.putString(FILTER_VEGAN, null);
         editor.putString(FILTER_GLUTEN_FREE, null);
         editor.apply();
-        Log.v(LOG_TAG, "onDestroyed");
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+
+            }
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 }

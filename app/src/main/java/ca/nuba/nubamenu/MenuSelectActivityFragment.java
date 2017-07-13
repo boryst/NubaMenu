@@ -219,7 +219,7 @@ public class MenuSelectActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        fm = getFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 

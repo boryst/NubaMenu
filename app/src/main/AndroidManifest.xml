@@ -53,7 +53,7 @@
             android:parentActivityName=".MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value="MenuActivity" />
         </activity>
 
         <service android:name=".service.NubaFirebaseMessagingService">

@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -98,6 +99,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getActivity().supportPostponeEnterTransition();
+
         setHasOptionsMenu(true);
         mUsername = ANONYMOUS;
         mUserId = ANONYMOUS;
@@ -266,7 +270,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(ivPicture);
             } else {
                 //Load image from local storage
-                Picasso.with(getActivity()).load(img).into(ivPicture);
+//                Picasso.with(getActivity()).load(img).into(ivPicture);
+                Picasso.with(getActivity())
+                        .load(img)
+                        .noFade()
+                        .into(ivPicture, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                getActivity().supportStartPostponedEnterTransition();
+                            }
+
+                            @Override
+                            public void onError() {
+                                getActivity().supportStartPostponedEnterTransition();
+                            }
+                        });
             }
 
             tvName.setText(name);

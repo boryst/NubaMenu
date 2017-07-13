@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -52,7 +53,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 //    public static final String ARG_DISH_TYPE = "DISH_TYPE";
 
     public static String type, location;
-
+    private FragmentManager fm;
     CursorLoader cursorLoader;
     private static final int MENU_LOADER = 0;
     ListCursorAdapter listCursorAdapter;
@@ -94,9 +95,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mPageName = getArguments().getString(ARG_PAGE);
         mPageNumber = getArguments().getInt(ARG_PAGE_NUMBER);
         //Log.v(LOG_TAG, "onCreate - "+mPageName);
+        fm = getActivity().getSupportFragmentManager();
 
         setHasOptionsMenu(true);
         //int resID = getActivity().getResources().getIdentifier("ic_launcher", "mipmap", "ca.nuba.nubamenu");
@@ -134,10 +137,9 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             case R.id.action_filter: {
                 filter();
                 return true;
-
             }
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

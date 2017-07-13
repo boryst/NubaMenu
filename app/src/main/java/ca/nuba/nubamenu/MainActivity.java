@@ -19,23 +19,29 @@ import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
+    private SharedPreferences prefs;
+    private FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Picasso.with(this).setIndicatorsEnabled(true);
+        Picasso.with(this).setIndicatorsEnabled(false);
         Timber.plant(new Timber.DebugTree());
 
         if (getSupportActionBar() != null){
             getSupportActionBar().setElevation(0f);
         }
 
-        MainActivityFragment mainActivityFragment = new MainActivityFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction()
-                .add(R.id.fragment_container, mainActivityFragment)
-                .addToBackStack("MainFragment")
-                .commit();
+        fm = getSupportFragmentManager();
+
+        prefs = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+
+            MainActivityFragment mainActivityFragment = new MainActivityFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_container, mainActivityFragment)
+                    .addToBackStack("MainFragment")
+                    .commit();
 
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();

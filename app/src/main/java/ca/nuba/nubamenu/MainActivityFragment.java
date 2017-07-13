@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,10 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fm = getFragmentManager();
+//        fm = getFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
         menuSelectActivityFragment = new MenuSelectActivityFragment();
+
 
         setHasOptionsMenu(true);
     }
@@ -47,7 +48,6 @@ public class MainActivityFragment extends Fragment {
         Cursor cursor = getActivity().getContentResolver().query(NubaContract.NubaMenuEntry.CONTENT_URI, null,null,null,null);
         if (cursor == null || !cursor.moveToFirst()) {
             FetchNubaMenuTask menuInfoTask = new FetchNubaMenuTask(getActivity());
-            Log.v("MAF", "Starting menuInfoTask");
             menuInfoTask.execute();
         } else {
             cursor.close();

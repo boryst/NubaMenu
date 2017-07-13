@@ -1,8 +1,10 @@
 package ca.nuba.nubamenu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -102,9 +104,6 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         } else {
             viewHolder.list_item_vegetarian_icon.setVisibility(GONE);
         }
-//        else {
-//            Picasso.with(mContext).load(R.drawable.vg).into(viewHolder.list_item_vegetarian_icon);
-//        }
 
         if (listItem.getVegan()){
             viewHolder.list_item_vegan_icon.setVisibility(VISIBLE);
@@ -112,9 +111,6 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         } else {
             viewHolder.list_item_vegan_icon.setVisibility(GONE);
         }
-//        else {
-//            Picasso.with(mContext).load(R.drawable.veg).into(viewHolder.list_item_vegan_icon);
-//        }
 
         if (listItem.getGlutenFree()){
             viewHolder.list_item_gluten_icon.setVisibility(VISIBLE);
@@ -122,9 +118,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         } else {
             viewHolder.list_item_gluten_icon.setVisibility(GONE);
         }
-//        else {
-//            Picasso.with(mContext).load(R.drawable.gfg).into(viewHolder.list_item_gluten_icon);
-//        }
+
 
 
         viewHolder.list_item_name.setText(listItem.getName());
@@ -143,12 +137,13 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
                 editor.apply();
 
 
-                menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
-//                ActivityOptionsCompat options = ActivityOptionsCompat.
-//                        makeSceneTransitionAnimation(, (View)viewHolder.list_item_icon , "list_item_icon");
-
-//                Intent intent = new Intent(mContext, DetailActivity.class);
-//                mContext.startActivity(intent, options.toBundle());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    //Use transition
+                    menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
+                } else {
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
