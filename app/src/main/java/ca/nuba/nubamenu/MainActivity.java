@@ -1,6 +1,7 @@
 package ca.nuba.nubamenu;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,19 +30,19 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this).setIndicatorsEnabled(false);
         Timber.plant(new Timber.DebugTree());
 
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0f);
         }
 
-        fm = getSupportFragmentManager();
+//        fm = getSupportFragmentManager();
 
         prefs = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
 
-            MainActivityFragment mainActivityFragment = new MainActivityFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, mainActivityFragment)
-                    .addToBackStack("MainFragment")
-                    .commit();
+//        MainActivityFragment mainActivityFragment = new MainActivityFragment();
+//        fm.beginTransaction()
+//                .add(R.id.fragment_container, mainActivityFragment)
+//                .addToBackStack("MainFragment")
+//                .commit();
 
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
@@ -49,9 +50,16 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(FILTER_VEGAN, null);
         editor.putString(FILTER_GLUTEN_FREE, null);
         editor.apply();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+//            getWindow().setExitTransition(new Slide().setDuration(10000));
+//            getWindow().setEnterTransition(new Slide().setDuration(10000));
+//            getWindow().setReenterTransition(new Slide().setDuration(10000));
+//            getWindow().setReturnTransition(new Slide().setDuration(10000));
+
+
+        }
     }
-
-
 
 
     @Override
@@ -63,15 +71,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
-            case R.id.action_settings:{
+        switch (id) {
+            case R.id.action_settings: {
 
             }
-            case R.id.drop_db:{
+            case R.id.drop_db: {
                 Utility.dropDB(this);
             }
         }
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

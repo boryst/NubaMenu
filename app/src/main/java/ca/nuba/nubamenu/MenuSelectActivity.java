@@ -1,6 +1,7 @@
 package ca.nuba.nubamenu;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.TAB_NUMBER_EXTRA;
+import static ca.nuba.nubamenu.Utility.slideOutTransition;
 
 public class MenuSelectActivity extends AppCompatActivity {
 
@@ -15,6 +17,12 @@ public class MenuSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_menu_select);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setEnterTransition(new Slide(Gravity.RIGHT));
+//            getWindow().setExitTransition(new Slide(Gravity.LEFT));
+        }
+//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
 
@@ -27,11 +35,17 @@ public class MenuSelectActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:{
+
+            }
+            case android.R.id.home:{
+                onBackPressed();
+            }
+            default: return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -40,7 +54,12 @@ public class MenuSelectActivity extends AppCompatActivity {
         editor.putInt(TAB_NUMBER_EXTRA, 0);
         editor.apply();
         super.onResume();
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        slideOutTransition(this);
     }
 }

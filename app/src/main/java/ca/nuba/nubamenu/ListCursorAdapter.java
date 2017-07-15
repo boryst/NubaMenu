@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,17 +81,14 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         final ListItem listItem = ListItem.fromCursor(cursor);
 
 
-        //File img = new File(mContext.getFilesDir() + "/" + imageNameCutter(myListItem.getIconPath()));
-        File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
+        //File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
+        File img = new File(mContext.getFilesDir() + "/" + listItem.getPicPath());
         if (!img.exists()){
-            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
-            //Picasso.with(mContext).load("http:/boryst.com/"+myListItem.getPicPath()).into(viewHolder.list_item_icon);
-            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
-
-
-
-            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
-
+//            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
+//            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
+            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getPicPath());
+//            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getPicPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
 
         } else {
             Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);

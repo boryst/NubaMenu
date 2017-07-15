@@ -1,6 +1,7 @@
 package ca.nuba.nubamenu;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
@@ -17,12 +20,13 @@ import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.TAB_NUMBER_EXTRA;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
+import static ca.nuba.nubamenu.Utility.slideOutTransition;
 
 
 public class MenuActivity extends AppCompatActivity {
     public static final String LOG_TAG = MenuActivity.class.getSimpleName();
     String mLocation, mType;
-    int mPage,tabPosition;
+    int mPage, tabPosition;
     private static String F_MENU = "f_menu";
     private FragmentManager fm;
 
@@ -30,7 +34,6 @@ public class MenuActivity extends AppCompatActivity {
 
     TabsAdapter mTabsAdapter;
     ViewPager mViewPager;
-
 
 
     @Override
@@ -53,98 +56,26 @@ public class MenuActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setAdapter(mTabsAdapter);
 
-
-/**        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.v(LOG_TAG,  "Tab number - "+position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });*/
-        //Fragment fr = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + mViewPager.getCurrentItem());
-        //Log.v(LOG_TAG, "current page - "+mViewPager.getCurrentItem());
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
 
-        if (actionBar !=null) {
+        if (actionBar != null) {
             //actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setElevation(0f);
-            setTitle(location+" - "+type);
+            setTitle(location + " - " + type);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Slide(Gravity.RIGHT));
         }
 
 
 
+/* Select tab if needed*/
 
-/** Select tab if needed*/
-
-   TabLayout.Tab tab = tabLayout.getTabAt(tabNumber);
-        if (tab!=null) {
+        TabLayout.Tab tab = tabLayout.getTabAt(tabNumber);
+        if (tab != null) {
             tab.select();
         }
-/*        String title =  String.valueOf(mTabsAdapter.getPageTitleUncut(tabLayout.getSelectedTabPosition() + 1));
-        Log.v(LOG_TAG, "Page title - "+title);
-
-
-        //Log.v(LOG_TAG, "Query - "+ Utility.sNubaMenuWithLike);
-        Cursor mCursor = this.getContentResolver().query(
-                NubaContract.NubaMenuEntry.CONTENT_URI,
-                new String[]{NubaContract.NubaMenuEntry.COLUMN_ICON_PATH},
-                sNubaMenuWithLike,
-                new String[]{title},
-                null);
-
-        if (mCursor != null) {
-            Log.v(LOG_TAG, "Cursor size - "+mCursor.getCount());
-            mCursor.moveToPosition(-1);
-
-            while (mCursor.moveToNext()){
-                //Log.v(LOG_TAG, "image "+mCursor.getPosition()+" - "+mCursor.getString(0));
-                File img = new File(this.getFilesDir() + "/" + imageNameCutter(mCursor.getString(0)));
-                if (!img.exists()) {
-                    Log.v(LOG_TAG, "File http://boryst.com/"+mCursor.getString(0)+" does not exist");
-                    Utility.imageDownload(this, "http://boryst.com/" + mCursor.getString(0), imageNameCutter(mCursor.getString(0)));
-                }
-            }
-            mCursor.close();
-        }*/
-
-
-/**        Intent intent = this.getIntent();
-        if (intent != null) {
-            Bundle extras = intent.getExtras();
-            mLocation = extras.getString("EXTRA_LOCATION");
-            mType = extras.getString("EXTRA_TYPE");
-            mPage = extras.getInt("EXTRA_PAGE",1);
-            setTitle(mLocation + " - " + mType);
-            if (getSupportActionBar() != null){
-                getSupportActionBar().setElevation(0f);
-            }
-        }
-
-
-
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        TabsAdapter tabsAdapter = new TabsAdapter(getSupportFragmentManager(), MenuActivity.this, mLocation, mType);
-        viewPager.setAdapter(tabsAdapter);
-
-
-        // Give the TabLayout the ViewPager
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-        TabLayout.Tab tab = tabLayout.getTabAt(mPage-1);
-        tab.select();*/
     }
 
 
@@ -172,11 +103,20 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
-
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                onBackPressed();
             }
-            default: return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        slideOutTransition(this);
+
     }
 }

@@ -60,7 +60,7 @@ import static ca.nuba.nubamenu.Utility.WEB_IMAGE_STORAGE;
  */
 
 //TODO: refactor names
-public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String ANONYMOUS = "anonymous";
     private static final int RC_SIGN_IN = 1;
@@ -185,7 +185,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         btnWriteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mAuthStateListener != null){
+                if (mAuthStateListener != null) {
                     writeReview();
                 }
             }
@@ -228,7 +228,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         btnOwnDeleteReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mOwnReviewKey != null){
+                if (mOwnReviewKey != null) {
                     deleteReview(mOwnReviewKey);
                 }
             }
@@ -250,7 +250,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor != null){
+        if (cursor != null) {
             cursor.moveToFirst();
 
             String picturePath = cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH);
@@ -264,10 +264,25 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             //Assign data to views
 
             File img = new File(getActivity().getFilesDir() + "/" + picturePath);
-            if (!img.exists()){
+            if (!img.exists()) {
                 //Load image from server and download it
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
-                Picasso.with(getActivity()).load(WEB_IMAGE_STORAGE + picturePath).placeholder(R.drawable.progress_animation).into(ivPicture);
+                Picasso.with(getActivity())
+                        .load(WEB_IMAGE_STORAGE + picturePath)
+                        .placeholder(R.drawable.progress_animation)
+                        .into(ivPicture, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                getActivity().supportStartPostponedEnterTransition();
+                            }
+
+                            @Override
+                            public void onError() {
+
+                                Timber.v("Fail to load");
+                                getActivity().supportStartPostponedEnterTransition();
+                            }
+                        });
             } else {
                 //Load image from local storage
 //                Picasso.with(getActivity()).load(img).into(ivPicture);
@@ -282,30 +297,32 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                             @Override
                             public void onError() {
+
+                                Timber.v("Fail to load");
                                 getActivity().supportStartPostponedEnterTransition();
                             }
                         });
             }
 
             tvName.setText(name);
-            String formatedPrice = "$" +String.format(Locale.CANADA, "%.2f", price);
+            String formatedPrice = "$" + String.format(Locale.CANADA, "%.2f", price);
             tvPrice.setText(formatedPrice);
 
-            if (v){
+            if (v) {
                 Picasso.with(getActivity()).load(R.drawable.v).into(ivV);
-            } else{
+            } else {
                 ivV.setVisibility(View.GONE);
             }
 
-            if (ve){
+            if (ve) {
                 Picasso.with(getActivity()).load(R.drawable.ve).into(ivVe);
-            } else{
+            } else {
                 ivVe.setVisibility(View.GONE);
             }
 
-            if (gf){
+            if (gf) {
                 Picasso.with(getActivity()).load(R.drawable.gf).into(ivGf);
-            } else{
+            } else {
                 ivGf.setVisibility(View.GONE);
             }
 
@@ -370,7 +387,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 float reviewRating = reviewRatingBar.getRating();
 
                 Map<String, Object> map = new HashMap<>();
-                map.put("author",mUsername);
+                map.put("author", mUsername);
                 map.put("reviewText", reviewText);
                 map.put("rating", reviewRating);
                 map.put("userId", mUserId);
@@ -421,8 +438,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN){
-            if (resultCode == RESULT_OK){
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
 
                 boolean isThere = false;
                 Review ownReview = new Review();
@@ -441,7 +458,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         break;
                     }
                 }
-                if (isThere){
+                if (isThere) {
                     //If there is a review left before, let it to be edited
                     rlOwnReview.setVisibility(View.VISIBLE);
 
@@ -460,19 +477,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 btnSignIn.setVisibility(View.GONE);
                 btnSignOut.setVisibility(View.VISIBLE);
 
-            } else if (resultCode == RESULT_CANCELED){
+            } else if (resultCode == RESULT_CANCELED) {
                 detachAuthStateListener();
             }
         }
     }
 
-    private void initializeDatabaseReadListener(){
+    private void initializeDatabaseReadListener() {
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Review review = dataSnapshot.getValue(Review.class);
-                    if (review.getUserId().equals(mUserId)){
+                    if (review.getUserId().equals(mUserId)) {
                         rlOwnReview.setVisibility(View.VISIBLE);
 
                         mOwnReviewKey = dataSnapshot.getKey();
@@ -495,13 +512,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Timber.v("--Child changed");
-                    Timber.v("--onChildChanged.key - "+dataSnapshot.getKey());
+                    Timber.v("--onChildChanged.key - " + dataSnapshot.getKey());
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                     Timber.v("--onChildRemoved");
-                    Timber.v("--onChildRemoved.key - "+dataSnapshot.getKey());
+                    Timber.v("--onChildRemoved.key - " + dataSnapshot.getKey());
                 }
 
                 @Override
@@ -515,8 +532,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         }
     }
 
-    private void initializeAvgRatingReadListener(){
-        if (mValueAvgRatingListener == null){
+    private void initializeAvgRatingReadListener() {
+        if (mValueAvgRatingListener == null) {
             mValueAvgRatingListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -547,7 +564,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
     private void initializeAuthListener() {
-        if (mAuthStateListener == null){
+        if (mAuthStateListener == null) {
             mAuthStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -561,13 +578,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
 
-    private void initializeAuthListenerForUserId(){
+    private void initializeAuthListenerForUserId() {
 
         mAuthStateListenerForUserName = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
                     mReviewsRecyclerAdapter.setUserId(mUserId);
                     btnSignIn.setVisibility(View.GONE);
@@ -579,15 +596,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         };
     }
 
-    private void attachAuthStateListener(){
+    private void attachAuthStateListener() {
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
-    private  void attachAvgRatingReadListener(){
+    private void attachAvgRatingReadListener() {
         mMenuItemAvgRatingReference.addValueEventListener(mValueAvgRatingListener);
     }
 
-    private void attachDatabaseReadListener(){
+    private void attachDatabaseReadListener() {
         mReviewsDatabaseReference.addChildEventListener(mChildEventListener);
     }
 
@@ -596,15 +613,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
 
-
-    private void detachAuthStateListener(){
+    private void detachAuthStateListener() {
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
     }
 
-    private void detachDatabaseReadListener(){
-        if (mChildEventListener != null){
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
             mReviewsDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
             mReviewsList.clear();
@@ -612,39 +628,39 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         }
     }
 
-    private void detachAvgRatingReadListener(){
-        if (mValueAvgRatingListener != null){
+    private void detachAvgRatingReadListener() {
+        if (mValueAvgRatingListener != null) {
             mMenuItemAvgRatingReference.removeEventListener(mValueAvgRatingListener);
             mValueAvgRatingListener = null;
         }
     }
 
-    private void detachAuthStateListenerForUserId(){
-        if (mAuthStateListenerForUserName != null){
+    private void detachAuthStateListenerForUserId() {
+        if (mAuthStateListenerForUserName != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListenerForUserName);
         }
     }
 
-    private void terminateAuthStateListener(){
+    private void terminateAuthStateListener() {
         if (mAuthStateListener != null) {
             mAuthStateListener = null;
         }
     }
 
 
-    private void onSignedInInitialize(String username, String userId){
+    private void onSignedInInitialize(String username, String userId) {
         mUsername = username;
         mUserId = userId;
     }
 
-    private void onSignOutCleanUp(){
+    private void onSignOutCleanUp() {
         Review myReview = new Review(mUsername, String.valueOf(tvOwnReviewText.getText()), rbOwnReviewRaring.getRating(), mUserId);
 
         mUsername = ANONYMOUS;
         mUserId = ANONYMOUS;
 
         rlOwnReview.setVisibility(View.GONE);
-        
+
         btnSignOut.setVisibility(View.GONE);
         btnSignIn.setVisibility(View.VISIBLE);
         btnWriteReview.setVisibility(View.GONE);

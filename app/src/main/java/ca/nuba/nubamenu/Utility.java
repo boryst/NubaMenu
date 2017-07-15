@@ -13,7 +13,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageButton;
 
@@ -401,6 +403,13 @@ public class Utility {
         return imageNameCutter(fileName).replace(".png","");
     }
 
+    public static void slideInTransition(FragmentActivity activity){
+        activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    public static void slideOutTransition(AppCompatActivity activity){
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
 
 
 }

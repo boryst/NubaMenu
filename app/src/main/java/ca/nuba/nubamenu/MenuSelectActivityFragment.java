@@ -2,11 +2,13 @@ package ca.nuba.nubamenu;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,7 @@ import static ca.nuba.nubamenu.Utility.TYPE_BRUNCH;
 import static ca.nuba.nubamenu.Utility.TYPE_DINNER;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 import static ca.nuba.nubamenu.Utility.TYPE_LUNCH;
+import static ca.nuba.nubamenu.Utility.slideInTransition;
 
 
 /**
@@ -93,37 +96,36 @@ public class MenuSelectActivityFragment extends Fragment {
 
 
 /**        if (intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA) != null) {
-            upLocation = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
-        }
+ upLocation = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
+ }
 
-        kflag = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
+ kflag = intent.getStringExtra(MainActivityFragment.LOCATION_EXTRA);
 
-        if (kflag != null) {
-            extras.putString(MainActivityFragment.LOCATION_EXTRA, kflag);
-        } else if (upLocation != null) {
-            extras.putString(MainActivityFragment.LOCATION_EXTRA, upLocation);
+ if (kflag != null) {
+ extras.putString(MainActivityFragment.LOCATION_EXTRA, kflag);
+ } else if (upLocation != null) {
+ extras.putString(MainActivityFragment.LOCATION_EXTRA, upLocation);
 
-        }*/
+ }*/
 
         // if flag = brunch - load brunch layout
 /**            if ((kflag != null) && (kflag.equals("Kitsilano")) || ((upLocation != null) && upLocation.equals("k"))){
-                rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
-                imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
-                Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
+ rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
+ imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
+ Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
 
-                imgBtnBrunch.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        extras.putString(TYPE_EXTRA, "Brunch");
-                        Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
-                        startActivity(intent);
-                    }
-                });
-            } else {
-                rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
-            }*/
+ imgBtnBrunch.setOnClickListener(new View.OnClickListener() {
+@Override public void onClick(View v) {
+extras.putString(TYPE_EXTRA, "Brunch");
+Intent intent = new Intent(getActivity(), MenuActivity.class).putExtras(extras);
+startActivity(intent);
+}
+});
+ } else {
+ rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
+ }*/
 
-        if (location !=null && location.equals(LOCATION_KITSILANO)){
+        if (location != null && location.equals(LOCATION_KITSILANO)) {
             rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
             imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
             Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
@@ -138,14 +140,19 @@ public class MenuSelectActivityFragment extends Fragment {
                     editor.putString(TYPE_EXTRA, TYPE_BRUNCH);
                     editor.apply();
                     //Intent intent1 = new Intent(getActivity(), MenuActivity.class).putExtra(TYPE_EXTRA, TYPE_BRUNCH);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setExitTransition(new Slide());
+                    }
+//                    startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity()).toBundle());
                     startActivity(intent);
+//                    getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                    slideInTransition(getActivity());
+
                 }
             });
         } else {
             rootView = inflater.inflate(R.layout.fragment_menu_select, container, false);
         }
-
-
 
 
         imgBtnLunch = (ImageButton) rootView.findViewById(R.id.nubaMenuLunch);
@@ -154,13 +161,12 @@ public class MenuSelectActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 extras.putString(TYPE_EXTRA, TYPE_LUNCH);
-                //flag = "lunch";
                 Intent intent = new Intent(getActivity(), MenuActivity.class);
-//                intent.putExtras(extras);
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(TYPE_EXTRA, TYPE_LUNCH);
                 editor.apply();
                 startActivity(intent);
+                slideInTransition(getActivity());
             }
         });
 
@@ -170,13 +176,12 @@ public class MenuSelectActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 extras.putString(TYPE_EXTRA, TYPE_DINNER);
-                //flag = "dinner";
                 Intent intent = new Intent(getActivity(), MenuActivity.class);
-//                intent.putExtras(extras);
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
                 editor.putString(TYPE_EXTRA, TYPE_DINNER);
                 editor.apply();
                 startActivity(intent);
+                slideInTransition(getActivity());
             }
         });
 
@@ -184,37 +189,39 @@ public class MenuSelectActivityFragment extends Fragment {
     }
 
 
-/**    public void imageButtonPressEffect(ImageButton button, int picture){
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-
-            //Drawable firstLayer = getResources().getDrawable(R.drawable.nubag);
-            Drawable firstLayer = getResources().getDrawable(picture);
-
-
-            GradientDrawable secondLayer = new GradientDrawable(
-                    GradientDrawable.Orientation.TL_BR, new int[]{
-                    getResources().getColor(R.color.gradientAccent),
-                    getResources().getColor(R.color.gradientAccent),
-                    getResources().getColor(R.color.gradientPrimary)});
-
-            Drawable[] layers = new Drawable[]{firstLayer, secondLayer};
-
-
-            LayerDrawable ld = new LayerDrawable(layers);
-            StateListDrawable states = new StateListDrawable();
-            states.addState(new int[] {android.R.attr.state_pressed}, ld);
-            states.addState(new int[] {android.R.attr.state_focused}, ld);
-            states.addState(new int[]{}, firstLayer);
-
-            button.setImageDrawable(states);
-
-
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ColorStateList csl = ColorStateList.valueOf(getResources().getColor(R.color.primary));
-            RippleDrawable d = new RippleDrawable(csl, getResources().getDrawable(picture), null);
-            button.setImageDrawable(d);
-        }
-    }*/
+    /**
+     * public void imageButtonPressEffect(ImageButton button, int picture){
+     * if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+     * <p>
+     * //Drawable firstLayer = getResources().getDrawable(R.drawable.nubag);
+     * Drawable firstLayer = getResources().getDrawable(picture);
+     * <p>
+     * <p>
+     * GradientDrawable secondLayer = new GradientDrawable(
+     * GradientDrawable.Orientation.TL_BR, new int[]{
+     * getResources().getColor(R.color.gradientAccent),
+     * getResources().getColor(R.color.gradientAccent),
+     * getResources().getColor(R.color.gradientPrimary)});
+     * <p>
+     * Drawable[] layers = new Drawable[]{firstLayer, secondLayer};
+     * <p>
+     * <p>
+     * LayerDrawable ld = new LayerDrawable(layers);
+     * StateListDrawable states = new StateListDrawable();
+     * states.addState(new int[] {android.R.attr.state_pressed}, ld);
+     * states.addState(new int[] {android.R.attr.state_focused}, ld);
+     * states.addState(new int[]{}, firstLayer);
+     * <p>
+     * button.setImageDrawable(states);
+     * <p>
+     * <p>
+     * } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+     * ColorStateList csl = ColorStateList.valueOf(getResources().getColor(R.color.primary));
+     * RippleDrawable d = new RippleDrawable(csl, getResources().getDrawable(picture), null);
+     * button.setImageDrawable(d);
+     * }
+     * }
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -231,9 +238,9 @@ public class MenuSelectActivityFragment extends Fragment {
         location = prefs.getString(LOCATION_EXTRA, null);
         getActivity().setTitle(location);
 
-        if (fm.getBackStackEntryCount() > 0){
+        if (fm.getBackStackEntryCount() > 0) {
             ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
-            if (ab != null){
+            if (ab != null) {
                 ab.setDisplayHomeAsUpEnabled(true);
             }
         }
@@ -243,13 +250,14 @@ public class MenuSelectActivityFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
-                if (fm.getBackStackEntryCount() > 0){
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack();
                 }
             }
-            default: return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
