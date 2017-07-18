@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -74,6 +75,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private List<Review> mReviewsList;
     private List<String> mReviewsKey;
     private float mRating, mOwnReviewRating;
+    private Bundle extras;
 
     //Views
     private ImageView ivPicture, ivV, ivVe, ivGf;
@@ -101,6 +103,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
 
         getActivity().supportPostponeEnterTransition();
+        if (getActivity().getIntent() != null){
+            extras = getActivity().getIntent().getExtras();
+        }
+
 
         setHasOptionsMenu(true);
         mUsername = ANONYMOUS;
@@ -181,6 +187,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setAdapter(mReviewsRecyclerAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ivPicture.setTransitionName(extras.getString("transition_name"));
+        }
 
         btnWriteReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +272,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
             //Assign data to views
 
-            File img = new File(getActivity().getFilesDir() + "/" + picturePath);
+            final File img = new File(getActivity().getFilesDir() + "/" + picturePath);
             if (!img.exists()) {
                 //Load image from server and download it
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
@@ -280,7 +289,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                             public void onError() {
 
                                 Timber.v("Fail to load");
-                                getActivity().supportStartPostponedEnterTransition();
+//                                getActivity().supportStartPostponedEnterTransition();
                             }
                         });
             } else {
@@ -293,12 +302,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                             @Override
                             public void onSuccess() {
                                 getActivity().supportStartPostponedEnterTransition();
+                                Timber.v("img - "+String.valueOf(img));
                             }
-
                             @Override
                             public void onError() {
-
-                                Timber.v("Fail to load");
                                 getActivity().supportStartPostponedEnterTransition();
                             }
                         });

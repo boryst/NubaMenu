@@ -88,7 +88,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
 
 
         try {
-            Log.v(LOG_TAG, "nubaMenuJsonStr - "+nubaMenuJsonStr);
+//            Log.v(LOG_TAG, "nubaMenuJsonStr - "+nubaMenuJsonStr);
 
             final String NUBA_NAME = "name";
             final String NUBA_PRICE = "price";
@@ -125,7 +125,7 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_LOCATION, menuInfo.getString((NUBA_LOCATION)));
 
                     mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
-                    Log.v(LOG_TAG, "Inserting");
+//                    Log.v(LOG_TAG, "Inserting");
                 }
             }
         } catch (JSONException e) {

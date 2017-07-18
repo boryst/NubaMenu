@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
@@ -521,6 +522,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     public void onMenuItemClick(ImageView sharedImageView) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("transition_name", ViewCompat.getTransitionName(sharedImageView));
+        Timber.v("Transition name - "+ViewCompat.getTransitionName(sharedImageView));
 
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 getActivity(),

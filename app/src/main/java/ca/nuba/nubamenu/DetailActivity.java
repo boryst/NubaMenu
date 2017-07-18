@@ -1,9 +1,12 @@
 package ca.nuba.nubamenu;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import timber.log.Timber;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String LOG_TAG = DetailActivity.class.getSimpleName();
@@ -41,19 +44,22 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-/*        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                //NavUtils.navigateUpFromSameTask(this);
-                //TODO: send back the number of tab so we can return to the tab we left from
-                NavUtils.navigateUpTo(this, NavUtils.getParentActivityIntent(this)
-                        .putExtra("EXTRA_LOCATION", mLocation)
-                        .putExtra("EXTRA_TYPE", mType)
-                        .putExtra("EXTRA_PAGE", mPage));
+        switch (item.getItemId()) {
+            case android.R.id.home:{
+                Timber.v("home pressed");
+                onBackPressed();
+            }
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
 
-
-                return true;
-        }*/
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void onBackPressed() {
+        Timber.v("back pressed");
+        super.onBackPressed();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            
+        }
+//        slideOutTransition(this);
     }
 }

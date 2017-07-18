@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,18 +82,22 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         final ListItem listItem = ListItem.fromCursor(cursor);
 
 
-        //File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
-        File img = new File(mContext.getFilesDir() + "/" + listItem.getPicPath());
+        File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
+
+        ViewCompat.setTransitionName(viewHolder.list_item_icon, listItem.getName()+listItem.getId());
+//        File img = new File(mContext.getFilesDir() + "/" + listItem.getPicPath());
         if (!img.exists()){
 //            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
-//            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
-            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getPicPath());
-//            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
-            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getPicPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
+//            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getPicPath());
+            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+//            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getPicPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
 
         } else {
+//            Timber.v("Loading");
             Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);
         }
+
 
         if (listItem.getVegetarian()){
             viewHolder.list_item_vegetarian_icon.setVisibility(VISIBLE);
@@ -135,6 +140,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     //Use transition
+//                    menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
                     menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
                 } else {
                     Intent intent = new Intent(mContext, DetailActivity.class);

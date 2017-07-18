@@ -34,7 +34,11 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0f);
         }
 
-//        fm = getSupportFragmentManager();
+        for (String file : getFilesDir().list()){
+            Timber.v("File - "+ file+"\n");
+        }
+
+        //        fm = getSupportFragmentManager();
 
         prefs = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
 
