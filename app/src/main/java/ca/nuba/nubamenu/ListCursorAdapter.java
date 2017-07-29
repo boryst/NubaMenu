@@ -84,7 +84,8 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
 
         File img = new File(mContext.getFilesDir() + "/" + listItem.getIconPath());
 
-        ViewCompat.setTransitionName(viewHolder.list_item_icon, listItem.getName()+listItem.getId());
+        ViewCompat.setTransitionName(viewHolder.list_item_icon, listItem.getName() + listItem.getId());
+
 //        File img = new File(mContext.getFilesDir() + "/" + listItem.getPicPath());
         if (!img.exists()){
 //            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
