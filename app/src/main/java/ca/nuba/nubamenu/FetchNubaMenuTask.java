@@ -88,8 +88,6 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
 
 
         try {
-//            Log.v(LOG_TAG, "nubaMenuJsonStr - "+nubaMenuJsonStr);
-
             final String NUBA_NAME = "name";
             final String NUBA_PRICE = "price";
             final String NUBA_V = "v";
@@ -100,7 +98,9 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
             final String NUBA_ICON_PATH = "icon_path";
             final String NUBA_WED_ID = "web_id";
             final String NUBA_LOCATION = "location";
-
+            final String NUBA_MODIFIFER = "modifier";
+            final String NUBA_START_DATE = "start_date";
+            final String NUBA_END_DATE = "end_date";
 
             JSONObject menuDataJason = new JSONObject(nubaMenuJsonStr);
 
@@ -123,9 +123,11 @@ public class FetchNubaMenuTask extends AsyncTask<String, Void, Void> {
                     contentValues.put(NubaMenuEntry.COLUMN_ICON_PATH, Utility.imageNameCutter(menuInfo.getString(NUBA_ICON_PATH)));
                     contentValues.put(NubaMenuEntry.COLUMN_WEB_ID, menuInfo.getInt(NUBA_WED_ID));
                     contentValues.put(NubaMenuEntry.COLUMN_LOCATION, menuInfo.getString((NUBA_LOCATION)));
+                    contentValues.put(NubaMenuEntry.COLUMN_MODIFIER, menuInfo.getString((NUBA_MODIFIFER)));
+                    contentValues.put(NubaMenuEntry.COLUMN_START_DATE, menuInfo.getString((NUBA_START_DATE)));
+                    contentValues.put(NubaMenuEntry.COLUMN_END_DATE, menuInfo.getString((NUBA_END_DATE)));
 
                     mContext.getContentResolver().insert(NubaMenuEntry.CONTENT_URI, contentValues);
-//                    Log.v(LOG_TAG, "Inserting");
                 }
             }
         } catch (JSONException e) {

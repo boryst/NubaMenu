@@ -31,8 +31,12 @@ public class NubaDbHelper extends SQLiteOpenHelper {
                 NubaMenuEntry.COLUMN_DESCRIPTION+" TEXT NOT NULL, "+
                 NubaMenuEntry.COLUMN_PIC_PATH+" TEXT NOT NULL, "+
                 NubaMenuEntry.COLUMN_ICON_PATH+" TEXT NOT NULL, "+
-                NubaMenuEntry.COLUMN_WEB_ID+" INT NOT NULL,"+
-                NubaMenuEntry.COLUMN_LOCATION+" TEXT NOT NULL"+
+                NubaMenuEntry.COLUMN_WEB_ID+" INT NOT NULL, "+
+                NubaMenuEntry.COLUMN_LOCATION+" TEXT NOT NULL, "+
+                NubaMenuEntry.COLUMN_MODIFIER+" TEXT NOT NULL, "+
+                NubaMenuEntry.COLUMN_START_DATE+" TEXT NOT NULL, "+
+                NubaMenuEntry.COLUMN_END_DATE+" TEXT NOT NULL"+
+
                 ");";
 
         db.execSQL(SQL_CREATE_NUBA_MENU_TABLE);

@@ -130,7 +130,11 @@ public class Utility {
             NubaContract.NubaMenuEntry.COLUMN_PIC_PATH,
             NubaContract.NubaMenuEntry.COLUMN_ICON_PATH,
             NubaContract.NubaMenuEntry.COLUMN_WEB_ID,
-            NubaMenuEntry.COLUMN_LOCATION
+            NubaMenuEntry.COLUMN_LOCATION,
+            NubaMenuEntry.COLUMN_MODIFIER,
+            NubaMenuEntry.COLUMN_START_DATE,
+            NubaMenuEntry.COLUMN_END_DATE
+
     };
 
     public static final int COL_NUBA_MENU_ID = 0;
@@ -145,6 +149,11 @@ public class Utility {
     public static final int COL_NUBA_MENU_ICON_PATH = 9;
     public static final int COL_NUBA_WEB_ID = 10;
     public static final int COL_NUBA_LOCATION = 11;
+    public static final int COL_NUBA_MODIFIFER = 12;
+    public static final int COL_NUBA_START_DATE = 13;
+    public static final int COL_NUBA_END_DATE = 14;
+
+
 
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -410,6 +419,5 @@ public class Utility {
     public static void slideOutTransition(AppCompatActivity activity){
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
-
 
 }

@@ -48,6 +48,11 @@ public class NubaFirebaseMessagingService extends FirebaseMessagingService {
                 contentValues.put(NubaMenuEntry.COLUMN_GLUTEN_FREE, remoteMessage.getData().get("last_update"));
                 contentValues.put(NubaMenuEntry.COLUMN_WEB_ID, remoteMessage.getData().get("id"));
                 contentValues.put(NubaMenuEntry.COLUMN_LOCATION, remoteMessage.getData().get("location"));
+                contentValues.put(NubaMenuEntry.COLUMN_MODIFIER, remoteMessage.getData().get("modifier"));
+                contentValues.put(NubaMenuEntry.COLUMN_START_DATE, remoteMessage.getData().get("start_date"));
+                contentValues.put(NubaMenuEntry.COLUMN_END_DATE, remoteMessage.getData().get("end_date"));
+
+
 
                 if (remoteMessage.getData().get("title").equals("insert")) {
                     Log.v(LOG_TAG, "Inserting:  "+remoteMessage.getData());

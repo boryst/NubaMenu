@@ -32,6 +32,10 @@ public class NubaContract {
          public static final String COLUMN_ICON_PATH = "icon_path";
          public static final String COLUMN_WEB_ID = "web_id";
          public static final String COLUMN_LOCATION = "location";
+         public static final String COLUMN_MODIFIER = "modifier";
+         public static final String COLUMN_START_DATE = "start_date";
+         public static final String COLUMN_END_DATE = "end_date";
+
 
          public static Uri buildNubaMenuUriWithID(long id){
             /**  content://ca.nuba.nubamenu/nuba_menu/id  */
