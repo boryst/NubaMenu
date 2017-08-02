@@ -49,7 +49,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView list_item_icon, list_item_vegetarian_icon, list_item_vegan_icon, list_item_gluten_icon;
+        public ImageView list_item_icon, list_item_vegetarian_icon, list_item_vegan_icon, list_item_gluten_icon, list_item_modifier;
         public TextView list_item_name, list_item_price;
         public View basicView;
         public ProgressBar progressBar;
@@ -64,6 +64,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
             list_item_gluten_icon = (ImageView) view.findViewById(R.id.list_item_gluten_icon);
             list_item_name = (TextView) view.findViewById(R.id.list_item_name);
             list_item_price = (TextView) view.findViewById(R.id.list_item_price);
+            list_item_modifier = (ImageView) view.findViewById(R.id.list_item_modifier);
 
         }
     }
@@ -149,5 +150,16 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
                 }
             }
         });
+
+        if (listItem.getModifier().equals("new")){
+            viewHolder.list_item_modifier.setImageResource(R.drawable.ic_new);
+            viewHolder.list_item_modifier.setVisibility(VISIBLE);
+        } else  if (listItem.getModifier().equals("feature")){
+            viewHolder.list_item_modifier.setImageResource(R.drawable.ic_feature);
+            viewHolder.list_item_modifier.setVisibility(VISIBLE);
+        } else  {
+            viewHolder.list_item_modifier.setVisibility(GONE);
+        }
+
     }
 }

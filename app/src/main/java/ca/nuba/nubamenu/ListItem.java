@@ -10,6 +10,16 @@ public class ListItem {
     private Boolean vegan;
     private int id;
 
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
+    }
+
+    private String modifier;
+
     public int getWebId() {
         return webId;
     }
@@ -107,7 +117,7 @@ public class ListItem {
         listItem.setPicPath(cursor.getString(Utility.COL_NUBA_MENU_PIC_PATH));
         listItem.setIconPath(cursor.getString(Utility.COL_NUBA_MENU_ICON_PATH));
         listItem.setWebId(cursor.getInt(Utility.COL_NUBA_WEB_ID));
-
+        listItem.setModifier(cursor.getString(Utility.COL_NUBA_MODIFIFER));
 
         return listItem;
     }
