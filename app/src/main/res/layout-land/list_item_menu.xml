@@ -62,6 +62,14 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="5dp"
                     />
+                <ImageView
+                    android:id="@+id/list_item_modifier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"
+                    />
             </LinearLayout>
         </LinearLayout>
 
