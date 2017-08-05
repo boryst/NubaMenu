@@ -16,7 +16,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -151,9 +150,9 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             //Log.v(LOG_TAG, mPageName+" is visible now");
 
             if (mPageName != null){
-                Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
-                Log.v(LOG_TAG, "String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
-                Log.v(LOG_TAG, "String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
+//                Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
+//                Log.v(LOG_TAG, "String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
+//                Log.v(LOG_TAG, "String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
 
 
                 if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
@@ -182,9 +181,9 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 } else mFilter = null;
 
 
-                Log.v(LOG_TAG, "After: String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
-                Log.v(LOG_TAG, "After: String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
-                Log.v(LOG_TAG, "After: String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
+//                Log.v(LOG_TAG, "After: String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
+//                Log.v(LOG_TAG, "After: String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
+//                Log.v(LOG_TAG, "After: String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
 
                 checkFilters(vFilter, veFilter, gfFilter);
 
@@ -197,6 +196,19 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                         null
                 );
                 listCursorAdapter.swapCursor(cursor);
+
+//                double seconds = System.currentTimeMillis() / 1000;
+//                while (cursor.moveToNext()){
+//
+//                    Timber.v(cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_START_DATE)+
+//                            " < "+seconds+ " < "+cursor.getString(COL_NUBA_END_DATE));
+//                    if (cursor.getDouble(COL_NUBA_START_DATE) < seconds && cursor.getDouble(COL_NUBA_END_DATE) > seconds){
+//                        Timber.v("YES");
+//                    } else {
+//                        Timber.v("NO");
+//                    }
+//                }
+
             }
 
         } else {
@@ -428,7 +440,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                     mFilter = true;
                     vFilter = false;
                     veFilter = false;
-                    Log.v(LOG_TAG, "here");
+//                    Log.v(LOG_TAG, "here");
 /*                    vFilter = null;
                     veFilter = null;*/
                 } else {
@@ -511,11 +523,16 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         listCursorAdapter.swapCursor(cursor);
+
+//        double seconds = System.currentTimeMillis() / 1000;
 //        while (cursor.moveToNext()){
-//            if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
-//
+//            Timber.v(cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_START_DATE)+
+//            " < "+seconds+ " < "+cursor.getString(COL_NUBA_END_DATE));
+//            if (cursor.getDouble(COL_NUBA_START_DATE) < seconds && cursor.getDouble(COL_NUBA_END_DATE) > seconds){
+//                Timber.v("YES");
+//            } else {
+//                Timber.v("NO");
 //            }
-//            Timber.v(cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_MODIFIFER));
 //        }
 
     }

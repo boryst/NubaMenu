@@ -25,15 +25,18 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 import ca.nuba.nubamenu.data.NubaContract;
 import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 import ca.nuba.nubamenu.data.NubaDbHelper;
 
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_END_DATE;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_LOCATION;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_MODIFIER;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_START_DATE;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_VEGAN;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN;
 import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.TABLE_NAME;
@@ -434,8 +437,15 @@ public class Utility {
 //                TABLE_NAME+"."+ COLUMN_LOCATION + " LIKE \"all\" ) ORDER BY "+COLUMN_MODIFIER+" DESC";
 //    }
 public static String addLocationToSql(String sql){
+    Calendar calendar = Calendar.getInstance();
+    double seconds = calendar.getTimeInMillis() / 1000;
+//    Timber.v("seconds - "+seconds);
     return sql+" AND ("+ TABLE_NAME+"."+COLUMN_LOCATION + " LIKE ? OR "+
-            TABLE_NAME+"."+ COLUMN_LOCATION + " LIKE \"all\" ) ORDER BY CASE WHEN "+TABLE_NAME+"."+COLUMN_MODIFIER+" = \"feature\" THEN 1 " +
+            TABLE_NAME+"."+ COLUMN_LOCATION + " LIKE \"all\" )"+
+            " AND (("+TABLE_NAME+"."+COLUMN_START_DATE+" < "+seconds+
+            " AND "+TABLE_NAME+"."+COLUMN_END_DATE+" > "+seconds+") OR ("+
+            TABLE_NAME+"."+COLUMN_START_DATE+" = "+TABLE_NAME+"."+COLUMN_END_DATE+" ))"+
+            " ORDER BY CASE WHEN "+TABLE_NAME+"."+COLUMN_MODIFIER+" = \"feature\" THEN 1 " +
             "WHEN "+TABLE_NAME+"."+COLUMN_MODIFIER+" = \"new\" THEN 2 ELSE 3 END, "+TABLE_NAME+"."+COLUMN_MODIFIER;
 }
 

@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
 //        Timber.v("Original SQL - "+sNubaMenuWithGfFilter);
 ////
 //        Timber.v("Formated SQL - "+addLocationToSql(sNubaMenuWithGfFilter));
-
-
-
     }
 
 
