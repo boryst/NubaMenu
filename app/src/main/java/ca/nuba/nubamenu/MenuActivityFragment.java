@@ -24,7 +24,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import ca.nuba.nubamenu.data.NubaContract;
-import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
@@ -252,33 +251,33 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                     selection = addLocationToSql(sNubaMenuWithLike);
 //                    selectionArgs = null;
                     selectionArgs = new String[]{mPageName, location};
-                    Timber.v("Location - "+location);
-                    Log.v(LOG_TAG, "Selection - default");
+//                    Timber.v("Location - "+location);
+//                    Log.v(LOG_TAG, "Selection - default");
                 } else {
-                    selection = sNubaMenuWithGfFilter; // selection with gf
-                    selectionArgs = new String[]{mPageName, String.valueOf(gf)};
-                    Log.v(LOG_TAG, "Selection - gf");
+                    selection = addLocationToSql(sNubaMenuWithGfFilter); // selection with gf
+                    selectionArgs = new String[]{mPageName, String.valueOf(gf), location};
+//                    Log.v(LOG_TAG, "Selection - gf");
                 }
             } else if (gf == null){
-                selection = sNubaMenuWithVeFilter;//selection with ve
-                selectionArgs = new String[]{mPageName, String.valueOf(ve)};
-                Log.v(LOG_TAG, "Selection - ve");
+                selection = addLocationToSql(sNubaMenuWithVeFilter);//selection with ve
+                selectionArgs = new String[]{mPageName, String.valueOf(ve), location};
+//                Log.v(LOG_TAG, "Selection - ve");
             } else {
-                selection = sNubaMenuWithVeGfFilter;//selection with ve and gf
-                selectionArgs = new String[]{mPageName, String.valueOf(ve), String.valueOf(gf)};
-                Log.v(LOG_TAG, "Selection - ve +  gf");
+                selection = addLocationToSql(sNubaMenuWithVeGfFilter);//selection with ve and gf
+                selectionArgs = new String[]{mPageName, String.valueOf(ve), String.valueOf(gf), location};
+//                Log.v(LOG_TAG, "Selection - ve +  gf");
             }
         }
 
         else if (!v) {
             if (gf == null){
-                selection = sNubaMenuWithVVeFilter; //selection with v and ve
-                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve)};
-                Log.v(LOG_TAG, "Selection - !v + !ve aka Meat");
+                selection = addLocationToSql(sNubaMenuWithVVeFilter); //selection with v and ve
+                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve), location};
+//                Log.v(LOG_TAG, "Selection - !v + !ve aka Meat");
             } else {
-                selection = sNubaMenuWithVVeGfFilter; // selection v + ve + gf
-                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf)};
-                Log.v(LOG_TAG + mPageName, "Selection - !v + !ve + gf aka Meat + gf");
+                selection = addLocationToSql(sNubaMenuWithVVeGfFilter); // selection v + ve + gf
+                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf), location};
+//                Log.v(LOG_TAG + mPageName, "Selection - !v + !ve + gf aka Meat + gf");
             }
 
         }
@@ -286,26 +285,26 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 
         else if (ve == null){
             if (gf == null){
-                selection = sNubaMenuWithVFilter; //selection with v
-                selectionArgs = new String[]{mPageName, String.valueOf(v)};
-                Log.v(LOG_TAG, "Selection - v");
+                selection = addLocationToSql(sNubaMenuWithVFilter); //selection with v
+                selectionArgs = new String[]{mPageName, String.valueOf(v), location};
+//                Log.v(LOG_TAG, "Selection - v");
             } else {
-                selection = sNubaMenuWithVGfFilter; //selection with v ang gf
-                selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(gf)};
-                Log.v(LOG_TAG, "Selection - v + gf");
+                selection = addLocationToSql(sNubaMenuWithVGfFilter); //selection with v ang gf
+                selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(gf), location};
+//                Log.v(LOG_TAG, "Selection - v + gf");
             }
 
         }
 
 
         else if (gf == null){
-            selection = sNubaMenuWithVVeFilter; //selection with v and ve
-            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve)};
-            Log.v(LOG_TAG, "Selection - v + ve");
+            selection = addLocationToSql(sNubaMenuWithVVeFilter); //selection with v and ve
+            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve), location};
+//            Log.v(LOG_TAG, "Selection - v + ve");
         } else {
-            selection = sNubaMenuWithVVeGfFilter; // selection v + ve + gf
-            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf)};
-            Log.v(LOG_TAG + mPageName, "Selection - v + ve + gf");
+            selection = addLocationToSql(sNubaMenuWithVVeGfFilter); // selection v + ve + gf
+            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf), location};
+//            Log.v(LOG_TAG + mPageName, "Selection - v + ve + gf");
         }
     }
 
@@ -454,9 +453,9 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 editor.putString(FILTER_VEGAN, String.valueOf(veFilter));
                 editor.putString(FILTER_GLUTEN_FREE, String.valueOf(gfFilter));
                 editor.putString(FILTER_MEAT, String.valueOf(mFilter));
-                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGETARIAN - "+ String.valueOf(vFilter));
-                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGAN - "+ String.valueOf(veFilter));
-                Log.v(LOG_TAG + "-InAlert", "FILTER_GLUTEN_FREE - "+ String.valueOf(gfFilter));
+//                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGETARIAN - "+ String.valueOf(vFilter));
+//                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGAN - "+ String.valueOf(veFilter));
+//                Log.v(LOG_TAG + "-InAlert", "FILTER_GLUTEN_FREE - "+ String.valueOf(gfFilter));
 
                 editor.apply();
 
@@ -469,6 +468,16 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                             null
                     );
                     listCursorAdapter.swapCursor(cursor);
+
+//                if (cursor != null){
+//                    while (cursor.moveToNext()){
+//                        if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
+//
+//                        }
+//                        Timber.v("filtered***"+cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_MODIFIFER));
+//                    }
+//                }
+
             }
         });
 
@@ -502,12 +511,12 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         listCursorAdapter.swapCursor(cursor);
-        while (cursor.moveToNext()){
-            if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
-
-            }
-            Timber.v("--        cursor.getPosition() - "+       cursor.getPosition());
-        }
+//        while (cursor.moveToNext()){
+//            if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
+//
+//            }
+//            Timber.v(cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_MODIFIFER));
+//        }
 
     }
 
@@ -531,7 +540,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     public void onMenuItemClick(ImageView sharedImageView) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("transition_name", ViewCompat.getTransitionName(sharedImageView));
-        Timber.v("Transition name - "+ViewCompat.getTransitionName(sharedImageView));
+//        Timber.v("Transition name - "+ViewCompat.getTransitionName(sharedImageView));
 
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 getActivity(),
