@@ -20,6 +20,7 @@ import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.TAB_NUMBER_EXTRA;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
+import static ca.nuba.nubamenu.Utility.formatLocation;
 import static ca.nuba.nubamenu.Utility.slideOutTransition;
 
 
@@ -48,7 +49,7 @@ public class MenuActivity extends AppCompatActivity {
 
         SharedPreferences prefs = this.getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
         String type = prefs.getString(TYPE_EXTRA, null);
-        String location = prefs.getString(LOCATION_EXTRA, null);
+        String location = formatLocation(prefs.getString(LOCATION_EXTRA, null));
         final int tabNumber = prefs.getInt(TAB_NUMBER_EXTRA, 0);
 
 

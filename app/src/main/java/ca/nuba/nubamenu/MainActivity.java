@@ -16,6 +16,8 @@ import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
+import static ca.nuba.nubamenu.Utility.addLocationToSql;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithGfFilter;
 
 public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -33,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0f);
         }
-
+//List of files
         for (String file : getFilesDir().list()){
-            Timber.v("File - "+ file+"\n");
+//            Timber.v("File - "+ file+"\n");
         }
 
         //        fm = getSupportFragmentManager();
@@ -63,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+//        Timber.v("Original SQL - "+sNubaMenuWithLike);
+//        Timber.v("Formated SQL - "+addLocationToSql(sNubaMenuWithLike));
+        Timber.v("Original SQL - "+sNubaMenuWithGfFilter);
+//
+        Timber.v("Formated SQL - "+addLocationToSql(sNubaMenuWithGfFilter));
+
+
+
     }
 
 

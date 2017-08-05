@@ -30,6 +30,14 @@ import ca.nuba.nubamenu.data.NubaContract;
 import ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry;
 import ca.nuba.nubamenu.data.NubaDbHelper;
 
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_LOCATION;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_MODIFIER;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_VEGAN;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN;
+import static ca.nuba.nubamenu.data.NubaContract.NubaMenuEntry.TABLE_NAME;
+
 
 /**
  * Class with a bunch of widely used variables, URIs for menu filter and helper functions
@@ -45,10 +53,10 @@ public class Utility {
     public static final String TYPE_DINNER = "Dinner";
 
     public static final String LOCATION_EXTRA = "LOCATION_EXTRA";
-    public static final String LOCATION_GASTOWN = "Gastown";
-    public static final String LOCATION_KITSILANO = "Kitsilano";
-    public static final String LOCATION_MOUNT = "Mount Pleasant";
-    public static final String LOCATION_YALETOWN = "Yaletown";
+    public static final String LOCATION_GASTOWN = "gastown";
+    public static final String LOCATION_KITSILANO = "kitsilano";
+    public static final String LOCATION_MOUNT = "pleasant";
+    public static final String LOCATION_YALETOWN = "yaletown";
 
     public static final String NUBA_PREFS = "NUBA_PREFS";
 
@@ -67,70 +75,71 @@ public class Utility {
     public static final String FILTER_GLUTEN_FREE = "FILTER_GLUTEN_FREE";
     public static final String FILTER_MEAT = "FILTER_MEAT";
 
+
     public static final String sNubaMenuWithLike =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ?";
 
     public static final  String sNubaMezzesWithLike =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? OR "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+" LIKE ? OR "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+" LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? OR "+
+                    TABLE_NAME+"."+ COLUMN_MENU_TYPE+" LIKE ? OR "+
+                    TABLE_NAME+"."+ COLUMN_MENU_TYPE+" LIKE ?";
 
     public static final  String sNubaMenuWithFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND " +
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN +" LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE +" LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND " +
+            TABLE_NAME+"."+ COLUMN_VEGETARIAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGAN +" LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_GLUTEN_FREE +" LIKE ?";
     /** Filters */
     public static final  String sNubaMenuWithGfFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_GLUTEN_FREE + " LIKE ?";
 
     public static final  String sNubaMenuWithVFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGETARIAN + " LIKE ?";
 
     public static final  String sNubaMenuWithVeFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGAN + " LIKE ?";
 
     public static final  String sNubaMenuWithVeGfFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_GLUTEN_FREE + " LIKE ?";
 
     public static final  String sNubaMenuWithVGfFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGETARIAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_GLUTEN_FREE + " LIKE ?";
 
     public static final  String sNubaMenuWithVVeFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGETARIAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGAN + " LIKE ?";
 
     public static final  String sNubaMenuWithVVeGfFilter =
-            NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE+ " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_VEGAN + " LIKE ? AND "+
-                    NubaContract.NubaMenuEntry.TABLE_NAME+"."+ NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE + " LIKE ?";
+            TABLE_NAME+"."+ COLUMN_MENU_TYPE+ " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGETARIAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_VEGAN + " LIKE ? AND "+
+                    TABLE_NAME+"."+ COLUMN_GLUTEN_FREE + " LIKE ?";
 
     public static final  String sNubaMenuUpdateWithWebID =
-            NubaMenuEntry.TABLE_NAME+ "." + NubaMenuEntry.COLUMN_WEB_ID + " = ? ";
+            TABLE_NAME+ "." + NubaMenuEntry.COLUMN_WEB_ID + " = ? ";
 
 
     public static final String[] NUBA_MENU_PROJECTION = {
-            NubaContract.NubaMenuEntry.TABLE_NAME + "." + NubaContract.NubaMenuEntry._ID,
-            NubaContract.NubaMenuEntry.COLUMN_MENU_TYPE,
+            TABLE_NAME + "." + NubaContract.NubaMenuEntry._ID,
+            COLUMN_MENU_TYPE,
             NubaContract.NubaMenuEntry.COLUMN_NAME,
             NubaContract.NubaMenuEntry.COLUMN_PRICE,
-            NubaContract.NubaMenuEntry.COLUMN_VEGETARIAN,
-            NubaContract.NubaMenuEntry.COLUMN_VEGAN,
-            NubaContract.NubaMenuEntry.COLUMN_GLUTEN_FREE,
+            COLUMN_VEGETARIAN,
+            COLUMN_VEGAN,
+            COLUMN_GLUTEN_FREE,
             NubaContract.NubaMenuEntry.COLUMN_DESCRIPTION,
             NubaContract.NubaMenuEntry.COLUMN_PIC_PATH,
             NubaContract.NubaMenuEntry.COLUMN_ICON_PATH,
             NubaContract.NubaMenuEntry.COLUMN_WEB_ID,
-            NubaMenuEntry.COLUMN_LOCATION,
+            COLUMN_LOCATION,
             NubaMenuEntry.COLUMN_MODIFIER,
             NubaMenuEntry.COLUMN_START_DATE,
             NubaMenuEntry.COLUMN_END_DATE
@@ -420,4 +429,33 @@ public class Utility {
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
+//    public static String addLocationToSql(String sql){
+//        return sql+" AND ("+ TABLE_NAME+"."+COLUMN_LOCATION + " LIKE ? OR "+
+//                TABLE_NAME+"."+ COLUMN_LOCATION + " LIKE \"all\" ) ORDER BY "+COLUMN_MODIFIER+" DESC";
+//    }
+public static String addLocationToSql(String sql){
+    return sql+" AND ("+ TABLE_NAME+"."+COLUMN_LOCATION + " LIKE ? OR "+
+            TABLE_NAME+"."+ COLUMN_LOCATION + " LIKE \"all\" ) ORDER BY CASE WHEN "+TABLE_NAME+"."+COLUMN_MODIFIER+" = \"feature\" THEN 1 " +
+            "WHEN "+TABLE_NAME+"."+COLUMN_MODIFIER+" = \"new\" THEN 2 ELSE 3 END, "+TABLE_NAME+"."+COLUMN_MODIFIER;
+}
+
+
+
+    public static String formatLocation(String location){
+        switch (location){
+            case "gastown":{
+                return "Gastown";
+            }
+            case "yaletown":{
+                return "Yaletown";
+            }
+            case "kitsilano":{
+                return "Kitsilano";
+            }
+            case "pleasant":{
+                return "Mount Pleasant";
+            }
+            default: return "";
+        }
+    }
 }

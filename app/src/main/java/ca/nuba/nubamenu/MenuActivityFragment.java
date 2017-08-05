@@ -36,7 +36,9 @@ import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
+import static ca.nuba.nubamenu.Utility.addLocationToSql;
 import static ca.nuba.nubamenu.Utility.sNubaMenuWithGfFilter;
+import static ca.nuba.nubamenu.Utility.sNubaMenuWithLike;
 import static ca.nuba.nubamenu.Utility.sNubaMenuWithVFilter;
 import static ca.nuba.nubamenu.Utility.sNubaMenuWithVGfFilter;
 import static ca.nuba.nubamenu.Utility.sNubaMenuWithVVeFilter;
@@ -246,9 +248,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             if (ve == null) {
                 if (gf == null){
 //                    selection = null;
-                    selection = Utility.sNubaMenuWithLike;
+//                    selection = Utility.sNubaMenuWithLike;
+                    selection = addLocationToSql(sNubaMenuWithLike);
 //                    selectionArgs = null;
-                    selectionArgs = new String[]{mPageName};
+                    selectionArgs = new String[]{mPageName, location};
+                    Timber.v("Location - "+location);
                     Log.v(LOG_TAG, "Selection - default");
                 } else {
                     selection = sNubaMenuWithGfFilter; // selection with gf
@@ -278,8 +282,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             }
 
         }
-
-
 
 
         else if (ve == null){
@@ -500,6 +502,13 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         listCursorAdapter.swapCursor(cursor);
+        while (cursor.moveToNext()){
+            if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
+
+            }
+            Timber.v("--        cursor.getPosition() - "+       cursor.getPosition());
+        }
+
     }
 
     @Override

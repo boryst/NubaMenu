@@ -23,6 +23,7 @@ import static ca.nuba.nubamenu.Utility.TYPE_BRUNCH;
 import static ca.nuba.nubamenu.Utility.TYPE_DINNER;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 import static ca.nuba.nubamenu.Utility.TYPE_LUNCH;
+import static ca.nuba.nubamenu.Utility.formatLocation;
 import static ca.nuba.nubamenu.Utility.slideInTransition;
 
 
@@ -90,7 +91,7 @@ public class MenuSelectActivityFragment extends Fragment {
             Log.v(LOG_TAG, "location - "+location);
 
         }*/
-        getActivity().setTitle(location);
+        getActivity().setTitle(formatLocation(location));
 
         extras.putString(LOCATION_EXTRA, location);
 
@@ -236,7 +237,7 @@ startActivity(intent);
     public void onResume() {
         SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
         location = prefs.getString(LOCATION_EXTRA, null);
-        getActivity().setTitle(location);
+        getActivity().setTitle(formatLocation(location));
 
         if (fm.getBackStackEntryCount() > 0) {
             ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
