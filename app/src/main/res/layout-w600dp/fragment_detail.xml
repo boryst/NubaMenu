@@ -138,12 +138,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                style="@style/Widget.AppCompat.Button.Colored"
+
                 />
             <Button
                 android:id="@+id/btn_detail_write_review"
                 android:text="@string/write_review_btn_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Colored"
+
                 />
             <!--android:visibility="gone"-->
 
@@ -166,7 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/authui_colorAccent"
+            android:background="@color/gradientPrimary"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:visibility="gone"
@@ -210,6 +214,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tv_detail_own_review"
+                style="@style/Widget.AppCompat.Button.Colored"
+
                 />
             <Button
                 android:id="@+id/btn_delete_own_review"
@@ -219,6 +225,8 @@
                 android:layout_toRightOf="@id/btn_detail_edit_own_review"
                 android:layout_toEndOf="@id/btn_detail_edit_own_review"
                 android:layout_below="@+id/tv_detail_own_review"
+                style="@style/Widget.AppCompat.Button.Colored"
+
                 />
         </RelativeLayout>
 

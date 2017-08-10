@@ -144,13 +144,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_out_btn_title"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
 
                 <Button
                     android:id="@+id/btn_detail_write_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/write_review_btn_title" />
+                    android:text="@string/write_review_btn_title"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
                 <!--android:visibility="gone"-->
 
             </LinearLayout>
@@ -173,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@color/authui_colorAccent"
+                android:background="@color/gradientPrimary"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -214,7 +218,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/tv_detail_own_review"
-                    android:text="@string/edit_btn_title" />
+                    android:text="@string/edit_btn_title"
+                    style="@style/Widget.AppCompat.Button.Colored"
+
+                    />
 
                 <Button
                     android:id="@+id/btn_delete_own_review"
@@ -223,7 +230,10 @@
                     android:layout_below="@+id/tv_detail_own_review"
                     android:layout_toEndOf="@id/btn_detail_edit_own_review"
                     android:layout_toRightOf="@id/btn_detail_edit_own_review"
-                    android:text="@string/delete_btn_title" />
+                    android:text="@string/delete_btn_title"
+                    style="@style/Widget.AppCompat.Button.Colored"
+
+                    />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
