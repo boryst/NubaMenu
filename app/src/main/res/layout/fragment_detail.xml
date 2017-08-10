@@ -145,21 +145,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
-            <!--android:visibility="gone"-->
 
         </LinearLayout>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reviews"
+            android:text="layout"
             android:gravity="center"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
 
             />
-
+<!--            android:text="@string/reviews"
+-->
         <RelativeLayout
             android:id="@+id/rl_detail_own_review"
             android:layout_width="match_parent"

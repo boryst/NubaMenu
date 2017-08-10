@@ -1,0 +1,236 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    tools:context="ca.nuba.nubamenu.DetailActivityFragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_detail_picture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:transitionName="list_item_icon"
+
+            />
+<!--
+           android:scaleType="centerCrop"
+-->
+
+
+        <TextView
+            android:id="@+id/tv_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            >
+
+            <ImageView
+                android:id="@+id/iv_detail_v_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/v_icon_description"
+                />
+
+            <ImageView
+                android:id="@+id/iv_detail_ve_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/ve_icon_description"
+                />
+
+            <ImageView
+                android:id="@+id/iv_detail_gf_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/gf_icon_description"
+                />
+
+            <TextView
+                android:id="@+id/tv_detail_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+            <RatingBar
+                android:id="@+id/rb_detail_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_detail_num_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/default_price"
+
+                android:textSize="30sp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_detail_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_detail_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                />
+            <Button
+                android:id="@+id/btn_detail_sign_out"
+                android:text="@string/sign_out_btn_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+            <Button
+                android:id="@+id/btn_detail_write_review"
+                android:text="@string/write_review_btn_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <!--android:visibility="gone"-->
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="layout-xxxhdpi-v21"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+
+            />
+        <!--android:text="@string/reviews"-->
+
+        <RelativeLayout
+            android:id="@+id/rl_detail_own_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/authui_colorAccent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_detail_own_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                />
+
+            <RatingBar
+            android:id="@+id/rb_detail_own_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:id="@+id/tv_detail_own_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rb_detail_own_rating"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                />
+            <Button
+                android:id="@+id/btn_detail_edit_own_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_btn_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_detail_own_review"
+                />
+            <Button
+                android:id="@+id/btn_delete_own_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_btn_title"
+                android:layout_toRightOf="@id/btn_detail_edit_own_review"
+                android:layout_toEndOf="@id/btn_detail_edit_own_review"
+                android:layout_below="@+id/tv_detail_own_review"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_fragment_detail_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
