@@ -5,6 +5,8 @@
         <item name="colorPrimary">#FFB74D</item>
         <item name="colorPrimaryDark">#FFA726</item>
         <item name="colorAccent">#EF6C00</item>
+        <item name="android:windowContentOverlay">@null</item>
+
         <!--<item name="displayOptions">useLogo|showHome</item>-->
         <!--<item name="logo">@drawable/nuba_logo</item>-->
         <!-- Customize your theme here. -->
