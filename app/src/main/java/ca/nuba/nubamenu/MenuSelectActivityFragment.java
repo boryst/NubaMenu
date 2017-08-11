@@ -24,6 +24,7 @@ import static ca.nuba.nubamenu.Utility.TYPE_DINNER;
 import static ca.nuba.nubamenu.Utility.TYPE_EXTRA;
 import static ca.nuba.nubamenu.Utility.TYPE_LUNCH;
 import static ca.nuba.nubamenu.Utility.formatLocation;
+import static ca.nuba.nubamenu.Utility.hasSoftKeys;
 import static ca.nuba.nubamenu.Utility.slideInTransition;
 
 
@@ -55,10 +56,21 @@ public class MenuSelectActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView;
+        int nubaLunchId;
+        int nubaBrunchId;
+        int nubaDinnerId;
 
-        int nubaLunchID = getActivity().getResources().getIdentifier("nubal", "drawable", "ca.nuba.nubamenu");
-        int nubaBrunchID = getActivity().getResources().getIdentifier("nubab", "drawable", "ca.nuba.nubamenu");
-        int nubaDinnerID = getActivity().getResources().getIdentifier("nubad", "drawable", "ca.nuba.nubamenu");
+        if (hasSoftKeys(getActivity().getWindowManager(), getActivity())){
+            nubaLunchId = getActivity().getResources().getIdentifier("nubal", "drawable", "ca.nuba.nubamenu");
+            nubaDinnerId = getActivity().getResources().getIdentifier("nubad", "drawable", "ca.nuba.nubamenu");
+            nubaBrunchId = getActivity().getResources().getIdentifier("nubab", "drawable", "ca.nuba.nubamenu");
+        } else {
+//If no software keys - use different image
+            nubaLunchId = getActivity().getResources().getIdentifier("nubal_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+            nubaDinnerId = getActivity().getResources().getIdentifier("nubad_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+            nubaBrunchId = getActivity().getResources().getIdentifier("nubab_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+        }
+
 
 //        if (savedInstanceState !=null){
 //            kflag = savedInstanceState.getString(STATE_MENU);
@@ -129,7 +141,7 @@ startActivity(intent);
         if (location != null && location.equals(LOCATION_KITSILANO)) {
             rootView = inflater.inflate(R.layout.fragment_menu_select_brunch, container, false);
             imgBtnBrunch = (ImageButton) rootView.findViewById(R.id.nubaMenuBrunch);
-            Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchID, getActivity());
+            Utility.imageButtonPressEffect(imgBtnBrunch, nubaBrunchId, getActivity());
 
             imgBtnBrunch.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -157,7 +169,7 @@ startActivity(intent);
 
 
         imgBtnLunch = (ImageButton) rootView.findViewById(R.id.nubaMenuLunch);
-        Utility.imageButtonPressEffect(imgBtnLunch, nubaLunchID, getActivity());
+        Utility.imageButtonPressEffect(imgBtnLunch, nubaLunchId, getActivity());
         imgBtnLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +184,7 @@ startActivity(intent);
         });
 
         imgBtnDinner = (ImageButton) rootView.findViewById(R.id.nubaMenuDinner);
-        Utility.imageButtonPressEffect(imgBtnDinner, nubaDinnerID, getActivity());
+        Utility.imageButtonPressEffect(imgBtnDinner, nubaDinnerId, getActivity());
         imgBtnDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
