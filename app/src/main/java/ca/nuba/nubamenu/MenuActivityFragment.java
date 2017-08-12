@@ -21,8 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
@@ -130,8 +132,6 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -139,17 +139,18 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 filter();
                 return true;
             }
-            default: return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
+        if (isVisibleToUser) {
             //Log.v(LOG_TAG, mPageName+" is visible now");
 
-            if (mPageName != null){
+            if (mPageName != null) {
 //                Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - "+ vFilter);
 //                Log.v(LOG_TAG, "String VE - " + prefs.getString(FILTER_VEGAN, null) + ", Boolean VE - "+ veFilter);
 //                Log.v(LOG_TAG, "String GF - " + prefs.getString(FILTER_GLUTEN_FREE, null) + ", Boolean GF - "+ gfFilter);
@@ -249,15 +250,15 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         return rootView;
     }
 
-    public void checkFilters(Boolean v, Boolean ve, Boolean gf){
+    public void checkFilters(Boolean v, Boolean ve, Boolean gf) {
 
         selection = null;
         selectionArgs = null;
 
 
-        if (v == null){
+        if (v == null) {
             if (ve == null) {
-                if (gf == null){
+                if (gf == null) {
 //                    selection = null;
 //                    selection = Utility.sNubaMenuWithLike;
                     selection = addLocationToSql(sNubaMenuWithLike);
@@ -270,7 +271,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                     selectionArgs = new String[]{mPageName, String.valueOf(gf), location};
 //                    Log.v(LOG_TAG, "Selection - gf");
                 }
-            } else if (gf == null){
+            } else if (gf == null) {
                 selection = addLocationToSql(sNubaMenuWithVeFilter);//selection with ve
                 selectionArgs = new String[]{mPageName, String.valueOf(ve), location};
 //                Log.v(LOG_TAG, "Selection - ve");
@@ -279,24 +280,19 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 selectionArgs = new String[]{mPageName, String.valueOf(ve), String.valueOf(gf), location};
 //                Log.v(LOG_TAG, "Selection - ve +  gf");
             }
-        }
-
-        else if (!v) {
-            if (gf == null){
+        } else if (!v) {
+            if (gf == null) {
                 selection = addLocationToSql(sNubaMenuWithVVeFilter); //selection with v and ve
-                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve), location};
+                selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(ve), location};
 //                Log.v(LOG_TAG, "Selection - !v + !ve aka Meat");
             } else {
                 selection = addLocationToSql(sNubaMenuWithVVeGfFilter); // selection v + ve + gf
-                selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf), location};
+                selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(ve), String.valueOf(gf), location};
 //                Log.v(LOG_TAG + mPageName, "Selection - !v + !ve + gf aka Meat + gf");
             }
 
-        }
-
-
-        else if (ve == null){
-            if (gf == null){
+        } else if (ve == null) {
+            if (gf == null) {
                 selection = addLocationToSql(sNubaMenuWithVFilter); //selection with v
                 selectionArgs = new String[]{mPageName, String.valueOf(v), location};
 //                Log.v(LOG_TAG, "Selection - v");
@@ -306,16 +302,13 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
 //                Log.v(LOG_TAG, "Selection - v + gf");
             }
 
-        }
-
-
-        else if (gf == null){
+        } else if (gf == null) {
             selection = addLocationToSql(sNubaMenuWithVVeFilter); //selection with v and ve
-            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve), location};
+            selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(ve), location};
 //            Log.v(LOG_TAG, "Selection - v + ve");
         } else {
             selection = addLocationToSql(sNubaMenuWithVVeGfFilter); // selection v + ve + gf
-            selectionArgs = new String[]{mPageName, String.valueOf(v),String.valueOf(ve),String.valueOf(gf), location};
+            selectionArgs = new String[]{mPageName, String.valueOf(v), String.valueOf(ve), String.valueOf(gf), location};
 //            Log.v(LOG_TAG + mPageName, "Selection - v + ve + gf");
         }
     }
@@ -331,10 +324,10 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         final CheckBox gfCheckBox = (CheckBox) container.findViewById(R.id.filterGfCheckBox);
         final CheckBox mCheckBox = (CheckBox) container.findViewById(R.id.filterMCheckBox);
 
-//        if (vFilter != null) vCheckBox.setChecked(true); else vCheckBox.setChecked(false);
-//        if (veFilter != null) veCheckBox.setChecked(true); else veCheckBox.setChecked(false);
-//        if (gfFilter != null) gfCheckBox.setChecked(true); else gfCheckBox.setChecked(false);
-//        if (mFilter != null) mCheckBox.setChecked(true); else mCheckBox.setChecked(false);
+        final RelativeLayout vRelativeLayout = (RelativeLayout) container.findViewById(R.id.rl_filter_v);
+        final RelativeLayout veRelativeLayout = (RelativeLayout) container.findViewById(R.id.rl_filter_ve);
+        final RelativeLayout gfRelativeLayout = (RelativeLayout) container.findViewById(R.id.rl_filter_gf);
+        final RelativeLayout mRelativeLayout = (RelativeLayout) container.findViewById(R.id.rl_filter_m);
 
         if (vFilter != null) {
             if (vFilter) {
@@ -376,87 +369,75 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             mCheckBox.setChecked(false);
         }
 
-
-        vCheckBoxBefore = false;
-
-        vCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
+        vRelativeLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-//
-                    if (veFilter != null && !veFilter) veFilter = null;
-//
-
-                    vFilter = true;
-                    vCheckBoxBefore = true;
-                    mFilter = null;
-                    mCheckBox.setChecked(false);
-
-                } else {
+                if (vCheckBox.isChecked()) {
+                    vCheckBox.setChecked(false);
                     vFilter = null;
-                    vCheckBoxBefore = false;
-                }
-            }
-        });
-
-        veCheckBoxBefore = false;
-        veCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
+                } else {
                     vCheckBox.setChecked(true);
                     vFilter = true;
-                    veFilter = true;
-                    veCheckBoxBefore = true;
-                    mFilter = null;
+                    if (veFilter != null && !veFilter) veFilter = null;
                     mCheckBox.setChecked(false);
-                } else {
-                    veFilter = null;
-                    if (vCheckBoxBefore) vFilter = true; else vFilter = null;
-                    vCheckBox.setChecked(vCheckBoxBefore);
-                    veCheckBoxBefore = false;
-                }
-            }
-        });
-
-        gfCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    gfFilter = true;
-                } else {
-                    gfFilter = null;
-                }
-            }
-        });
-
-        mCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    if (vCheckBox.isChecked() && !vCheckBoxBefore) vCheckBoxBefore = true;
-                    vCheckBox.setChecked(false);
-                    veCheckBox.setChecked(false);
-                    mFilter = true;
-                    vFilter = false;
-                    veFilter = false;
-//                    Log.v(LOG_TAG, "here");
-/*                    vFilter = null;
-                    veFilter = null;*/
-                } else {
                     mFilter = null;
-                    if (vCheckBoxBefore) vFilter = true; else vFilter = null;
-                    if (veCheckBoxBefore) veFilter = true; else veFilter = null;
-                    veCheckBox.setChecked(veCheckBoxBefore);
-                    vCheckBox.setChecked(vCheckBoxBefore);
                 }
             }
         });
 
+        veRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (veCheckBox.isChecked()) {
+                    veCheckBox.setChecked(false);
+                    veFilter = null;
+                } else {
+                    veCheckBox.setChecked(true);
+                    veFilter = true;
+                    vCheckBox.setChecked(true);
+                    vFilter = true;
+                    mCheckBox.setChecked(false);
+                    mFilter = null;
+                }
+            }
+        });
+
+        gfRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (gfCheckBox.isChecked()) {
+                    gfCheckBox.setChecked(false);
+                    gfFilter = null;
+                } else {
+                    gfCheckBox.setChecked(true);
+                    gfFilter = true;
+                }
+            }
+        });
+
+        mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCheckBox.isChecked()) {
+                    mCheckBox.setChecked(false);
+                    mFilter = null;
+                    if (!vFilter) vFilter = null;
+                    if (!veFilter) veFilter = null;
+                } else {
+                    mCheckBox.setChecked(true);
+                    mFilter = true;
+                    vCheckBox.setChecked(false);
+                    vFilter = false;
+                    veCheckBox.setChecked(false);
+                    veFilter = false;
+                }
+            }
+        });
 
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+//                Timber.v("Filters: v - "+vFilter+" , veFilter - "+veFilter+", gfFilter - "+gfFilter);
+
                 dialog.dismiss();
 
                 checkFilters(vFilter, veFilter, gfFilter);
@@ -465,31 +446,16 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 editor.putString(FILTER_VEGAN, String.valueOf(veFilter));
                 editor.putString(FILTER_GLUTEN_FREE, String.valueOf(gfFilter));
                 editor.putString(FILTER_MEAT, String.valueOf(mFilter));
-//                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGETARIAN - "+ String.valueOf(vFilter));
-//                Log.v(LOG_TAG + "-InAlert", "FILTER_VEGAN - "+ String.valueOf(veFilter));
-//                Log.v(LOG_TAG + "-InAlert", "FILTER_GLUTEN_FREE - "+ String.valueOf(gfFilter));
-
                 editor.apply();
 
-
-                    Cursor cursor = getActivity().getContentResolver().query(
-                            NubaContract.NubaMenuEntry.CONTENT_URI,
-                            Utility.NUBA_MENU_PROJECTION,
-                            selection,
-                            selectionArgs,
-                            null
-                    );
-                    listCursorAdapter.swapCursor(cursor);
-
-//                if (cursor != null){
-//                    while (cursor.moveToNext()){
-//                        if (cursor.getString(Utility.COL_NUBA_MODIFIFER).equals("feature")){
-//
-//                        }
-//                        Timber.v("filtered***"+cursor.getString(COL_NUBA_MENU_NAME)+"--"+cursor.getString(COL_NUBA_MODIFIFER));
-//                    }
-//                }
-
+                Cursor cursor = getActivity().getContentResolver().query(
+                        NubaContract.NubaMenuEntry.CONTENT_URI,
+                        Utility.NUBA_MENU_PROJECTION,
+                        selection,
+                        selectionArgs,
+                        null
+                );
+                listCursorAdapter.swapCursor(cursor);
             }
         });
 

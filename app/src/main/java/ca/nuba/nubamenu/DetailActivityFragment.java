@@ -269,9 +269,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             boolean ve = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN));
             boolean gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
             String desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
-            Timber.v("modifier - "+cursor.getString(Utility.COL_NUBA_MODIFIFER));
-            Timber.v("start_date - "+cursor.getString(Utility.COL_NUBA_START_DATE));
-            Timber.v("end_date - "+cursor.getString(Utility.COL_NUBA_END_DATE));
+//            Timber.v("modifier - "+cursor.getString(Utility.COL_NUBA_MODIFIFER));
+//            Timber.v("start_date - "+cursor.getString(Utility.COL_NUBA_START_DATE));
+//            Timber.v("end_date - "+cursor.getString(Utility.COL_NUBA_END_DATE));
 
 
             //Assign data to views
