@@ -24,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import ca.nuba.nubamenu.data.NubaContract;
-import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
@@ -465,7 +464,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
             }
         });
 
+
+
         alert.show();
+
+
     }
 
 

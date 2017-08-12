@@ -66,9 +66,16 @@ public class MenuSelectActivityFragment extends Fragment {
             nubaBrunchId = getActivity().getResources().getIdentifier("nubab", "drawable", "ca.nuba.nubamenu");
         } else {
 //If no software keys - use different image
-            nubaLunchId = getActivity().getResources().getIdentifier("nubal_nosoftkeys", "drawable", "ca.nuba.nubamenu");
-            nubaDinnerId = getActivity().getResources().getIdentifier("nubad_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+//            nubaLunchId = getActivity().getResources().getIdentifier("nubal_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+//            nubaDinnerId = getActivity().getResources().getIdentifier("nubad_nosoftkeys", "drawable", "ca.nuba.nubamenu");
             nubaBrunchId = getActivity().getResources().getIdentifier("nubab_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+            if (getActivity().getResources().getConfiguration().orientation == 1){
+                nubaDinnerId = getActivity().getResources().getIdentifier("nubad_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+                nubaLunchId = getActivity().getResources().getIdentifier("nubal_nosoftkeys", "drawable", "ca.nuba.nubamenu");
+            } else {
+                nubaDinnerId = getActivity().getResources().getIdentifier("nubad", "drawable", "ca.nuba.nubamenu");
+                nubaLunchId = getActivity().getResources().getIdentifier("nubal", "drawable", "ca.nuba.nubamenu");
+            }
         }
 
 
