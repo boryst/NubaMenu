@@ -63,7 +63,7 @@ public class MenuActivity extends AppCompatActivity {
         if (actionBar != null) {
             //actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setElevation(0f);
-            setTitle(location + " - " + type);
+            setTitle(type);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Slide(Gravity.RIGHT));
