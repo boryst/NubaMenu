@@ -51,6 +51,8 @@ import timber.log.Timber;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
+import static android.view.View.GONE;
+import static ca.nuba.nubamenu.Utility.COL_NUBA_MODIFIFER;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.ITEM_WEB_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
@@ -78,7 +80,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private Bundle extras;
 
     //Views
-    private ImageView ivPicture, ivV, ivVe, ivGf;
+    private ImageView ivPicture, ivModifier, ivV, ivVe, ivGf;
     private TextView tvName, tvPrice, tvDescription, tvRating, tvOwnReviewAuthor, tvOwnReviewText;
     private Button btnWriteReview, btnOwnEditReview, btnOwnDeleteReview, btnSignOut;
     private SignInButton btnSignIn;
@@ -161,6 +163,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         //Menu item detail views
         ivPicture = (ImageView) rootView.findViewById(R.id.iv_detail_picture);
+        ivModifier = (ImageView) rootView.findViewById(R.id.iv_detail_modifier);
         tvName = (TextView) rootView.findViewById(R.id.tv_detail_name);
         ivV = (ImageView) rootView.findViewById(R.id.iv_detail_v_icon);
         ivVe = (ImageView) rootView.findViewById(R.id.iv_detail_ve_icon);
@@ -269,6 +272,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             boolean ve = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_VEGAN));
             boolean gf = Boolean.parseBoolean(cursor.getString(Utility.COL_NUBA_MENU_GLUTEN_FREE));
             String desc = cursor.getString(Utility.COL_NUBA_MENU_DESCRIPTION);
+            String modifier = cursor.getString(COL_NUBA_MODIFIFER);
 //            Timber.v("modifier - "+cursor.getString(Utility.COL_NUBA_MODIFIFER));
 //            Timber.v("start_date - "+cursor.getString(Utility.COL_NUBA_START_DATE));
 //            Timber.v("end_date - "+cursor.getString(Utility.COL_NUBA_END_DATE));
@@ -315,26 +319,40 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         });
             }
 
-            tvName.setText(name);
+
+//            tvName.setText(name);
+            getActivity().setTitle(name);
+
+            if (modifier.equals("new")){
+                ivModifier.setVisibility(View.VISIBLE);
+                ivModifier.setImageResource(R.drawable.ic_new);
+            } else if (modifier.equals("feature")){
+                ivModifier.setVisibility(View.VISIBLE);
+                ivModifier.setImageResource(R.drawable.ic_feature);
+            } else {
+                tvName.setVisibility(GONE);
+            }
+
+
             String formatedPrice = "$" + String.format(Locale.CANADA, "%.2f", price);
             tvPrice.setText(formatedPrice);
 
             if (v) {
                 Picasso.with(getActivity()).load(R.drawable.v).into(ivV);
             } else {
-                ivV.setVisibility(View.GONE);
+                ivV.setVisibility(GONE);
             }
 
             if (ve) {
                 Picasso.with(getActivity()).load(R.drawable.ve).into(ivVe);
             } else {
-                ivVe.setVisibility(View.GONE);
+                ivVe.setVisibility(GONE);
             }
 
             if (gf) {
                 Picasso.with(getActivity()).load(R.drawable.gf).into(ivGf);
             } else {
-                ivGf.setVisibility(View.GONE);
+                ivGf.setVisibility(GONE);
             }
 
             tvDescription.setText(desc);
@@ -364,7 +382,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 String reviewText = reviewEditText.getText().toString();
                 float reviewRating = reviewRatingBar.getRating();
                 final Review review = new Review(mUsername, reviewText, reviewRating, mUserId);
-                btnWriteReview.setVisibility(View.GONE);
+                btnWriteReview.setVisibility(GONE);
                 mReviewsDatabaseReference.push().setValue(review);
                 dialog.dismiss();
             }
@@ -430,7 +448,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         deleteReviewConfirmationAlert.setView(container);
         deleteReviewConfirmationAlert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                rlOwnReview.setVisibility(View.GONE);
+                rlOwnReview.setVisibility(GONE);
                 reviewReference.removeValue();
                 btnWriteReview.setVisibility(View.VISIBLE);
                 dialog.dismiss();
@@ -473,7 +491,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     //If there is a review left before, let it to be edited
                     rlOwnReview.setVisibility(View.VISIBLE);
 
-                    btnWriteReview.setVisibility(View.GONE);
+                    btnWriteReview.setVisibility(GONE);
                     tvOwnReviewText.setText(ownReview.getReviewText());
                     rbOwnReviewRaring.setRating(ownReview.getRating());
                     tvOwnReviewAuthor.setText(ownReview.getAuthor());
@@ -485,7 +503,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 } else {
                     btnWriteReview.setVisibility(View.VISIBLE);
                 }
-                btnSignIn.setVisibility(View.GONE);
+                btnSignIn.setVisibility(GONE);
                 btnSignOut.setVisibility(View.VISIBLE);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -511,7 +529,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         rbOwnReviewRaring.setRating(review.getRating());
                         tvOwnReviewAuthor.setText(review.getAuthor());
 
-                        btnWriteReview.setVisibility(View.GONE);
+                        btnWriteReview.setVisibility(GONE);
                     } else {
 
                         mReviewsKey.add(0, dataSnapshot.getKey());
@@ -598,10 +616,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 if (user != null) {
                     onSignedInInitialize(user.getDisplayName(), user.getUid());
                     mReviewsRecyclerAdapter.setUserId(mUserId);
-                    btnSignIn.setVisibility(View.GONE);
+                    btnSignIn.setVisibility(GONE);
                     btnSignOut.setVisibility(View.VISIBLE);
                 } else {
-                    btnWriteReview.setVisibility(View.GONE);
+                    btnWriteReview.setVisibility(GONE);
                 }
             }
         };
@@ -670,11 +688,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mUsername = ANONYMOUS;
         mUserId = ANONYMOUS;
 
-        rlOwnReview.setVisibility(View.GONE);
+        rlOwnReview.setVisibility(GONE);
 
-        btnSignOut.setVisibility(View.GONE);
+        btnSignOut.setVisibility(GONE);
         btnSignIn.setVisibility(View.VISIBLE);
-        btnWriteReview.setVisibility(View.GONE);
+        btnWriteReview.setVisibility(GONE);
 
         if (tvOwnReviewText.getText().length() != 0) {
             mReviewsList.add(0, myReview);
