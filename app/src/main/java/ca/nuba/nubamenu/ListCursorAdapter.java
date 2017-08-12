@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -52,7 +59,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
         public ImageView list_item_icon, list_item_vegetarian_icon, list_item_vegan_icon, list_item_gluten_icon, list_item_modifier;
         public TextView list_item_name, list_item_price;
         public View basicView;
-        public ProgressBar progressBar;
+        public ProgressBar pbLoading;
 
         public ViewHolder(View view) {
             super(view);
@@ -65,7 +72,7 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
             list_item_name = (TextView) view.findViewById(R.id.list_item_name);
             list_item_price = (TextView) view.findViewById(R.id.list_item_price);
             list_item_modifier = (ImageView) view.findViewById(R.id.list_item_modifier);
-
+            pbLoading = (ProgressBar) view.findViewById(R.id.pb_list_item_progress);
         }
     }
 
@@ -92,9 +99,24 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
 //            Log.v(LOG_TAG, "Image "+ listItem.getIconPath()+" does not exist");
             Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getIconPath());
 //            Utility.imageDownload(mContext, WEB_IMAGE_STORAGE + listItem.getIconPath(), listItem.getPicPath());
-            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+//            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getIconPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
 //            Picasso.with(mContext).load(WEB_IMAGE_STORAGE + listItem.getPicPath()).placeholder(R.drawable.progress_animation).into(viewHolder.list_item_icon);
+            Glide.with(mContext)
+                    .load(WEB_IMAGE_STORAGE + listItem.getIconPath())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            viewHolder.pbLoading.setVisibility(GONE);
+                            return false;
+                        }
 
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            viewHolder.pbLoading.setVisibility(GONE);
+                            return false;
+                        }
+                    })
+                    .into(viewHolder.list_item_icon);
         } else {
 //            Timber.v("Loading");
             Picasso.with(mContext).load(img).into(viewHolder.list_item_icon);

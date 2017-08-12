@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,10 +21,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -86,6 +93,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private SignInButton btnSignIn;
     private RatingBar rbRating, rbOwnReviewRaring;
     private RelativeLayout rlOwnReview;
+    private ProgressBar pbProgress;
 
     //Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -172,6 +180,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         rbRating = (RatingBar) rootView.findViewById(R.id.rb_detail_rating);
         tvRating = (TextView) rootView.findViewById(R.id.tv_detail_num_ratings);
         tvDescription = (TextView) rootView.findViewById(R.id.tv_detail_description);
+        pbProgress = (ProgressBar) rootView.findViewById(R.id.pb_detail_progress);
 
         btnSignIn = (SignInButton) rootView.findViewById(R.id.btn_detail_sign_in);
         btnSignOut = (Button) rootView.findViewById(R.id.btn_detail_sign_out);
@@ -284,27 +293,42 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             if (!img.exists()) {
                 //Load image from server and download it
                 Utility.imageDownload(getActivity(), WEB_IMAGE_STORAGE + picturePath, picturePath);
-                Picasso.with(getActivity())
+//                Picasso.with(getActivity())
+//                        .load(WEB_IMAGE_STORAGE + picturePath)
+//                        .placeholder(R.drawable.progress_animation)
+//                        .into(ivPicture, new Callback() {
+//                            @Override
+//                            public void onSuccess() {
+//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                                    getActivity().supportStartPostponedEnterTransition();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onError() {
+//
+//                                Timber.v("Fail to load");
+////                                getActivity().supportStartPostponedEnterTransition();
+//                            }
+//                        });
+                Glide.with(getActivity())
                         .load(WEB_IMAGE_STORAGE + picturePath)
-                        .placeholder(R.drawable.progress_animation)
-                        .into(ivPicture, new Callback() {
+                        .listener(new RequestListener<Drawable>() {
                             @Override
-                            public void onSuccess() {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                    getActivity().supportStartPostponedEnterTransition();
-                                }
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                pbProgress.setVisibility(GONE);
+                                return false;
                             }
 
                             @Override
-                            public void onError() {
-
-                                Timber.v("Fail to load");
-//                                getActivity().supportStartPostponedEnterTransition();
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                pbProgress.setVisibility(GONE);
+                                return false;
                             }
-                        });
+                        })
+                        .into(ivPicture);
             } else {
-                //Load image from local storage
-//                Picasso.with(getActivity()).load(img).into(ivPicture);
+
                 Picasso.with(getActivity())
                         .load(img)
                         .noFade()
