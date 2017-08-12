@@ -290,7 +290,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                         .into(ivPicture, new Callback() {
                             @Override
                             public void onSuccess() {
-                                getActivity().supportStartPostponedEnterTransition();
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    getActivity().supportStartPostponedEnterTransition();
+                                }
                             }
 
                             @Override
