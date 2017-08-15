@@ -311,6 +311,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 ////                                getActivity().supportStartPostponedEnterTransition();
 //                            }
 //                        });
+                Timber.v("---Trying to load image");
                 Glide.with(getActivity())
                         .load(WEB_IMAGE_STORAGE + picturePath)
                         .listener(new RequestListener<Drawable>() {
@@ -323,6 +324,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 pbProgress.setVisibility(GONE);
+                                Timber.v("onResourceReady");
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    Timber.v("transition");
+                                    getActivity().supportStartPostponedEnterTransition();
+                                }
                                 return false;
                             }
                         })
@@ -736,7 +742,3 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         super.onStop();
     }
 }
-
-//TODO: 1. Combine mReviewsKey and mReviewsList
-//TODO: 2. Replace views.visibility to ReletiveLayout.setVisibility
-//TODO: 3. Get rid off auth state listener

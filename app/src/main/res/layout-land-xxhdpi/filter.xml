@@ -4,7 +4,9 @@
     android:orientation="vertical"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
     >
     <TextView
         android:id="@+id/filterTitle"
@@ -30,7 +32,6 @@
             android:layout_height="50dp"
             android:src="@drawable/v"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
             />
@@ -67,7 +68,6 @@
             android:layout_height="50dp"
             android:src="@drawable/ve"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
             />
@@ -104,7 +104,6 @@
             android:layout_height="50dp"
             android:src="@drawable/gf"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
             />
@@ -132,7 +131,6 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
         >
         <ImageView
             android:id="@+id/filterM"
@@ -140,7 +138,6 @@
             android:layout_height="50dp"
             android:src="@drawable/vg"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
             />

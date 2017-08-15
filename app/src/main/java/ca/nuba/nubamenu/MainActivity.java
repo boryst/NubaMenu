@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0f);
         }
 
+        Timber.v("API - "+Build.VERSION.SDK_INT);
+
 //List of files
         for (String file : getFilesDir().list()){
 //            Timber.v("File - "+ file+"\n");
