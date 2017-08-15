@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0f);
         }
+
 //List of files
         for (String file : getFilesDir().list()){
 //            Timber.v("File - "+ file+"\n");
@@ -81,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
+/*        switch (id) {
             case R.id.action_settings: {
 
             }
             case R.id.drop_db: {
                 Utility.dropDB(this);
             }
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

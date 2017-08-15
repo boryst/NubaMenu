@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import timber.log.Timber;
+
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
 import static ca.nuba.nubamenu.Utility.LOCATION_KITSILANO;
@@ -61,6 +63,8 @@ public class MenuSelectActivityFragment extends Fragment {
         int nubaDinnerId;
 
         if (hasSoftKeys(getActivity().getWindowManager(), getActivity())){
+            Timber.v("hasSoftKeys");
+            Timber.v("density - "+getResources().getDisplayMetrics().density);
             nubaLunchId = getActivity().getResources().getIdentifier("nubal", "drawable", "ca.nuba.nubamenu");
             nubaDinnerId = getActivity().getResources().getIdentifier("nubad", "drawable", "ca.nuba.nubamenu");
             nubaBrunchId = getActivity().getResources().getIdentifier("nubab", "drawable", "ca.nuba.nubamenu");

@@ -35,7 +35,7 @@ public class MenuSelectActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+/*        switch (id){
             case R.id.action_settings:{
 
             }
@@ -44,8 +44,8 @@ public class MenuSelectActivity extends AppCompatActivity {
             }
             default: return super.onOptionsItemSelected(item);
 
-        }
-
+        }*/
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
