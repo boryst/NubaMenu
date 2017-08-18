@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -161,12 +163,24 @@ public class ListCursorAdapter extends CursorRecyclerViewAdapter<ListCursorAdapt
                 editor.putInt(ITEM_WEB_ID_EXTRA, listItem.getWebId());
                 editor.apply();
 
+                final File img = new File(mContext.getFilesDir() + "/" + listItem.getPicPath());
+//                if (!img.exists()) {
+//                    Timber.v("-------------------------File does not exist, "+mContext.getFilesDir() + "/" + listItem.getPicPath());
+//                } else {
+//                    Timber.v("-------------------------File exists, "+mContext.getFilesDir() + "/" + listItem.getPicPath());
+//                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && img.exists()){
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    Timber.v("-------------------------File exists and API is higher");
+
+
                     //Use transition
 //                    menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
+
                     menuItemClickListener.onMenuItemClick(viewHolder.list_item_icon);
                 } else {
+                    Timber.v("-------------------------File does not exist, or API is lower");
+
                     Intent intent = new Intent(mContext, DetailActivity.class);
                     mContext.startActivity(intent);
                 }

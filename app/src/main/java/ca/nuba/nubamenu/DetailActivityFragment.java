@@ -199,7 +199,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setAdapter(mReviewsRecyclerAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && extras != null
+                ) {
             ivPicture.setTransitionName(extras.getString("transition_name"));
         }
 
