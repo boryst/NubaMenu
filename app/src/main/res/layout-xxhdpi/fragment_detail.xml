@@ -124,9 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="@string/default_price"
+                android:text="@string/detail_activity_no_reviews"
 
-                android:textSize="30sp" />
+                android:textSize="10sp" />
         </LinearLayout>
         <TextView
             android:id="@+id/tv_detail_description"

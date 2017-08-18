@@ -605,7 +605,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
                             mRating = avgRating.getCurrentAvgRating();
                             tvRating.setText(String.valueOf(avgRating.getNumOfRatings()));
+                            tvRating.setTextSize(30);
                             rbRating.setRating(mRating);
+
                         } else {
                             tvRating.setTextSize(10);
                             tvRating.setText(R.string.detail_activity_no_reviews);
