@@ -26,4 +26,5 @@
     <string name="v_icon_description">V icon</string>
     <string name="ve_icon_description">Ve icon</string>
     <string name="gf_icon_description">Gf icon</string>
+    <string name="filter_title">Filter</string>
 </resources>

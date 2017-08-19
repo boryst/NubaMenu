@@ -10,7 +10,7 @@
         android:id="@+id/filterTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Filter"
+        android:text="@string/filter_title"
         android:gravity="center_horizontal"
         android:textSize="25sp"
 
