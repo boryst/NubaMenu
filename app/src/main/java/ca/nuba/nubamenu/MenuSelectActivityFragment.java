@@ -18,6 +18,10 @@ import android.widget.ImageButton;
 import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
+import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
+import static ca.nuba.nubamenu.Utility.FILTER_MEAT;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.LOCATION_EXTRA;
 import static ca.nuba.nubamenu.Utility.LOCATION_KITSILANO;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
@@ -41,6 +45,8 @@ public class MenuSelectActivityFragment extends Fragment {
     ImageButton imgBtnLunch, imgBtnDinner, imgBtnBrunch;
     Bundle extras = new Bundle();
     FragmentManager fm;
+    Boolean vFilter, veFilter, gfFilter, mFilter;
+
 
     public MenuSelectActivityFragment() {
     }
@@ -252,7 +258,40 @@ startActivity(intent);
 
         fm = getActivity().getSupportFragmentManager();
         setHasOptionsMenu(true);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGETARIAN, null).equals("null")) {
+                vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            }
+        } else vFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            }
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            }
+        } else gfFilter = null;
+
+
+
+        Timber.v("onResume");
+        Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "%%"));
+        Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "%%"));
+        Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "%%"));
+        Timber.v("M - "+prefs.getString(FILTER_MEAT, "%%"));
+
+        Timber.v("V - "+String.valueOf(vFilter));
+        Timber.v("VE - "+String.valueOf(veFilter));
+        Timber.v("GF - "+String.valueOf(gfFilter));
+        Timber.v("M - "+String.valueOf(mFilter));
         super.onCreate(savedInstanceState);
+
+
 
     }
 

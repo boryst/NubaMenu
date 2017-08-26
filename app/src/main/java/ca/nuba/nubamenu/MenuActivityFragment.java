@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import ca.nuba.nubamenu.data.NubaContract;
+import timber.log.Timber;
 
 import static android.content.Context.MODE_PRIVATE;
 import static ca.nuba.nubamenu.Utility.ARG_PAGE;
@@ -89,6 +90,35 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
         } else gfFilter = null;
         checkFilters(vFilter, veFilter, gfFilter);*/
 
+        prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+
+        String prefV = prefs.getString(FILTER_VEGETARIAN, null);
+
+
+        if (prefV != null) {
+            Timber.v("============is not Null");
+            if (!prefV.equals("null")) {
+                vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            }
+        } else vFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            }
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            }
+        } else gfFilter = null;
+        Timber.v("onResume");
+        Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "**"));
+        Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "**"));
+        Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "**"));
+        Timber.v("M - "+prefs.getString(FILTER_MEAT, "**"));
+
+        checkFilters(vFilter, veFilter, gfFilter);
+
 
         //getLoaderManager().restartLoader(MENU_LOADER, null, this);
         super.onResume();
@@ -125,6 +155,11 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
             }
         } else gfFilter = null;
+        Timber.v("onCreate");
+        Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "--"));
+        Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "--"));
+        Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "--"));
+        Timber.v("M - "+prefs.getString(FILTER_MEAT, "--"));
 
         checkFilters(vFilter, veFilter, gfFilter);
 
@@ -160,7 +195,7 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                         vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
                         //Log.v(LOG_TAG, "String V - " + prefs.getString(FILTER_VEGETARIAN, null) + ", Boolean V - " + vFilter);
                     }
-                } else veFilter = null;
+                } else vFilter = null;
                 if (prefs.getString(FILTER_VEGAN, null) != null) {
                     if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
                         veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
@@ -446,6 +481,13 @@ public class MenuActivityFragment extends Fragment implements LoaderManager.Load
                 editor.putString(FILTER_GLUTEN_FREE, String.valueOf(gfFilter));
                 editor.putString(FILTER_MEAT, String.valueOf(mFilter));
                 editor.apply();
+
+                Timber.v("inAlert");
+                Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "--"));
+                Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "--"));
+                Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "--"));
+                Timber.v("M - "+prefs.getString(FILTER_MEAT, "--"));
+
 
                 Cursor cursor = getActivity().getContentResolver().query(
                         NubaContract.NubaMenuEntry.CONTENT_URI,

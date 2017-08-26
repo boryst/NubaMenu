@@ -3,6 +3,7 @@ package ca.nuba.nubamenu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -60,6 +61,10 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
 import static ca.nuba.nubamenu.Utility.COL_NUBA_MODIFIFER;
+import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
+import static ca.nuba.nubamenu.Utility.FILTER_MEAT;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
+import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.ITEM_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.ITEM_WEB_ID_EXTRA;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
@@ -75,6 +80,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private static final String ANONYMOUS = "anonymous";
     private static final int RC_SIGN_IN = 1;
     private static final int DETAIL_LOADER = 0;
+
+    Boolean vFilter, veFilter, gfFilter, mFilter;
+
 
     //Menu item id in MySQL database on a server
     private static int mWebId;
@@ -117,6 +125,38 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             extras = getActivity().getIntent().getExtras();
         }
 
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGETARIAN, null).equals("null")) {
+                vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            }
+        } else vFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            }
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            }
+        } else gfFilter = null;
+
+
+
+        Timber.v("onResume");
+        Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "%%"));
+        Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "%%"));
+        Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "%%"));
+        Timber.v("M - "+prefs.getString(FILTER_MEAT, "%%"));
+
+        Timber.v("V - "+String.valueOf(vFilter));
+        Timber.v("VE - "+String.valueOf(veFilter));
+        Timber.v("GF - "+String.valueOf(gfFilter));
+        Timber.v("M - "+String.valueOf(mFilter));
 
         setHasOptionsMenu(true);
         mUsername = ANONYMOUS;

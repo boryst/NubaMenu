@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import timber.log.Timber;
 
 import static ca.nuba.nubamenu.Utility.FILTER_GLUTEN_FREE;
+import static ca.nuba.nubamenu.Utility.FILTER_MEAT;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGAN;
 import static ca.nuba.nubamenu.Utility.FILTER_VEGETARIAN;
 import static ca.nuba.nubamenu.Utility.NUBA_PREFS;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private FragmentManager fm;
+    Boolean vFilter, veFilter, gfFilter, mFilter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,42 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor;
         editor = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE).edit();
-        editor.putString(FILTER_VEGETARIAN, null);
-        editor.putString(FILTER_VEGAN, null);
-        editor.putString(FILTER_GLUTEN_FREE, null);
+        editor.putString(FILTER_VEGETARIAN, "null");
+        editor.putString(FILTER_VEGAN, "null");
+        editor.putString(FILTER_GLUTEN_FREE, "null");
+        editor.putString(FILTER_MEAT, "null");
         editor.apply();
+
+
+        SharedPreferences prefs = getSharedPreferences(NUBA_PREFS, MODE_PRIVATE);
+
+        if (prefs.getString(FILTER_VEGETARIAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGETARIAN, null).equals("null")) {
+                vFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGETARIAN, null));
+            }
+        } else vFilter = null;
+        if (prefs.getString(FILTER_VEGAN, null) != null) {
+            if (!prefs.getString(FILTER_VEGAN, null).equals("null")) {
+                veFilter = Boolean.parseBoolean(prefs.getString(FILTER_VEGAN, null));
+            }
+        } else veFilter = null;
+        if (prefs.getString(FILTER_GLUTEN_FREE, null) != null) {
+            if (!prefs.getString(FILTER_GLUTEN_FREE, null).equals("null")) {
+                gfFilter = Boolean.parseBoolean(prefs.getString(FILTER_GLUTEN_FREE, null));
+            }
+        } else gfFilter = null;
+
+
+
+        Timber.v("V - "+prefs.getString(FILTER_VEGETARIAN, "%%"));
+        Timber.v("VE - "+prefs.getString(FILTER_VEGAN, "%%"));
+        Timber.v("GF - "+prefs.getString(FILTER_GLUTEN_FREE, "%%"));
+        Timber.v("M - "+prefs.getString(FILTER_MEAT, "%%"));
+
+        Timber.v("V - "+String.valueOf(vFilter));
+        Timber.v("VE - "+String.valueOf(veFilter));
+        Timber.v("GF - "+String.valueOf(gfFilter));
+        Timber.v("M - "+String.valueOf(mFilter));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
 //            getWindow().setExitTransition(new Slide().setDuration(10000));
