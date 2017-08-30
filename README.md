@@ -1,23 +1,29 @@
 # NubaMenu
-Current state of application(08.30.2017):
+ 
+<ol>
+<li>Current state of application(08.30.2017)</li>
 
-1. App connected to NubaMenu API. During first launch donwloads DB and images. Receives updates via Firebase cloud messaging.
-2. Content provider and SQLite DB.
-3. Some pictures missing.  
-4. Filter for vegetarian, vegan or gluten free items.
+<ul>
+<li>App connected to NubaMenu API. During first launch donwloads DB and images.</li>
+<li>Implemented Firebase Authentication</li>
+<li>Receives updates via Firebase cloud messaging.</li>
+<li>Uses Firebase Database to store reviews</li>
+<li>Implemented Firebase Function to calculate average rating</li>
+<li>Custom content provider and SQLite database.</li>
+</ul>
 
-5. Some of the future fixes/improvements/additions:
+<li>Some of the future fixes/improvements/additions:</li>
 
-Two pane mode for tablets</br>
-Settings</br>
-Search</br>
-Comments</br>
-Item ratings
+<ul>
+<li>Two pane mode for tablets</li>
+<li>Settings</li>
+<li>Search<</li>
+<li>Item ratings</li>
+</ul>
+<li><a href="https://www.dropbox.com/s/323507eah733j0c/NubaMenu0.1.apk?dl=0">Download apk (08.30.2017)</a></li>
 
-6. <a href="https://www.dropbox.com/s/323507eah733j0c/NubaMenu0.1.apk?dl=0">Download apk (08.30.2017)</a>
 
-
-7. Screenshots:
+<li>Screenshots</li>
 
 Phone(OnePlus One) Portrait
 
@@ -35,3 +41,4 @@ Tablet(Nexus 7 2013) Landscape
 
 <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021332.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021341.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021349.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021402.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021435.png" width="250">
 
+</ol>
