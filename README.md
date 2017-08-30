@@ -17,8 +17,7 @@
 <ul>
 <li>Two pane mode for tablets</li>
 <li>Settings</li>
-<li>Search<</li>
-<li>Item ratings</li>
+<li>Search</li>
 </ul>
 <li><a href="https://www.dropbox.com/s/323507eah733j0c/NubaMenu0.1.apk?dl=0">Download apk (08.30.2017)</a></li>
 
@@ -27,7 +26,7 @@
 
 Phone(OnePlus One) Portrait
 
-  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-00.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-13.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-21.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-04-29.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-04-40.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-05-04.png" height="250">
+<img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-00.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-13.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-03-21.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-04-29.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-04-40.png" height="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_2017-08-30-02-05-04.png" height="250">
 
 Phone(OnePlus One) Landscape
 
