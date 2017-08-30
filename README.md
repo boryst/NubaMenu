@@ -29,9 +29,9 @@ Phone(OnePlus One) Landscape
 
 Tablet(Nexus 7 2013) Portrait
 
-<img src="http://i.imgur.com/oungg0m.jpg" height="250"> <img src="http://i.imgur.com/xSzYLlE.jpg" height="250"> <img src="http://i.imgur.com/SvhZudx.png" height="250"> <img src="http://i.imgur.com/9wsCdTc.png" height="250"> <img src="http://i.imgur.com/Q8eySs4.png" height="250"> 
+<img src="http://boryst.com/nuba_img_git/Screenshot_20170830-020957.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021009.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021017.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021028.png" height="250"> <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021318.png" height="250"> 
 
 Tablet(Nexus 7 2013) Landscape
 
-<img src="http://i.imgur.com/uC80aqM.jpg" width="250">  <img src="http://i.imgur.com/sJCnBsg.jpg" width="250">  <img src="http://i.imgur.com/VPsb3gl.png" width="250">  <img src="http://i.imgur.com/ZPJdBPM.png" width="250">  <img src="http://i.imgur.com/KnOZmqB.png" width="250">
+<img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021332.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021341.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021349.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021402.png" width="250">  <img src="http://boryst.com/nuba_img_git/Screenshot_20170830-021435.png" width="250">
 
