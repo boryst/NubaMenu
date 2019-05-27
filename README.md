@@ -54,6 +54,6 @@ Tablet(Nexus 7 2013) Landscape
 <a href="https://ibb.co/4NLxXNh"><img src="https://i.ibb.co/dKvyVK8/Screenshot-20170830-021341.png" alt="Screenshot-20170830-021341" border="0" width="250"></a>
 <a href="https://ibb.co/tLd1sqJ"><img src="https://i.ibb.co/0swzMCG/Screenshot-20170830-021349.png" alt="Screenshot-20170830-021349" border="0" width="250"></a>
 <a href="https://ibb.co/1LwL82m"><img src="https://i.ibb.co/Ms3sMNC/Screenshot-20170830-021402.png" alt="Screenshot-20170830-021402" border="0" width="250"></a>
-<a href="https://ibb.co/qjJ1yKn"><img src="https://i.ibb.co/RbjHvfS/Screenshot-20170830-021418.png" alt="Screenshot-20170830-021418" border="0" width="250"></a><br /><a target='_blank' href='https://imgbb.com/'>image uploader</a><br />
+<a href="https://ibb.co/qjJ1yKn"><img src="https://i.ibb.co/RbjHvfS/Screenshot-20170830-021418.png" alt="Screenshot-20170830-021418" border="0" width="250"></a><br />
 
 </ol>
